@@ -6,6 +6,7 @@ class CreateWritefullyPosts < ActiveRecord::Migration
       t.text   :content
       t.string :type
       t.string :slug
+      t.string :visibility
       t.string :cover
       t.integer :position
       t.datetime :published_at
