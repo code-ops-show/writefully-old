@@ -2,6 +2,6 @@ module Writefully
   class Tag < ActiveRecord::Base
     include Writefully::Taxonomy
 
-    writefully_tokenize :posts
+    has_many :posts, through: :taggings
   end
 end
