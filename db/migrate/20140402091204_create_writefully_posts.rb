@@ -9,6 +9,7 @@ class CreateWritefullyPosts < ActiveRecord::Migration
       t.string :cover
       t.integer :position
       t.datetime :published_at
+      t.references :authorship, index: true
 
       t.timestamps
     end
