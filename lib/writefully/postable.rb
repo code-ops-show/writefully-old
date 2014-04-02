@@ -10,16 +10,18 @@ module Writefully
       attr_accessor :publish
 
       has_many :taggings
-      
+
       before_save :publish_resource, if: -> { respond_to?(:published_at) }
     end
 
     def taxonomize_with(tokens, type)
-      type          = type.to_s.singularize
-      type_class    = type.classify
-      self.send(:"#{type}_ids=", type_class.constantize.ids_from_tokens(tokens))
-    rescue NameError
-      self.send(:"#{type}_ids=", "Writefully::#{type_class}".constantize.ids_from_tokens(tokens))
+      type_singular = type.to_s.singularize
+      type_klass    = klass_from(type_singular).constantize
+      self.send(:"#{type_singular}_ids=", type_klass.ids_from_tokens(tokens))
+    end
+
+    def klass_from type_singular
+      type_singular == "tag" ? "Writefully::Tag" : type.classify
     end
 
     def publish_resource
