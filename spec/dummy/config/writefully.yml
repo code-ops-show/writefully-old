@@ -1,3 +1,4 @@
 test:
   :content: <%= Rails.root.join('content') %>
   :storage_folder: 'codemycasts'
+  :storage_provider: 'AWS'

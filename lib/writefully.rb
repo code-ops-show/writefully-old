@@ -1,6 +1,7 @@
 require 'yaml'
 
 require 'writefully/engine'
+require 'activerecord-import'
 
 module Writefully
   class << self
@@ -32,5 +33,4 @@ require 'writefully/content'
 require 'writefully/storage'
 require 'writefully/postable'
 require 'writefully/taxon'
-require 'writefully/taxonomy'
 require 'writefully/writer'

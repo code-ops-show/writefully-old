@@ -1,11 +1,5 @@
 module Writefully
   Taxon = Struct.new(:incoming, :existing, :type) do 
-    TAG_ATTRIBUTE = 
-      { 
-        tag:      { type: nil },
-        playlist: { type: 'Playlist' }
-      }
-
     def non_existing
       get_difference.map { |token| Tag.new(build_attributes(token)) }
     end
@@ -18,8 +12,12 @@ module Writefully
       (parameterized(incoming) - parameterized(existing)).map { |t| t.titleize }
     end
 
+    def type_attribute 
+      selector == :'writefully/tag' ? { type: nil } : { type: selector.to_s.classify }
+    end
+
     def build_attributes token
-      TAG_ATTRIBUTE[selector]
+      type_attribute
         .merge({ name: token, slug: token.parameterize })
     end
 

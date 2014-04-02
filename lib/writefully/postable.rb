@@ -10,9 +10,7 @@ module Writefully
       attr_accessor :publish
 
       has_many :taggings
-
-      writefully_taxonomize :tags, -> { where(type: nil) }, through: :taggings
-
+      
       before_save :publish_resource, if: -> { respond_to?(:published_at) }
     end
 
@@ -39,7 +37,7 @@ module Writefully
     end
 
     module ClassMethods
-      def writefully_taxonomize(type, *args)
+      def wf_taxonomize(type, *args)
         class_eval do 
           has_many :"#{type}", *args
 
@@ -49,7 +47,7 @@ module Writefully
         end
       end
 
-      def writefully_content(field_name)
+      def wf_content(field_name)
         class_eval do 
           alias_attribute :content, :"#{field_name}" unless field_name == :content
         end
