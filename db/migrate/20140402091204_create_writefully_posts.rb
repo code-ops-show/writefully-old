@@ -8,6 +8,7 @@ class CreateWritefullyPosts < ActiveRecord::Migration
       t.string :slug
       t.string :cover
       t.integer :position
+      t.datetime :published_at
 
       t.timestamps
     end

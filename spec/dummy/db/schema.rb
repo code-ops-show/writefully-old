@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20140402091415) do
     t.string   "slug"
     t.string   "cover"
     t.integer  "position"
+    t.datetime "published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
