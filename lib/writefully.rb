@@ -2,6 +2,7 @@ require 'yaml'
 
 require 'writefully/engine'
 require 'activerecord-import'
+require 'active_support/core_ext'
 
 module Writefully
   class << self

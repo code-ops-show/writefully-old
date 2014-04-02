@@ -1,5 +1,3 @@
-require 'active_support/core_ext'
-
 module Writefully
   module Postable
     extend ActiveSupport::Concern
@@ -8,8 +6,6 @@ module Writefully
     included do 
       after_initialize :check_content_field_existence
       attr_accessor :publish
-
-      has_many :taggings
 
       before_save :publish_resource, if: -> { respond_to?(:published_at) }
     end
@@ -21,7 +17,7 @@ module Writefully
     end
 
     def klass_from type_singular
-      type_singular == "tag" ? "Writefully::Tag" : type.classify
+      type_singular == "tag" ? "Writefully::Tag" : type_singular.classify 
     end
 
     def publish_resource

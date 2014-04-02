@@ -6,7 +6,7 @@ module Writefully
     class << self 
       def ids_from_tokens tokens
         taxon = Taxon.new(tokens, pluck(:name), name)
-    
+
         import taxon.non_existing
         where(name: tokens).ids
       end

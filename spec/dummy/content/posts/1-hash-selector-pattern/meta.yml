@@ -2,4 +2,5 @@ title: "Ruby Hash Selector Pattern"
 slug: "ruby-hash-selector-pattern"
 blurb: "We show you an alternative to if / else and case / switch."
 tags: ["Ruby"]
+playlists: ["A Shot of Ruby"]
 cover: "hash-selector-icon.png"

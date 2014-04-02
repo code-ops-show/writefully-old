@@ -10,16 +10,14 @@ module Writefully
     def initialize(index)
       @content  = Content.new(index)
       @asset    = Asset.new(index)
-
-      @resource = index[:resource].classify.constantize
-                    .where(slug: content.slug)
-                      .first_or_initialize(content.meta)
+      @resource = index[:resource].classify.constantize             
     end
 
     def write_content 
-      resource.content = converted_body_assets
-      resource.cover   = get_cover_url
-      resource.save
+      resource.where(slug: content.slug).first_or_create(content.meta) do |object|
+        object.content = converted_body_assets
+        object.cover   = get_cover_url
+      end 
     end
 
     def write_assets

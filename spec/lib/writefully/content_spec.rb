@@ -8,6 +8,7 @@ describe Writefully::Content do
     "cover"       => "hash-selector-icon.png",
     "blurb" => "We show you an alternative to if / else and case / switch.",
     "tags"        => ["Ruby"],
+    "playlists"   => ["A Shot of Ruby"],
     "position"    => 1
   } }
   subject(:content) { Writefully::Content.new(index) }
