@@ -3,13 +3,11 @@ require 'spec_helper'
 describe Writefully::Content do 
   let(:index) { {resource: 'posts', slug: '1-hash-selector-pattern' } }
   let(:meta)  { { 
-    "name"        => "Ruby Hash Selector Pattern",
+    "title"        => "Ruby Hash Selector Pattern",
     "slug"        => "ruby-hash-selector-pattern",
     "cover"       => "hash-selector-icon.png",
-    "description" => "We show you an alternative to if / else and case / switch.",
-    "video"       => "http://www.youtube.com/watch?v=Pyg-31Nhd8I",
+    "blurb" => "We show you an alternative to if / else and case / switch.",
     "tags"        => ["Ruby"],
-    "free"        => true,
     "position"    => 1
   } }
   subject(:content) { Writefully::Content.new(index) }

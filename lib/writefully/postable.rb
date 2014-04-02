@@ -9,15 +9,19 @@ module Writefully
       after_initialize :check_content_field_existence
       attr_accessor :publish
 
-      has_many :taggings, as: :taggable
+      has_many :taggings
+
+      writefully_taxonomize :tags, -> { where(type: nil) }, through: :taggings
 
       before_save :publish_resource, if: -> { respond_to?(:published_at) }
     end
 
     def taxonomize_with(tokens, type)
       type          = type.to_s.singularize
-      type_constant = type.classify.constantize
-      self.send(:"#{type}_ids=", type_constant.ids_from_tokens(tokens))
+      type_class    = type.classify
+      self.send(:"#{type}_ids=", type_class.constantize.ids_from_tokens(tokens))
+    rescue NameError
+      self.send(:"#{type}_ids=", "Writefully::#{type_class}".constantize.ids_from_tokens(tokens))
     end
 
     def publish_resource

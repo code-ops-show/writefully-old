@@ -1,7 +1,5 @@
-name: "Rails Flash Partials"
+title: "Rails Flash Partials"
 slug: "rails-flash-partials"
-description: "How to setup flash messages in your application"
-video: "http://www.youtube.com/watch?v=rSlDEvtk6lA"
+blurb: "How to setup flash messages in your application"
 tags: ["Rails"]
-playlists: ["A Shot of Rails"]
 cover: "cover.png"

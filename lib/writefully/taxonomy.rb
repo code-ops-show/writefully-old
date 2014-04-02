@@ -13,10 +13,10 @@ module Writefully
         end
       end
 
-      def ids_from_token tokens
+      def ids_from_tokens tokens
         taxon = Taxon.new(tokens, pluck(:name), name)
     
-        import taxonomy.non_existing
+        import taxon.non_existing
         where(name: tokens).ids
       end
     end
