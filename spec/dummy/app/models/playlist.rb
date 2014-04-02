@@ -1,0 +1,3 @@
+class Playlist < Tag 
+  
+end

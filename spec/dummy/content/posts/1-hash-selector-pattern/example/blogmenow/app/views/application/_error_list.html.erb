@@ -1,0 +1,5 @@
+<ul>
+<% target.errors.each do |e| %>
+  <li><%= e.to_s.titleize %>: <%= target.errors[e][0] %></li>
+<% end %>
+</ul>
