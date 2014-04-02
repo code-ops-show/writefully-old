@@ -1,6 +1,6 @@
 require 'yaml'
 
-require 'writefully/version'
+require 'writefully/engine'
 
 module Writefully
   class << self
@@ -20,7 +20,7 @@ module Writefully
     end
 
     def config_yml
-      Rails.root.join('config', 'writefully.yml')
+      Rails.root.join('config', 'writefully.yml') if defined?(Rails)
     end
 
   end

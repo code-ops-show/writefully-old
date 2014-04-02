@@ -11,28 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140402073702) do
+ActiveRecord::Schema.define(version: 20140402091415) do
 
-  create_table "posts", force: true do |t|
-    t.string   "name"
-    t.string   "slug"
+  create_table "writefully_posts", force: true do |t|
+    t.string   "title"
+    t.string   "blurb"
     t.text     "content"
-    t.string   "description"
+    t.string   "type"
+    t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "taggings", force: true do |t|
-    t.string   "taggable_type"
-    t.integer  "taggable_id"
+  add_index "writefully_posts", ["slug"], name: "index_writefully_posts_on_slug", unique: true
+
+  create_table "writefully_taggings", force: true do |t|
     t.integer  "tag_id"
+    t.integer  "post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "taggings", ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable_type_and_taggable_id"
+  add_index "writefully_taggings", ["post_id"], name: "index_writefully_taggings_on_post_id"
+  add_index "writefully_taggings", ["tag_id"], name: "index_writefully_taggings_on_tag_id"
 
-  create_table "tags", force: true do |t|
+  create_table "writefully_tags", force: true do |t|
     t.string   "name"
     t.string   "slug"
     t.string   "type"
@@ -40,7 +43,7 @@ ActiveRecord::Schema.define(version: 20140402073702) do
     t.datetime "updated_at"
   end
 
-  add_index "tags", ["slug"], name: "index_tags_on_slug", unique: true
-  add_index "tags", ["type"], name: "index_tags_on_type"
+  add_index "writefully_tags", ["slug"], name: "index_writefully_tags_on_slug", unique: true
+  add_index "writefully_tags", ["type"], name: "index_writefully_tags_on_type"
 
 end

@@ -1,6 +1,3 @@
-class Post < ActiveRecord::Base
-  include Writefully::Post
-
-  writefully_taxonomize :tags,      -> { where(type: nil) },        through: :taggings
+class Post < Writefully::Post
   writefully_taxonomize :playlists, -> { where(type: 'Playlist') }, through: :taggings, source: :tag 
 end

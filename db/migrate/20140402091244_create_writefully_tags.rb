@@ -9,5 +9,6 @@ class CreateWritefullyTags < ActiveRecord::Migration
     end
 
     add_index :writefully_tags, :slug, unique: true
+    add_index :writefully_tags, :type
   end
 end

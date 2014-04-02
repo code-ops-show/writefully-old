@@ -1,3 +1,3 @@
-class Playlist < Tag 
+class Playlist < Writefully::Tag 
   
 end
