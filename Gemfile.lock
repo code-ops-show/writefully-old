@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    writefully (0.10.1)
+    writefully (0.10.2)
       activerecord-import
       celluloid (~> 0.15.2)
       hashie

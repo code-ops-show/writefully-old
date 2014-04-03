@@ -1,3 +1,3 @@
 module Writefully
-  VERSION = "0.10.1"
+  VERSION = "0.10.3"
 end

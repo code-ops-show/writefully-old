@@ -16,6 +16,10 @@ module Writefully
       YAML.load(File.read(File.join(path, "meta.yml"))).merge({ "position" => position })
     end
 
+    def details
+      Hashie::Mash.new(meta["details"])
+    end
+
     def slug
       meta["slug"] || index[:slug].split(/\d-/).last
     end

@@ -19,7 +19,7 @@ module Writefully
     def write_content 
       object = resource.where(slug: content.slug).first_or_initialize(content.meta)
       object.content = converted_assets_for(content.body)
-      object.details = converted_assets_for(content.meta["details"])         
+      object.details = converted_assets_for(content.details)         
       object.save
     end
 

@@ -13,12 +13,15 @@ describe Writefully::Writer do
   before { Writefully::Writer.any_instance.stub(:store_asset).and_return(true) }
 
   describe "#coverted_assets_for" do 
+    let(:converted_content) { subject.converted_assets_for(writer.content.body) }
+    let(:converted_hash)    { subject.converted_assets_for(writer.content.details)["cover"] }
+    
     it "should convert for string" do 
-      subject.converted_assets_for(writer.content.body).should include cover_url
+      converted_content.should include cover_url
     end
 
-    it "should convert for hash" do 
-      subject.converted_assets_for(writer.content.meta["details"])["cover"].should include cover_url
+    it "should convert for hash" do
+      converted_hash.should include cover_url
     end
   end
 
