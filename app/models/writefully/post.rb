@@ -6,5 +6,9 @@ module Writefully
     wf_taxonomize :tags, -> { where(type: nil) }, through: :taggings
 
     belongs_to :authorship
+
+    def details
+      Hashie::Mash.new(details)
+    end
   end
 end

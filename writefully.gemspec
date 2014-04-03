@@ -22,6 +22,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'activerecord-import'
   s.add_dependency 'listen', '~> 2.0'
   s.add_dependency 'thor'
+  s.add_dependency 'pg'
+  s.add_dependency 'hashie'
 
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'pry'
