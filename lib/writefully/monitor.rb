@@ -16,7 +16,7 @@ module Writefully
 
     def listen
       log_start
-      worker_pool 
+      worker_pool
       boot_listner
     end
 
@@ -33,12 +33,13 @@ module Writefully
     end
 
     def worker_pool
-      @_pool ||= Worker.pool
+      @_pool ||= Worker.pool(size: (Writefully.options[:concurrency] || 2))
     end
 
     def process_message
       Proc.new do |modified, added, removed|
         Indices.build_from(modified).each do |index|
+          logger.info "Processing #{index[:resource]} #{index[:slug]}"
           worker_pool.async.write(index)
         end
       end

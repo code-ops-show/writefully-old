@@ -27,7 +27,7 @@ module Writefully
       asset.names.map { |asset_name| store_asset(asset_name) } 
     end
 
-    def store_assets asset_name
+    def store_asset asset_name
       file = File.open(File.join(asset.path, asset_name))
       s3_file = STORAGE.store_file(File.join(asset.endpoint, asset_name), file)
     end
