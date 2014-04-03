@@ -8,7 +8,7 @@ module Writefully
         taxon = Taxon.new(tokens, pluck(:name), name)
 
         import taxon.non_existing
-        where(name: tokens).ids
+        where(slug: tokens.map { |t| t.parameterize }).ids
       end
     end
   end

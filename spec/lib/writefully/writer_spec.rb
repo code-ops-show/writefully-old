@@ -23,6 +23,12 @@ describe Writefully::Writer do
         subject.write_content
       }.to change(Writefully::Tag, :count).by(2)
     end
+
+    it "should create 2 new taggings" do 
+      expect { 
+        subject.write_content
+        }.to change(Writefully::Tagging, :count).by(2)
+    end
   end
 
   describe "when post exists it should update" do 

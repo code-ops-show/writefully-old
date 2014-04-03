@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    writefully (0.8.0)
+    writefully (0.9.6)
       activerecord-import
       celluloid (~> 0.15.2)
       listen (~> 2.0)

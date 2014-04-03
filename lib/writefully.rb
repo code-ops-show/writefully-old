@@ -30,6 +30,7 @@ end
 
 require 'writefully/asset'
 require 'writefully/source'
+require 'writefully/indices'
 require 'writefully/content'
 require 'writefully/storage'
 require 'writefully/postable'

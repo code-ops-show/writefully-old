@@ -1,6 +1,8 @@
 require 'listen'
 require 'logger'
 
+require 'writefully/worker'
+
 module Writefully
   Monitor = Struct.new(:config) do
 
@@ -36,9 +38,11 @@ module Writefully
 
     def process_message
       Proc.new do |modified, added, removed|
-        worker_pool.write(Indicies.build_from(modified))
+        Indices.build_from(modified).each do |index|
+          worker_pool.async.write(index)
+        end
       end
     end
-    
+
   end
 end

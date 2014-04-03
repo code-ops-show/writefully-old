@@ -10,6 +10,7 @@ namespace :writefully do
 
   desc "Starts the writefully monitor"
   task :start => :environment do
+    require 'writefully/monitor'
     Signal.trap("INT") { $stdout.puts "Writefully exiting..."; exit }
     Writefully::Monitor.new(Writefully.options).listen
   end
