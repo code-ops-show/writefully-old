@@ -6,7 +6,12 @@ describe Writefully::Writer do
 
   subject(:writer) { Writefully::Writer.new(index) }
 
-  its(:get_cover_url) { should eq cover_url }
-
+  its(:get_cover_url)         { should eq cover_url }
   its(:converted_body_assets) { should include cover_url }
+
+  it "should create 1 new post" do 
+    expect { 
+      subject.write_content
+    }.to change(Writefully::Post, :count).by(1)
+  end
 end
