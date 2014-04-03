@@ -3,10 +3,8 @@ namespace :writefully do
   task :write => :environment do 
     Writefully::Source.indices.each do |index|
       writer = Writefully::Writer.new(index)
-      if writer.content_is_different?
-        writer.async.write_content 
-        writer.async.write_assets
-      end
+      writer.async.write_content 
+      writer.async.write_assets
     end
   end
 

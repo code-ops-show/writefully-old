@@ -13,9 +13,17 @@ module Writefully
     end
 
     def listen
+      log_start
+      worker_pool 
+      boot_listner
+    end
+
+    def log_start
       logger.info("This is doctor Frasier Crane. I'm listening...")
-      pool = worker_pool
-      listener = Listen.to config[:content], wait_for_delay: 4, &process_message(pool)
+    end
+
+    def boot_listner
+      listener = Listen.to config[:content], wait_for_delay: 4, &process_message
       listener.start
       while listener.listen?
         sleep 0.5
@@ -26,29 +34,11 @@ module Writefully
       @_pool ||= Worker.pool
     end
 
-    def process_message(pool)
+    def process_message
       Proc.new do |modified, added, removed|
-        pool.write(get_indices(modified))
+        worker_pool.write(Indicies.build_from(modified))
       end
     end
-
-    def get_indices(modified)
-      modified.map do |file_name|
-        index_hash_from(index_name_from(remove_content_path(file_name)))
-      end
-    end
-
-    def remove_content_path(file_name)
-      file_name.split('/') - Writefully.options[:content].split('/')
-    end
-
-    def index_name_from(array)
-      [:resource, :slug].zip(array).flatten
-    end
-
-    def index_hash_from(array)
-      Hash[*array]
-    end
-
+    
   end
 end
