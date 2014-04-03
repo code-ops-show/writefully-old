@@ -34,4 +34,14 @@ describe Writefully::Writer do
       }.to change(Writefully::Post, :count).by(0)
     end
   end 
+
+  describe "when weird resource is specified" do 
+    let(:index) { { resource: 'episodes', slug: '1-hash-selector-pattern' } }
+
+    it "should raise error" do 
+      expect { 
+        Writefully::Writer.new(index)
+      }.to raise_error(Writefully::Writer::ContentModelNotFound)
+    end
+  end
 end

@@ -52,10 +52,12 @@ module Writefully
       fallback_type
     end
 
+  private
+
     def fallback_type
       if index[:resource] == "posts"
         "Writefully::Post".constantize
-      else
+      else 
         raise ContentModelNotFound, "Model #{index[:resource].classify} was not found"
       end
     end
