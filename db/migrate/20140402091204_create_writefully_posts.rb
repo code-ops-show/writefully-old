@@ -3,12 +3,12 @@ class CreateWritefullyPosts < ActiveRecord::Migration
     create_table :writefully_posts do |t|
       t.string     :title
       t.string     :slug
-      t.text       :content
       t.string     :type
-      t.integer    :position
-      t.datetime   :published_at
-      t.references :authorship, index: true
+      t.text       :content
       t.hstore     :details
+      t.datetime   :published_at
+      t.integer    :position
+      t.references :authorship, index: true
 
       t.timestamps
     end

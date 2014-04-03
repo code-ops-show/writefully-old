@@ -18,8 +18,8 @@ module Writefully
 
     def write_content 
       object = resource.where(slug: content.slug).first_or_initialize(content.meta)
-      object.content = converted_body_assets
-      object.cover   = get_cover_url
+      object.content = converted_assets_for(content.body)
+      object.details = converted_assets_for(content.details)         
       object.save
     end
 
@@ -32,14 +32,14 @@ module Writefully
       s3_file = STORAGE.store_file(File.join(asset.endpoint, asset_name), file)
     end
 
-    def converted_body_assets
-      file_url = File.join(STORAGE.endpoint, asset.endpoint, '/')
-      file_regex = ::Regexp.new('assets\/')
-      content.body.gsub(file_regex, file_url)
-    end
-
-    def get_cover_url
-      File.join(STORAGE.endpoint, asset.endpoint, content.meta["cover"])
+    def converted_assets_for content
+      if content.is_a?(String)
+        content.gsub(asset.regex, asset.url(STORAGE.endpoint))
+      elsif content.is_a?(Hash)
+        content.inject({}) do |h, (k, v)| 
+          h[k] = v.gsub(asset.regex, asset.url(STORAGE.endpoint)); h 
+        end 
+      end
     end
 
   private

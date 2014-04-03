@@ -1,6 +1,7 @@
 title: "Rails Flash Partials"
 slug: "rails-flash-partials"
-blurb: "How to setup flash messages in your application"
 tags: ["Rails"]
 playlists: ["A Shot of Ruby"]
-cover: "cover.png"
+details: 
+  blurb: "How to setup flash messages in your application"
+  cover: "assets/cover.png"

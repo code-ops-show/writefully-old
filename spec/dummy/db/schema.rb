@@ -13,6 +13,10 @@
 
 ActiveRecord::Schema.define(version: 20140402200330) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+  enable_extension "hstore"
+
   create_table "writefully_authorships", force: true do |t|
     t.string   "bio"
     t.integer  "user_id"
@@ -20,25 +24,23 @@ ActiveRecord::Schema.define(version: 20140402200330) do
     t.datetime "updated_at"
   end
 
-  add_index "writefully_authorships", ["user_id"], name: "index_writefully_authorships_on_user_id"
+  add_index "writefully_authorships", ["user_id"], name: "index_writefully_authorships_on_user_id", using: :btree
 
   create_table "writefully_posts", force: true do |t|
     t.string   "title"
-    t.string   "blurb"
-    t.text     "content"
-    t.string   "type"
     t.string   "slug"
-    t.string   "visibility"
-    t.string   "cover"
-    t.integer  "position"
+    t.string   "type"
+    t.text     "content"
+    t.hstore   "details"
     t.datetime "published_at"
+    t.integer  "position"
     t.integer  "authorship_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "writefully_posts", ["authorship_id"], name: "index_writefully_posts_on_authorship_id"
-  add_index "writefully_posts", ["slug"], name: "index_writefully_posts_on_slug", unique: true
+  add_index "writefully_posts", ["authorship_id"], name: "index_writefully_posts_on_authorship_id", using: :btree
+  add_index "writefully_posts", ["slug"], name: "index_writefully_posts_on_slug", unique: true, using: :btree
 
   create_table "writefully_taggings", force: true do |t|
     t.integer  "tag_id"
@@ -47,8 +49,8 @@ ActiveRecord::Schema.define(version: 20140402200330) do
     t.datetime "updated_at"
   end
 
-  add_index "writefully_taggings", ["post_id"], name: "index_writefully_taggings_on_post_id"
-  add_index "writefully_taggings", ["tag_id"], name: "index_writefully_taggings_on_tag_id"
+  add_index "writefully_taggings", ["post_id"], name: "index_writefully_taggings_on_post_id", using: :btree
+  add_index "writefully_taggings", ["tag_id"], name: "index_writefully_taggings_on_tag_id", using: :btree
 
   create_table "writefully_tags", force: true do |t|
     t.string   "name"
@@ -58,7 +60,7 @@ ActiveRecord::Schema.define(version: 20140402200330) do
     t.datetime "updated_at"
   end
 
-  add_index "writefully_tags", ["slug"], name: "index_writefully_tags_on_slug", unique: true
-  add_index "writefully_tags", ["type"], name: "index_writefully_tags_on_type"
+  add_index "writefully_tags", ["slug"], name: "index_writefully_tags_on_slug", unique: true, using: :btree
+  add_index "writefully_tags", ["type"], name: "index_writefully_tags_on_type", using: :btree
 
 end

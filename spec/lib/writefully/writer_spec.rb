@@ -8,11 +8,19 @@ describe Writefully::Writer do
 
   subject(:writer) { Writefully::Writer.new(index) }
 
-  its(:get_cover_url)         { should eq cover_url }
-  its(:converted_body_assets) { should include cover_url }
   its(:write_assets)          { should eq [true] }
 
   before { Writefully::Writer.any_instance.stub(:store_asset).and_return(true) }
+
+  describe "#coverted_assets_for" do 
+    it "should convert for string" do 
+      subject.converted_assets_for(writer.content.body).should include cover_url
+    end
+
+    it "should convert for hash" do 
+      subject.converted_assets_for(writer.content.details.cover).should include cover_url
+    end
+  end
 
   describe "changes to models" do 
     it "should create 1 new post" do 

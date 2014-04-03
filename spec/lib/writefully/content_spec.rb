@@ -5,10 +5,10 @@ describe Writefully::Content do
   let(:meta)  { { 
     "title"        => "Ruby Hash Selector Pattern",
     "slug"        => "ruby-hash-selector-pattern",
-    "cover"       => "hash-selector-icon.png",
-    "blurb" => "We show you an alternative to if / else and case / switch.",
     "tags"        => ["Ruby"],
     "playlists"   => ["A Shot of Ruby"],
+    "details"     => { "blurb" => "We show you an alternative to if / else and case / switch.",
+                       "cover" => "assets/hash-selector-icon.png" },
     "position"    => 1
   } }
   subject(:content) { Writefully::Content.new(index) }

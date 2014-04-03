@@ -8,7 +8,7 @@ module Writefully
     belongs_to :authorship
 
     def details
-      Hashie::Mash.new(details)
+      Hashie::Mash.new(read_attribute(:details))
     end
   end
 end

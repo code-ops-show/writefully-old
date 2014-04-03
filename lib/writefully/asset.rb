@@ -11,5 +11,13 @@ module Writefully
     def names
       Dir.chdir(path) { Dir.glob('*') }
     end
+
+    def regex
+      ::Regexp.new('assets\/')
+    end
+
+    def url storage_endpoint
+      File.join(storage_endpoint, endpoint, '/')
+    end
   end
 end
