@@ -17,14 +17,14 @@ module Writefully
     def listen
       log_start
       worker_pool
-      boot_listner
+      boot_listener
     end
 
     def log_start
       logger.info("This is doctor Frasier Crane. I'm listening...")
     end
 
-    def boot_listner
+    def boot_listener
       listener = Listen.to config[:content], wait_for_delay: 4, &process_message
       listener.start
       while listener.listen?

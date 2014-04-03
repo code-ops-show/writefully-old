@@ -9,5 +9,9 @@ module Writefully
       writer.write_content
       writer.write_assets
     end
+
+    def erase(index)
+      
+    end
   end
 end
