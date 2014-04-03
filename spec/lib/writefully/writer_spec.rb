@@ -18,7 +18,7 @@ describe Writefully::Writer do
     end
 
     it "should convert for hash" do 
-      subject.converted_assets_for(writer.content.details.cover).should include cover_url
+      subject.converted_assets_for(writer.content.meta["details"])["cover"].should include cover_url
     end
   end
 
