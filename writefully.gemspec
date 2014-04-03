@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.homepage    = "http://www.codemy.net"
   s.summary     = %q{Makes publishing content easier by using black magic}
   s.description = %q{Allows developer to quickly publish to their site using git hooks}
+  s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"]
