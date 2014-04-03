@@ -32,10 +32,6 @@ module Writefully
       s3_file = STORAGE.store_file(File.join(asset.endpoint, asset_name), file)
     end
 
-    def content_is_different?
-      resource.new_record? and (resource.content != content.body)
-    end
-
     def converted_body_assets
       file_url = File.join(STORAGE.endpoint, asset.endpoint, '/')
       file_regex = ::Regexp.new('assets\/')
@@ -46,13 +42,13 @@ module Writefully
       File.join(STORAGE.endpoint, asset.endpoint, content.meta["cover"])
     end
 
+  private
+
     def compute_type
       index[:resource].classify.constantize
     rescue NameError
       fallback_type
     end
-
-  private
 
     def fallback_type
       if index[:resource] == "posts"
