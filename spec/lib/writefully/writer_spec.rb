@@ -10,6 +10,9 @@ describe Writefully::Writer do
 
   its(:get_cover_url)         { should eq cover_url }
   its(:converted_body_assets) { should include cover_url }
+  its(:write_assets)          { should eq [true] }
+
+  before { Writefully::Writer.any_instance.stub(:store_asset).and_return(true) }
 
   describe "changes to models" do 
     it "should create 1 new post" do 
