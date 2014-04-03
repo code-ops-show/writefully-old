@@ -4,6 +4,8 @@ Outputting flash messages is one of the most convenient ways of letting your use
 
 With rails generally its pretty simple to output flash messages. You just do 
 
+![Cover Picture](assets/cover.png)
+
 ```ruby
 flash[:notice] = "Your post has been updated!"
 ```

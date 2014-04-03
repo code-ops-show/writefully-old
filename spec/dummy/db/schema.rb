@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140402091415) do
+ActiveRecord::Schema.define(version: 20140402200330) do
+
+  create_table "writefully_authorships", force: true do |t|
+    t.string   "bio"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "writefully_authorships", ["user_id"], name: "index_writefully_authorships_on_user_id"
 
   create_table "writefully_posts", force: true do |t|
     t.string   "title"
@@ -19,13 +28,16 @@ ActiveRecord::Schema.define(version: 20140402091415) do
     t.text     "content"
     t.string   "type"
     t.string   "slug"
+    t.string   "visibility"
     t.string   "cover"
     t.integer  "position"
     t.datetime "published_at"
+    t.integer  "authorship_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "writefully_posts", ["authorship_id"], name: "index_writefully_posts_on_authorship_id"
   add_index "writefully_posts", ["slug"], name: "index_writefully_posts_on_slug", unique: true
 
   create_table "writefully_taggings", force: true do |t|

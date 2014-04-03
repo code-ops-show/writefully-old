@@ -14,10 +14,10 @@ module Writefully
     end
 
     def write_content 
-      resource.where(slug: content.slug).first_or_create(content.meta) do |object|
-        object.content = converted_body_assets
-        object.cover   = get_cover_url
-      end 
+      object = resource.where(slug: content.slug).first_or_initialize(content.meta)
+      object.content = converted_body_assets
+      object.cover   = get_cover_url
+      object.save
     end
 
     def write_assets
@@ -34,7 +34,7 @@ module Writefully
     end
 
     def converted_body_assets
-      file_url = File.join(STORAGE.endpoint, asset.endpoint)
+      file_url = File.join(STORAGE.endpoint, asset.endpoint, '/')
       file_regex = ::Regexp.new('assets\/')
       content.body.gsub(file_regex, file_url)
     end
