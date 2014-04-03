@@ -7,10 +7,13 @@ module Writefully
 
     STORAGE = Storage.new
 
+    class ContentModelNotFound < StandardError; end
+
     def initialize(index)
+      @index    = index
       @content  = Content.new(index)
       @asset    = Asset.new(index)
-      @resource = index[:resource].classify.constantize             
+      @resource = compute_type            
     end
 
     def write_content 
@@ -41,6 +44,20 @@ module Writefully
 
     def get_cover_url
       File.join(STORAGE.endpoint, asset.endpoint, content.meta["cover"])
+    end
+
+    def compute_type
+      index[:resource].classify.constantize
+    rescue NameError
+      fallback_type
+    end
+
+    def fallback_type
+      if index[:resource] == "posts"
+        "Writefully::Post".constantize
+      else
+        raise ContentModelNotFound, "Model #{index[:resource].classify} was not found"
+      end
     end
     
   end
