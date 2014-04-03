@@ -16,11 +16,17 @@ module Writefully
       @resource = compute_type            
     end
 
+    def computed_attributes
+      content.meta.merge({ 
+        content: converted_assets_for(content.body),
+        details: converted_assets_for(content.details)
+      })
+    end
+
     def write_content 
-      object = resource.where(slug: content.slug).first_or_initialize(content.meta)
-      object.content = converted_assets_for(content.body)
-      object.details = converted_assets_for(content.details)         
-      object.save
+      resource.where(slug: content.slug)
+                .first_or_initialize
+                  .update_attributes(computed_attributes)
     end
 
     def write_assets

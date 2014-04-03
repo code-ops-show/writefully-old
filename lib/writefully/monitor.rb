@@ -36,12 +36,20 @@ module Writefully
       @_pool ||= Worker.pool(size: (Writefully.options[:concurrency] || 2))
     end
 
+    def run_job index
+      logger.info "Processing #{index[:resource]} #{index[:slug]}"
+      worker_pool.async.write(index)
+    end
+
+    def process_jobs indices
+      indices.uniq.each { |index| run_job(index) }
+    end
+
     def process_message
       Proc.new do |modified, added, removed|
-        Indices.build_from(modified).each do |index|
-          logger.info "Processing #{index[:resource]} #{index[:slug]}"
-          worker_pool.async.write(index)
-        end
+        process_jobs(Indices.build_from(modified))
+        process_jobs(Indices.build_from(added))
+        process_jobs(Indices.build_from(removed))
       end
     end
 

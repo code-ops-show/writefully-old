@@ -112,7 +112,7 @@
         1,
         null,
         1,
-        4,
+        5,
         null,
         1,
         null,
@@ -124,7 +124,7 @@
       ],
       "/Users/zacksiri/Repositories/writefully/spec/dummy/app/models/post.rb": [
         1,
-        4,
+        5,
         null
       ],
       "/Users/zacksiri/Repositories/writefully/app/models/writefully/tagging.rb": [
@@ -143,10 +143,10 @@
         null,
         1,
         1,
-        6,
+        8,
         null,
-        6,
-        12,
+        8,
+        16,
         null,
         null,
         null,
@@ -158,6 +158,6 @@
         null
       ]
     },
-    "timestamp": 1396521441
+    "timestamp": 1396526156
   }
 }
