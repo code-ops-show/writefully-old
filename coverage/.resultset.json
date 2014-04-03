@@ -55,6 +55,7 @@
         1,
         2,
         2,
+        null,
         1,
         1,
         null,
@@ -126,6 +127,14 @@
         4,
         null
       ],
+      "/Users/zacksiri/Repositories/writefully/app/models/writefully/tagging.rb": [
+        1,
+        1,
+        1,
+        1,
+        null,
+        null
+      ],
       "/Users/zacksiri/Repositories/writefully/app/models/writefully/tag.rb": [
         1,
         1,
@@ -143,20 +152,12 @@
         null,
         null
       ],
-      "/Users/zacksiri/Repositories/writefully/app/models/writefully/tagging.rb": [
-        1,
-        1,
-        1,
-        1,
-        null,
-        null
-      ],
       "/Users/zacksiri/Repositories/writefully/spec/dummy/app/models/playlist.rb": [
         1,
         null,
         null
       ]
     },
-    "timestamp": 1396520300
+    "timestamp": 1396521441
   }
 }

@@ -8,7 +8,7 @@ development:
   database: writefully_dummy_development
   pool: 25
   host: localhost
-  username: zacksiri
+  username: 
   password: 
 
 # Warning: The database defined as "test" will be erased and
@@ -19,7 +19,7 @@ test:
   database: writefully_dummy_test
   pool: 25
   host: localhost
-  username: zacksiri
+  username: 
   password:
 
 
