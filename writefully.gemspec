@@ -25,7 +25,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'thor'
   s.add_dependency 'pg'
   s.add_dependency 'hashie'
-  s.add_dependency 'sinatra'
   s.add_dependency 'github_api'
 
   s.add_development_dependency 'pry'
