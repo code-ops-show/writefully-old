@@ -10,8 +10,9 @@ module Writefully::Tasks
 
     def setup_site(site_id)
       site         = Site.where(id: site_id).first
-      repository   = Repository.new(site.access_token, site.owner)
-    
+      supervisor   = Repository.supervise(site.access_token, site.owner)
+      repository   = supervisor.actors.first  
+
       created_repo = create_repository(repository)
       added_hook   = add_hook(repository, created_repo)
 
