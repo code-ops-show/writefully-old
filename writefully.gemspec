@@ -1,4 +1,4 @@
-$:.push File.expand_path("../lib", __FILE__)
+  $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
 require "writefully/version"
@@ -25,8 +25,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'pg'
   s.add_dependency 'hashie'
   s.add_dependency 'sinatra'
+  s.add_dependency 'github_api'
 
-  s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'pry'
   s.add_development_dependency 'rspec-rails'
 end
