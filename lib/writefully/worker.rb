@@ -13,5 +13,10 @@ module Writefully
     def erase(index)
       
     end
+
+    def setup_repository(site_id)
+      site = Site.where(id: site_id).first
+      repository = Repository.new(site.access_token, site.owner)
+    end
   end
 end

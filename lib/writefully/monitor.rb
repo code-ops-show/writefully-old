@@ -2,6 +2,7 @@ require 'listen'
 require 'logger'
 
 require 'writefully/worker'
+require 'writefully/messenger'
 
 module Writefully
   Monitor = Struct.new(:config) do
@@ -16,8 +17,13 @@ module Writefully
 
     def listen
       log_start
+      init_zmq
       worker_pool
       boot_listener
+    end
+
+    def init_zmq
+      Celluloid::ZMQ.init
     end
 
     def log_start
@@ -33,7 +39,7 @@ module Writefully
     end
 
     def worker_pool
-      @_pool ||= Worker.pool(size: (Writefully.options[:concurrency] || 2))
+      Celluloid::Actor[:workers] ||= Worker.pool(size: (Writefully.options[:concurrency] || 2))
     end
 
     def run_job index
