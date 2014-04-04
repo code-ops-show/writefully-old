@@ -28,15 +28,13 @@ module Writefully
 
   end
 end
-
-require 'writefully/hook'
+require 'writefully/storage'
 require 'writefully/taxon'
 require 'writefully/asset'
 require 'writefully/source'
-require 'writefully/writer'
 require 'writefully/postable'
 require 'writefully/indices'
 require 'writefully/content'
-require 'writefully/storage'
 require 'writefully/messenger'
 require 'writefully/repository'
+require 'writefully/writer'
