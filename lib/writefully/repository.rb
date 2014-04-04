@@ -21,8 +21,9 @@ module Writefully
       blk.call(result)
     end
 
-    def add_hook blk
-      result = #
+    def add_hook_for repo_name, blk
+      result = # call githut api
+      blk.call(result)
     end
   end
 end
