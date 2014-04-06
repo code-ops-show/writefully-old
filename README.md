@@ -4,14 +4,27 @@
 
 Allows developers who love to write to publish easily
 
-# Roadmap
+# Manifesto
 
-+ Writefully Core
++ Writefully Process
+  + Separate lightweight process that manages all the work
+  + Main rails process should be able to communicate with Writefully via ZMQ
+    + When a site is created it sets up a sample repository
+  + Easily Extendable from main rails app
+  + Backend Interface for managing sites
   + Turn a github repository into a full blown CMS
-  + Turns repository collaborators into authors
+    + Receive WebHook from github and updates site
+    + Turns repository collaborators into authors
+    + Converts local based images into content provider URL
+      + S3 / Cloudfront
+      + Akamai
+      + Cloudfiles
+      + etc...
 
-+ Writefully App
-  + A native desktop app
-    + Probably going to use node-webkit
-  + A native mobile app
-    + Probably going to use Framework7
++ Writefully Desktop App
+  + Probably going to use !(node-webkit)[https://github.com/rogerwang/node-webkit]
+  + More details to com
+
++ Writefully mobile app
+  + Probably going to use !(Framework7)[http://www.idangero.us/framework7/]
+  + More details to come
