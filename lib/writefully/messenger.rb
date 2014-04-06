@@ -8,7 +8,7 @@ module Writefully
       
     end
 
-    def create_repository
+    def on_delivery
       
     end
   end
@@ -17,6 +17,10 @@ module Writefully
     include Celluloid::ZMQ
 
     def initialize
+      
+    end
+
+    def deliver package
       
     end
   end
