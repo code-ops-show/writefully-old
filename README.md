@@ -12,6 +12,7 @@ Allows developers who love to write to publish easily
     + When a site is created it sets up a repository / hooks with sample content
   + Manages content taxonomy via Tags / Taggings
   + Easily Extendable from main rails app
+  + Content Localization
   + Backend Interface for managing sites
   + Receive WebHook from github and updates site
   + Turns repository collaborators into authors
