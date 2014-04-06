@@ -7,6 +7,8 @@ module Writefully
 
     belongs_to :authorship
 
+    belongs_to :parent, class_name: "Writefully::Post"
+
     def details
       Hashie::Mash.new(read_attribute(:details))
     end
