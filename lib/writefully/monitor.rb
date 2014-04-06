@@ -39,7 +39,7 @@ module Writefully
     end
 
     def worker_pool
-      Celluloid::Actor[:workers] ||= Worker.pool(size: (Writefully.options[:concurrency] || 2))
+      Celluloid::Actor[:workers] ||= Worker.pool(size: ())
     end
 
     def run_job index

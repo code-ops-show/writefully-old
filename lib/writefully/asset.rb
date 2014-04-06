@@ -19,5 +19,15 @@ module Writefully
     def url storage_endpoint
       File.join(storage_endpoint, endpoint, '/')
     end
+
+    def convert_for content
+      if content.is_a?(String)
+        content.gsub(regex, url(STORAGE.endpoint))
+      elsif content.is_a?(Hash)
+        content.inject({}) do |h, (k, v)| 
+          h[k] = v.gsub(regex, url(STORAGE.endpoint)); h 
+        end 
+      end
+    end
   end
 end

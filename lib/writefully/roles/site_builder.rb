@@ -1,23 +1,20 @@
 module Writefully
-  module Tasks
-    module Repository
-      extend ActiveSupport::Concern
-      
+  module Roles
+    class SiteBuilder
+      include Celluloid
+
       SIGNAL = -> (condition) { 
         lambda do |result|
           condition.signal(result)
         end
       }
 
-      def setup_site(site_id)
+      def build(site_id)
         site         = Site.where(id: site_id).first
-        supervisor   = ::Repository.supervise(site.access_token, site.owner)
-        repository   = supervisor.actors.first  
+        repository   = Repository.new_link(site.access_token, site.owner)
 
         created_repo = create_repository(repository)
         added_hook   = add_hook(repository, created_repo)
-
-        repository.terminate
       end
 
       def create_repository(repository)
@@ -29,9 +26,10 @@ module Writefully
       def add_hook(repository, created_repo)
         condition     = Celluloid::Condition.new
         repo_name     = created_repo.name
-        repository.async.add_hook_for repo_name SIGNAL.call(condition)
+        repository.async.add_hook_for repo_name, SIGNAL.call(condition)
         condition.wait
       end
+
     end
   end
 end

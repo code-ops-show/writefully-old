@@ -6,6 +6,8 @@ require 'active_support/core_ext'
 require 'hashie'
 
 module Writefully
+  STORAGE = Storage.new
+
   class << self
 
     def options
