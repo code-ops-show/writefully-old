@@ -7,14 +7,14 @@ Allows developers who love to write to publish easily
 # Manifesto
 
 + Writefully Process
-  + [] Separate lightweight process that manages all the work
-  + [] Main rails process should be able to communicate with Writefully via ZMQ
-    + [] When a site is created it sets up a sample repository
-  + [x] Easily Extendable from main rails app
-  + [] Backend Interface for managing sites
-  + [] Receive WebHook from github and updates site
-  + [x] Turns repository collaborators into authors
-  + [x] Converts local based images into content provider URL
+  + Separate lightweight process that manages all the work
+  + Main rails process should be able to communicate with Writefully via ZMQ
+    + When a site is created it sets up a sample repository
+  + Easily Extendable from main rails app
+  + Backend Interface for managing sites
+  + Receive WebHook from github and updates site
+  + Turns repository collaborators into authors
+  + Converts local based images into content provider URL
     + S3 / Cloudfront
     + Akamai
     + Cloudfiles
