@@ -6,10 +6,11 @@ Allows developers who love to write to publish easily
 
 # Manifesto
 
-+ Writefully Process
++ Writefully Core
   + Separate lightweight process that manages all the work
   + Main rails process should be able to communicate with Writefully via ZMQ
-    + When a site is created it sets up a sample repository
+    + When a site is created it sets up a repository / hooks with sample content
+  + Manages content taxonomy via Tags / Taggings
   + Easily Extendable from main rails app
   + Backend Interface for managing sites
   + Receive WebHook from github and updates site
