@@ -22,9 +22,9 @@ Allows developers who love to write to publish easily
     + etc...
 
 + Writefully Desktop App
-  + Probably going to use !(node-webkit)[https://github.com/rogerwang/node-webkit]
+  + Probably going to use ![node-webkit](https://github.com/rogerwang/node-webkit)
   + More details to com
 
 + Writefully mobile app
-  + Probably going to use !(Framework7)[http://www.idangero.us/framework7/]
+  + Probably going to use ![Framework7](http://www.idangero.us/framework7/)
   + More details to come
