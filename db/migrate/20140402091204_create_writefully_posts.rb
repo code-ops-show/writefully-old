@@ -8,6 +8,8 @@ class CreateWritefullyPosts < ActiveRecord::Migration
       t.hstore     :details
       t.datetime   :published_at
       t.integer    :position
+      t.string     :locale, default: 'en'
+      t.integer    :parent_id
       t.references :authorship, index: true
 
       t.timestamps
