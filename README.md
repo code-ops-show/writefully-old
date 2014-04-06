@@ -4,7 +4,7 @@
 
 Allows developers who love to write to publish easily
 
-# Manifesto
+## Manifesto
 
 + Writefully Core
   + Separate lightweight process that manages all the work
