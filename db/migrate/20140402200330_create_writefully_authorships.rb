@@ -3,6 +3,7 @@ class CreateWritefullyAuthorships < ActiveRecord::Migration
     create_table :writefully_authorships do |t|
       t.references :user, index: true
       t.hstore     :data
+      t.references :site, index: true
 
       t.timestamps
     end

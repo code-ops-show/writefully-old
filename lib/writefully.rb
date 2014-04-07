@@ -1,9 +1,19 @@
 require 'yaml'
 
 require 'writefully/engine'
+
 require 'activerecord-import'
 require 'active_support/core_ext'
 require 'hashie'
+
+require 'writefully/taxon'
+require 'writefully/asset'
+require 'writefully/source'
+require 'writefully/postable'
+require 'writefully/indices'
+require 'writefully/content'
+require 'writefully/messenger'
+require 'writefully/storage'
 
 module Writefully
   STORAGE = Storage.new
@@ -30,13 +40,3 @@ module Writefully
 
   end
 end
-require 'writefully/storage'
-require 'writefully/taxon'
-require 'writefully/asset'
-require 'writefully/source'
-require 'writefully/postable'
-require 'writefully/indices'
-require 'writefully/content'
-require 'writefully/messenger'
-require 'writefully/repository'
-require 'writefully/writer'
