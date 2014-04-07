@@ -1,5 +1,3 @@
-require 'celluloid'
-
 module Writefully
   module Tools
     class Pencil
@@ -7,15 +5,15 @@ module Writefully
 
       finalizer :clean_up
 
-      attr_reader :resource, :content, :asset, :index
+      attr_reader :resource, :content, :asset, :index, :site_id
 
       class ContentModelNotFound < StandardError; end
 
-      def initialize(index)
+      def pick_up(index, site_id)
+        @site_id  = site_id
         @index    = index
         @content  = Content.new(index)
         @asset    = Asset.new(index)
-        @resource = compute_type            
       end
 
       def computed_attributes
@@ -26,19 +24,15 @@ module Writefully
       end
 
       def write_content 
-        resource.where(slug: content.slug)
-                  .first_or_initialize
-                    .update_attributes(computed_attributes)
+        compute_type.by_site(site_id).where(slug: content.slug)
+                      .first_or_initialize
+                        .update_attributes(computed_attributes)
       end
 
       def write_assets
         asset.names.map do |asset_name| 
-          Celluloid::Actor[:assets_handler].async.upload(asset.endpoint, asset.path, asset_name)
+          Celluloid::Actor[:pigeons].async.upload(asset.endpoint, asset.path, asset_name)
         end
-      end
-
-      def clean_up
-        # on termination (success) we need to remove the job from the queue
       end
 
     private

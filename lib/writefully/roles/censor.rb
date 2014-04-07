@@ -1,20 +1,21 @@
 module Writefully
   module Roles
-    class Journalist
+    class Censor
       include Celluloid
 
       trap_exit :handle_exit
 
       def initialize
-        @pencil = Celluloid::Actor[:pencil]
-        link @pencil
+        @eraser = Celluloid::Actor[:eraser]
+        link @eraser
       end
 
-      def publish(index)
-        @pencil.pick_up(index, Writefully::Source.site_id)
-        @pencil.async.write_content
-        @pencil.async.write_assets
+      def pull(index)
+        @eraser.pick_up(index)
+        @eraser.async.erase_content
+        @eraser.async.erase_assets
       end
+
 
       def handle_exit actor, reason
         # when writer fails we need to persist index to the queue so it can be retried

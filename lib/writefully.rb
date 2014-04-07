@@ -6,13 +6,6 @@ require 'activerecord-import'
 require 'active_support/core_ext'
 require 'hashie'
 
-require 'writefully/taxon'
-require 'writefully/asset'
-require 'writefully/source'
-require 'writefully/postable'
-require 'writefully/indices'
-require 'writefully/content'
-require 'writefully/messenger'
 require 'writefully/storage'
 
 module Writefully
@@ -40,3 +33,11 @@ module Writefully
 
   end
 end
+
+require 'writefully/taxon'
+require 'writefully/asset'
+require 'writefully/source'
+require 'writefully/postable'
+require 'writefully/indices'
+require 'writefully/content'
+require 'writefully/messenger'

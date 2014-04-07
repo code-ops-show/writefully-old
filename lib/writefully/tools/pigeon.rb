@@ -1,6 +1,6 @@
 module Writefully
-  module Roles
-    class AssetsHandler
+  module Tools
+    class Pigeon
       include Celluloid
 
       def upload endpoint, path, name

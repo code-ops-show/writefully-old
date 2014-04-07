@@ -7,6 +7,10 @@ module Writefully
         Writefully.options[:content]
       end
 
+      def site_id
+        @site_id ||= open(File.join(content_path, 'site-id')).read.strip.to_i
+      end
+
       def contentable
         (available & valid)
         .collect { |resource| resource.pluralize }
