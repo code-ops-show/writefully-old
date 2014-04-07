@@ -5,7 +5,7 @@ module Writefully
     class Pencil
       include Celluloid
 
-      finalizer :cleanup
+      finalizer :clean_up
 
       attr_reader :resource, :content, :asset, :index
 
@@ -37,7 +37,7 @@ module Writefully
         end
       end
 
-      def cleanup
+      def clean_up
         # on termination (success) we need to remove the job from the queue
       end
 

@@ -4,6 +4,15 @@ require 'logger'
 require 'writefully/worker'
 require 'writefully/messenger'
 
+require 'writefully/tools/pencil'
+require 'writefully/tools/eraser'
+
+require 'writefully/roles/assets_handler'
+require 'writefully/roles/journalist'
+require 'writefully/roles/site_builder'
+
+require 'writefully/news_agency'
+
 module Writefully
   Monitor = Struct.new(:config) do
 
