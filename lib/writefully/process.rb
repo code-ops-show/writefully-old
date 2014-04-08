@@ -17,10 +17,8 @@ module Writefully
 
     def listen
       log_start
-      init_zmq
       connect_to_database!
       load_required_models
-      start_post_office!
       start_news_agency!
       boot_listener!
     end
@@ -33,14 +31,6 @@ module Writefully
       Writefully::Source.to_load.each do |model|
         require File.join(Writefully.options[:app_directory], 'app', 'models', model)
       end
-    end
-
-    def init_zmq
-      Celluloid::ZMQ.init
-    end
-
-    def start_post_office!
-      
     end
 
     def start_news_agency!

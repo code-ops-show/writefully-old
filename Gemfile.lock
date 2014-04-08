@@ -4,7 +4,6 @@ PATH
     writefully (0.10.4)
       activerecord-import
       celluloid
-      celluloid-zmq
       github_api
       hashie
       listen (~> 2.0)
@@ -52,10 +51,6 @@ GEM
     celluloid-io (0.15.0)
       celluloid (>= 0.15.0)
       nio4r (>= 0.5.0)
-    celluloid-zmq (0.15.0)
-      celluloid (>= 0.13.0)
-      ffi
-      ffi-rzmq
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -79,10 +74,6 @@ GEM
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.3)
-    ffi-rzmq (2.0.1)
-      ffi-rzmq-core (>= 1.0.1)
-    ffi-rzmq-core (1.0.3)
-      ffi (~> 1.9)
     github_api (0.11.3)
       addressable (~> 2.3)
       descendants_tracker (~> 0.0.1)

@@ -1,3 +1,5 @@
+require 'active_support/concern'
+
 module Writefully
   module Postable
     extend ActiveSupport::Concern

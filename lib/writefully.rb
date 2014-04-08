@@ -3,7 +3,6 @@ require 'yaml'
 require 'writefully/engine'
 
 require 'activerecord-import'
-require 'active_support/core_ext'
 require 'hashie'
 
 require 'writefully/storage'
@@ -53,4 +52,3 @@ require 'writefully/source'
 require 'writefully/postable'
 require 'writefully/indices'
 require 'writefully/content'
-require 'writefully/messenger'
