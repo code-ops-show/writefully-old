@@ -4,7 +4,7 @@ class CreateWritefullySites < ActiveRecord::Migration
       t.string   :name
       t.string   :access_token
       t.string   :branch, default: 'master'
-      t.string   :owner
+      t.hstore   :owner
       t.hstore   :repository
       t.string   :domain
       t.boolean  :processing
