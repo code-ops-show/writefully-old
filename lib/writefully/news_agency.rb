@@ -1,6 +1,6 @@
 module Writefully
   class NewsAgency < Celluloid::SupervisionGroup
-    pool      Tools::Pigeon,        as: :pigeons, size: (Writefully.options[:concurrency] || 2)
+    pool      Tools::Pigeon,        as: :pigeons, size: (Writefully.options[:concurrency] rescue 2)
     supervise Tools::Pencil,        as: :pencil
     supervise Tools::Hammer,        as: :hammer
 

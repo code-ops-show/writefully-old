@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Writfully Admin Interface</title>
+  <%= stylesheet_link_tag    "writefully/writefully", media: "all" %>
+  <%= javascript_include_tag "writefully/writefully" %>
+  <%= csrf_meta_tags %>
+</head>
+<body class='writefully <%= controller_name %> <%= action_name %>'>
+
+<div class='container'>
+  <%= yield %>
+</div>
+
+</body>
+</html>

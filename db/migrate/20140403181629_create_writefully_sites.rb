@@ -4,14 +4,15 @@ class CreateWritefullySites < ActiveRecord::Migration
       t.string   :name
       t.string   :access_token
       t.string   :branch, default: 'master'
-      t.hstore   :owner
       t.hstore   :repository
       t.string   :domain
       t.boolean  :processing
+      t.integer  :owner_id
 
       t.timestamps
     end
 
     add_index :writefully_sites, :repository, using: :gin
+    add_index :writefulyl_sites, :owner_id
   end
 end

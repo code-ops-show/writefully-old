@@ -2,7 +2,11 @@ require_dependency "writefully/application_controller"
 
 module Writefully
   class SitesController < ApplicationController
-    
+    def index
+      redirect_to setup_path
+      @sites = Site.all
+    end
+
     def new
       @site = Site.new
     end
