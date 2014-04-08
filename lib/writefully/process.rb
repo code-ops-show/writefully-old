@@ -26,9 +26,7 @@ module Writefully
     end
 
     def connect_to_database!
-      ActiveRecord::Base.establish_connection(
-        Writefully.db_config
-      )
+      ActiveRecord::Base.establish_connection(Writefully.db_config)
     end
 
     def load_required_models
