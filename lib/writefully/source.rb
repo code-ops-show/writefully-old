@@ -7,6 +7,10 @@ module Writefully
         Writefully.options[:content]
       end
 
+      def models_path
+        File.join(Writefully.options[:app_directory], 'app', 'models')
+      end
+
       def site_id
         @site_id ||= open(File.join(content_path, 'site-id')).read.strip.to_i
       end
@@ -16,6 +20,14 @@ module Writefully
         .collect { |resource| resource.pluralize }
       end
 
+      def to_load
+        Dir.chdir(models_path) do 
+          Dir.glob('*').select do |file|
+            open(File.join(models_path, file)).read.strip.match(/Writefully/) if File.file?(file)
+          end.collect { |file| file.split('.')[0] }
+        end
+      end
+
       def available
         Dir.chdir(content_path) do 
           Dir.glob("*").collect { |resource| resource.singularize }
@@ -23,7 +35,7 @@ module Writefully
       end
 
       def valid
-        Dir.chdir(Rails.root.join('app', 'models')) do
+        Dir.chdir(models_path) do
           Dir.glob('*').select { |model| model.include?('.rb') }
                        .collect { |model| model.split('.')[0] }
         end

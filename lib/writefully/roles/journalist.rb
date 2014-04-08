@@ -11,14 +11,14 @@ module Writefully
       end
 
       def publish(index)
-        info "Processing #{index[:resource]} #{index[:slug]}"
+        Writefully.logger.info "Processing #{index[:resource]} #{index[:slug]}"
         @pencil.pick_up(index, Writefully::Source.site_id)
         @pencil.async.write_content
         @pencil.async.write_assets
       end
 
       def handle_exit actor, reason
-        error "An error occured #{reason}"
+        Writefully.logger.error "An error occured #{reason}"
       end
     end
   end

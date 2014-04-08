@@ -15,10 +15,6 @@ require 'writefully/news_agency'
 module Writefully
   Process = Struct.new(:config) do
 
-    def logger
-      @logger ||= Celluloid.logger = Logger.new(Writefully.log_location)
-    end
-
     def listen
       log_start
       init_zmq
@@ -36,8 +32,8 @@ module Writefully
     end
 
     def load_required_models
-      Writefully::Source.contentable.each do |model|
-        require File.join(Writefully.options[:app_directory], 'app', 'models', model.singularize)
+      Writefully::Source.to_load.each do |model|
+        require File.join(Writefully.options[:app_directory], 'app', 'models', model)
       end
     end
 
@@ -54,7 +50,7 @@ module Writefully
     end
 
     def log_start
-      logger.info("This is doctor Frasier Crane. I'm listening...")
+      Writefully.logger.info("This is doctor Frasier Crane. I'm listening...")
     end
 
     def process_message
@@ -79,7 +75,6 @@ module Writefully
     }
 
     def queue_jobs indices, action
-      binding.pry
       indices.uniq.each { |index| JOBS[action].call(index) }
     end
 

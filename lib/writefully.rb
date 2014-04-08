@@ -21,6 +21,10 @@ module Writefully
       ENV["RACK_ENV"] || ENV["RAILS_ENV"] || 'development'
     end
 
+    def logger
+      @logger ||= Logger.new(log_location)
+    end
+
     def log_location
       env == 'development' ? STDOUT : Writefully.options[:logfile]
     end
