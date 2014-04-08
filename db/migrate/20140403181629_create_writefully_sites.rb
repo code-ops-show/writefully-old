@@ -13,6 +13,6 @@ class CreateWritefullySites < ActiveRecord::Migration
     end
 
     add_index :writefully_sites, :repository, using: :gin
-    add_index :writefulyl_sites, :owner_id
+    add_index :writefully_sites, :owner_id
   end
 end

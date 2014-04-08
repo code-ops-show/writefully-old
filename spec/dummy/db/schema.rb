@@ -11,19 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140402200330) do
+ActiveRecord::Schema.define(version: 20140403181629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
 
   create_table "writefully_authorships", force: true do |t|
-    t.string   "bio"
     t.integer  "user_id"
+    t.hstore   "data"
+    t.integer  "site_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "writefully_authorships", ["site_id"], name: "index_writefully_authorships_on_site_id", using: :btree
   add_index "writefully_authorships", ["user_id"], name: "index_writefully_authorships_on_user_id", using: :btree
 
   create_table "writefully_posts", force: true do |t|
@@ -34,13 +36,33 @@ ActiveRecord::Schema.define(version: 20140402200330) do
     t.hstore   "details"
     t.datetime "published_at"
     t.integer  "position"
+    t.string   "locale",                default: "en"
+    t.integer  "translation_source_id"
+    t.integer  "site_id"
     t.integer  "authorship_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "writefully_posts", ["authorship_id"], name: "index_writefully_posts_on_authorship_id", using: :btree
+  add_index "writefully_posts", ["site_id"], name: "index_writefully_posts_on_site_id", using: :btree
   add_index "writefully_posts", ["slug"], name: "index_writefully_posts_on_slug", unique: true, using: :btree
+  add_index "writefully_posts", ["translation_source_id"], name: "index_writefully_posts_on_translation_source_id", using: :btree
+
+  create_table "writefully_sites", force: true do |t|
+    t.string   "name"
+    t.string   "access_token"
+    t.string   "branch",       default: "master"
+    t.hstore   "repository"
+    t.string   "domain"
+    t.boolean  "processing"
+    t.integer  "owner_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "writefully_sites", ["owner_id"], name: "index_writefully_sites_on_owner_id", using: :btree
+  add_index "writefully_sites", ["repository"], name: "index_writefully_sites_on_repository", using: :gin
 
   create_table "writefully_taggings", force: true do |t|
     t.integer  "tag_id"

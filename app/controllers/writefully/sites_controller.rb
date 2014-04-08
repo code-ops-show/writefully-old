@@ -2,8 +2,9 @@ require_dependency "writefully/application_controller"
 
 module Writefully
   class SitesController < ApplicationController
+    before_filter -> { redirect_to setup_path }, if: :from_scratch?
+
     def index
-      redirect_to setup_path
       @sites = Site.all
     end
 
