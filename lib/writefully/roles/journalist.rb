@@ -11,13 +11,14 @@ module Writefully
       end
 
       def publish(index)
+        info "Processing #{index[:resource]} #{index[:slug]}"
         @pencil.pick_up(index, Writefully::Source.site_id)
         @pencil.async.write_content
         @pencil.async.write_assets
       end
 
       def handle_exit actor, reason
-        # when writer fails we need to persist index to the queue so it can be retried
+        error "An error occured #{reason}"
       end
     end
   end

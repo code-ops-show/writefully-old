@@ -2,6 +2,7 @@ module Writefully
   module Tools
     class Pencil
       include Celluloid
+      include Celluloid::Logger
 
       finalizer :clean_up
 

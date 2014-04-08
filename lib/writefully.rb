@@ -21,11 +21,20 @@ module Writefully
       ENV["RACK_ENV"] || ENV["RAILS_ENV"] || 'development'
     end
 
+    def log_location
+      env == 'development' ? STDOUT : Writefully.options[:logfile]
+    end
+
+    def db_config
+      YAML::load(ERB.new(IO.read(File.join(options[:app_directory], 'config', 'database.yml'))).result)[env]
+    end
+
     def config_from(path = nil)
       YAML::load(ERB.new(IO.read(path)).result)[env]
     rescue Errno::ENOENT
       $stdout.puts "config/writefully.yml does not exist"
     end
+
 
     def config_yml
       Rails.root.join('config', 'writefully.yml') if defined?(Rails)

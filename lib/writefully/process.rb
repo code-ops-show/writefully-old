@@ -1,9 +1,12 @@
 require 'listen'
 require 'logger'
-require 'celluloid'
 
 require 'active_record'
 require 'writefully'
+
+%w(tag post site tagging authorship).each do |model|
+  require File.dirname(__FILE__) + "/../../app/models/writefully/#{model}"
+end
 
 require 'writefully/tools'
 require 'writefully/roles'
@@ -13,11 +16,7 @@ module Writefully
   Process = Struct.new(:config) do
 
     def logger
-      @logger ||= Logger.new(log_location)
-    end
-
-    def log_location
-      Writefully.env == 'development' ? STDOUT : config[:logfile]
+      @logger ||= Celluloid.logger = Logger.new(Writefully.log_location)
     end
 
     def listen
@@ -31,11 +30,15 @@ module Writefully
     end
 
     def connect_to_database!
-      # active record connect
+      ActiveRecord::Base.establish_connection(
+        Writefully.db_config
+      )
     end
 
     def load_required_models
-      
+      Writefully::Source.contentable.each do |model|
+        require File.join(Writefully.options[:app_directory], 'app', 'models', model.singularize)
+      end
     end
 
     def init_zmq
@@ -71,21 +74,12 @@ module Writefully
     end
 
     JOBS = { 
-      write:  -> (index) { write_or_update(index) },
-      remove: -> (index) { remove(index)  }
+      write:  -> (index) { Celluloid::Actor[:journalist].publish(index) },
+      remove: -> (index) { Celluloid::Actor[:censor].pull(index)  }
     }
 
-    def write_or_update index
-      logger.info "Processing #{index[:resource]} #{index[:slug]}"
-      Celluloid::Actor[:journalist].async.publish(index)
-    end
-
-    def remove index
-      logger.info "Removing #{index[:resource]} #{index[:slug]}"
-      Celluloid::Actor[:censor].async.pull(index)
-    end
-
     def queue_jobs indices, action
+      binding.pry
       indices.uniq.each { |index| JOBS[action].call(index) }
     end
 
