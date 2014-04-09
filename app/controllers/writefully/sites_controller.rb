@@ -2,18 +2,19 @@ require_dependency "writefully/application_controller"
 
 module Writefully
   class SitesController < ApplicationController
-    before_filter -> { redirect_to setup_path }, if: :from_scratch?
+    before_filter :authenticate_wf_owner!
 
     def index
-      @sites = Site.all
+      @sites = current_wf_owner.owned_sites
+      redirect_to new_site_path if @sites.empty?
     end
 
     def new
-      @site = Site.new
+      @site = current_wf_owner.owned_sites.build
     end
 
     def create
-      @site = Site.new(site_params)
+      @site = current_wf_owner.owned_sites.build(site_params)
     end
 
   protected

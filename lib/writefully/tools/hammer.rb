@@ -1,5 +1,3 @@
-require 'github_api'
-
 module Writefully
   module Tools
     class Hammer
