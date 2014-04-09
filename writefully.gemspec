@@ -18,7 +18,11 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency 'rails', '~> 4.0.4'
+  
   s.add_dependency 'celluloid'
+  s.add_dependency 'celluloid-io'
+  s.add_dependency 'celluloid-redis'
+
   s.add_dependency 'activerecord-import'
   s.add_dependency 'listen', '~> 2.0'
   s.add_dependency 'thor'

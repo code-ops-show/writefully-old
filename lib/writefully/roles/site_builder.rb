@@ -9,24 +9,36 @@ module Writefully
         end
       }
 
-      def build(site_id)
-        site         = Site.where(id: site_id).first
-        repository   = Repository.new_link(site.access_token, site.owner)
-
-        created_repo = create_repository(repository)
-        added_hook   = add_hook(repository, created_repo)
+      def initialize
+        @hammer = Celluloid::Actor[:hammer]
+        link @hammer
       end
 
-      def create_repository(repository)
+      def build(site_id)
+        site         = Site.where(id: site_id).first
+        auth_token   = site.owner.data["auth_token"]
+        user_name    = site.owner.data["user_name"]
+        repo_name    = site.name.parameterize
+
+        @hammer.prepare auth_token, user_name, repo_name, site.domain
+
+        created_repo = create_repository
+        added_hook   = add_hook
+
+        binding.pry
+      end
+
+      private
+
+      def create_repository
         condition    = Celluloid::Condition.new
-        repository.async.create SIGNAL.call(condition)
+        @hammer.async.forge SIGNAL.call(condition)
         condition.wait
       end
 
-      def add_hook(repository, created_repo)
+      def add_hook
         condition     = Celluloid::Condition.new
-        repo_name     = created_repo.name
-        repository.async.add_hook_for repo_name, SIGNAL.call(condition)
+        @hammer.async.add_hook_for SIGNAL.call(condition)
         condition.wait
       end
 

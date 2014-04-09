@@ -1,8 +1,14 @@
 require 'listen'
 require 'logger'
 
+require 'celluloid'
+require 'celluloid/io'
+require 'celluloid/redis'
+
 require 'active_record'
 require 'writefully'
+require 'redis'
+require 'redis-namespace'
 
 %w(tag post site tagging authorship).each do |model|
   require File.dirname(__FILE__) + "/../../app/models/writefully/#{model}"
@@ -22,6 +28,7 @@ module Writefully
       start_news_agency!
       boot_listener!
     end
+
 
     def connect_to_database!
       ActiveRecord::Base.establish_connection(Writefully.db_config)

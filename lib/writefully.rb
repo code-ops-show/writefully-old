@@ -3,6 +3,8 @@ require 'hashie'
 require 'github_api'
 require 'activerecord-import'
 
+require 'redis'
+require 'redis-namespace'
 
 require 'writefully/engine'
 require 'writefully/storage'

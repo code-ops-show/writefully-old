@@ -7,3 +7,4 @@ end
 require 'writefully/roles/censor'
 require 'writefully/roles/journalist'
 require 'writefully/roles/site_builder'
+require 'writefully/roles/mail_man'
