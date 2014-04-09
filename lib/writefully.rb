@@ -17,13 +17,18 @@ module Writefully
       @_options ||= config_from(config_yml)
     end
 
+    def redis
+      r = Redis.new(host: 'localhost', port: 6379)
+      @_redis ||= Redis::Namespace.new(:"#{env}:writefully", redis: r)
+    end
+
     def env
       ENV["RACK_ENV"] || ENV["RAILS_ENV"] || 'development'
     end
 
     def github_app
-      @_github_app ||= Github.new(client_id:     options[:writefully_github_client], 
-                                  client_secret: options[:writefully_github_secret])
+      @_github_app ||= Github.new(client_id:     options[:github_client], 
+                                  client_secret: options[:github_secret])
     end
 
     def logger
