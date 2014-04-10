@@ -17,13 +17,15 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"]
 
-  s.add_dependency 'rails', '~> 4.0.4'
+  s.add_dependency 'rails', '~> 4.0'
+  s.add_dependency 'coffee-rails', '~> 4.0'
+  s.add_dependency 'sass-rails', '~> 4.0'
+  s.add_dependency 'sprockets',  '= 2.11.0'
   
   s.add_dependency 'celluloid'
   s.add_dependency 'celluloid-io'
   s.add_dependency 'celluloid-redis'
 
-  s.add_dependency 'activerecord-import'
   s.add_dependency 'listen', '~> 2.0'
   s.add_dependency 'thor'
   s.add_dependency 'pg'
@@ -31,13 +33,13 @@ Gem::Specification.new do |s|
   s.add_dependency 'github_api'
   s.add_dependency 'redis'
   s.add_dependency 'redis-namespace'
+  s.add_dependency 'activerecord-import'
+
+  s.add_dependency 'jquery-rails'
+  s.add_dependency 'turbolinks'
+  s.add_dependency 'transponder'
+  s.add_dependency 'bootstrap-sass'
 
   s.add_development_dependency 'pry'
   s.add_development_dependency 'rspec-rails'
-  s.add_development_dependency 'sass-rails'
-  s.add_development_dependency 'sprockets',  '= 2.11.0'
-  s.add_development_dependency 'jquery-rails'
-  s.add_development_dependency 'coffee-rails'
-  s.add_development_dependency 'turbolinks'
-  s.add_development_dependency 'transponder'
 end

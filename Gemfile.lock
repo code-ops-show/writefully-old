@@ -3,16 +3,24 @@ PATH
   specs:
     writefully (0.11.0)
       activerecord-import
+      bootstrap-sass
       celluloid
+      celluloid-io
       celluloid-redis
+      coffee-rails (~> 4.0)
       github_api
       hashie
+      jquery-rails
       listen (~> 2.0)
       pg
-      rails (~> 4.0.4)
+      rails (~> 4.0)
       redis
       redis-namespace
+      sass-rails (~> 4.0)
+      sprockets (= 2.11.0)
       thor
+      transponder
+      turbolinks
 
 GEM
   remote: https://rubygems.org/
@@ -46,6 +54,8 @@ GEM
     addressable (2.3.6)
     arel (4.0.2)
     atomic (1.1.16)
+    bootstrap-sass (3.1.1.0)
+      sass (~> 3.2)
     builder (3.1.4)
     celluloid (0.15.2)
       timers (~> 1.1.0)
@@ -162,9 +172,10 @@ GEM
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
     sass (3.2.18)
-    sass-rails (4.0.1)
+    sass-rails (4.0.2)
       railties (>= 4.0.0, < 5.0)
-      sass (>= 3.1.10)
+      sass (~> 3.2.0)
+      sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0.0)
     simplecov (0.8.2)
       docile (~> 1.1.0)
@@ -202,13 +213,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  coffee-rails
   coveralls
-  jquery-rails
   pry
   rspec-rails
-  sass-rails
-  sprockets (= 2.11.0)
-  transponder
-  turbolinks
   writefully!
