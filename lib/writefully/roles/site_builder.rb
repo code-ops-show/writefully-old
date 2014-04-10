@@ -3,18 +3,18 @@ module Writefully
     class SiteBuilder
       include Celluloid
 
+      trap_exit :actor_died
+
       attr_reader :site, :site_name
 
-      trap_exit :handle_error
-
       def build(site_id)
-        @site         = Site.where(id: site_id.to_i).first
-        user_name    = site.owner.data["user_name"]
+        @site      = Site.where(id: site_id.to_i).first
+        user_name  = site.owner.data["user_name"]
+        auth_token = site.owner.data["auth_token"]
 
-        @site_name     = site.name.parameterize
-        api = Github.new oauth_token: site.owner.data["auth_token"]
-        @hammer = Tools::Hammer.new_link(api, user_name, site_name, site.domain)
-        
+        @site_name = site.name.parameterize
+        @hammer    = Tools::Hammer.new_link(auth_token, user_name, site_name, site.domain)
+
         complete_site_setup(*build_repository)
       ensure
         @hammer.terminate
@@ -22,10 +22,7 @@ module Writefully
       end
 
       def build_repository
-        Writefully.logger.info "Forging #{site_name}"
         created_repo = @hammer.future.forge
-
-        Writefully.logger.info "Adding hook for #{site_name}"
         added_hook   = @hammer.future.add_hook_for(created_repo.value.name)
 
         [created_repo.value, added_hook.value]
@@ -36,8 +33,10 @@ module Writefully
         site.update_attributes(repository: site_repository, processing: false)
       end
 
-      def handle_error actor, reason
-        
+      def actor_died actor, reason
+        Writefully.logger.info "#{reason.message}"
+        site.update_attributes(processing: false, healty: false)
+        Writefully.redis.lpush "site:#{site.id}:errors", reason.message
       end
 
       def clear_db_connection!

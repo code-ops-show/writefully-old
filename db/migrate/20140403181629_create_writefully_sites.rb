@@ -6,6 +6,7 @@ class CreateWritefullySites < ActiveRecord::Migration
       t.hstore   :repository
       t.string   :domain
       t.boolean  :processing, default: true
+      t.boolean  :healthy,    default: false
       t.integer  :owner_id
 
       t.timestamps

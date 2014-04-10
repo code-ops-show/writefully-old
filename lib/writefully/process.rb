@@ -15,6 +15,10 @@ require 'redis-namespace'
   require File.dirname(__FILE__) + "/../../app/models/writefully/#{model}"
 end
 
+Writefully::Source.to_load.each do |model|
+  require File.join(Writefully.options[:app_directory], 'app', 'models', model)
+end
+
 require 'github_api'
 
 require 'writefully/tools'
@@ -27,28 +31,23 @@ module Writefully
     def listen
       log_start
       connect_to_database!
-      load_required_models
       start_news_agency!
       start_mail_man!
       boot_listener!
     end
 
+    # connect to db
     def connect_to_database!
       ActiveRecord::Base.establish_connection(Writefully.db_config)
     end
 
+    # Mail Man uses celluloid/io its basically listening for redis subscription
     def start_mail_man!
-      # the mail man needs to be supervised so he doesn't sleep around
-      # when he delivers the 'packages'
       Roles::MailMan.supervise_as :mailman
     end
 
-    def load_required_models
-      Writefully::Source.to_load.each do |model|
-        require File.join(Writefully.options[:app_directory], 'app', 'models', model)
-      end
-    end
-
+    # Supervises the actors that manage all the work with converting content
+    # and sorting it into its place
     def start_news_agency!
       NewsAgency.run!
     end
@@ -65,6 +64,8 @@ module Writefully
       end
     end
 
+    # this listener listens to the specified content folder and updates the content
+    # in the database
     def boot_listener!
       listener = Listen.to config[:content], wait_for_delay: 2, &process_message
       listener.start
