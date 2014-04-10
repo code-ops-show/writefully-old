@@ -26,12 +26,16 @@ module Writefully
       connect_to_database!
       load_required_models
       start_news_agency!
+      start_mail_man!
       boot_listener!
     end
 
-
     def connect_to_database!
       ActiveRecord::Base.establish_connection(Writefully.db_config)
+    end
+
+    def start_mail_man!
+      Roles::MailMan.supervise_as :mailman
     end
 
     def load_required_models

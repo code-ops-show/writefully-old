@@ -7,7 +7,5 @@ module Writefully
 
     supervise Roles::Journalist,    as: :journalist
     supervise Roles::SiteBuilder,   as: :site_builder
-
-    supervise Roles::MailMan,       as: :mailman
   end
 end
