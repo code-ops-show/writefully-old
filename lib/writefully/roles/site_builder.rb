@@ -3,43 +3,38 @@ module Writefully
     class SiteBuilder
       include Celluloid
 
-      SIGNAL = -> (condition) { 
-        lambda do |result|
-          condition.signal(result)
-        end
+      attr_accessor :user_name, :site_name, :api, :hook_config
+
+      HOOK_CONFIG = -> (domain) { 
+        { name: 'web',
+          events: ["push", "member"],
+          active: true,
+          config: { 
+            url: "#{domain}/writefully/hook"
+          }
+        }
       }
 
-      def initialize
-        @hammer = Celluloid::Actor[:hammer]
-        link @hammer
-      end
-
       def build(site_id)
-        site         = Site.where(id: site_id).first
-        auth_token   = site.owner.data["auth_token"]
-        user_name    = site.owner.data["user_name"]
-        repo_name    = site.name.parameterize
+        site         = Site.where(id: site_id.to_i).first
+        @user_name    = site.owner.data["user_name"]
+        @site_name    = site.name.parameterize
+        @hook_config  = HOOK_CONFIG.call(site.domain)
 
-        @hammer.prepare auth_token, user_name, repo_name, site.domain
+        @api = Github.new oauth_token: site.owner.data["auth_token"]
 
-        created_repo = create_repository
-        added_hook   = add_hook
-
-        binding.pry
+        created_repo = future.create_repository
+        added_hook   = future.add_hook_for(created_repo.value.name)
       end
 
-      private
-
-      def create_repository
-        condition    = Celluloid::Condition.new
-        @hammer.async.forge SIGNAL.call(condition)
-        condition.wait
+      def create_repository 
+        Writefully.logger.info "Forging #{site_name}"
+        api.repos.create name: site_name 
       end
 
-      def add_hook
-        condition     = Celluloid::Condition.new
-        @hammer.async.add_hook_for SIGNAL.call(condition)
-        condition.wait
+      def add_hook_for repo_name
+        Writefully.logger.info "Adding hook for #{repo_name}"
+        api.repos.hooks.create user_name, repo_name, hook_config
       end
 
     end

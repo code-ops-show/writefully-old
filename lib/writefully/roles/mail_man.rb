@@ -25,7 +25,7 @@ module Writefully
 
       def handle_message(channel, message)
         actor_name, action_name = get_actor_action(channel)
-        # Celluloid::Actor[actor_name].__send__(action_name, message)
+        Celluloid::Actor[actor_name].__send__(action_name, message)
       end
 
       def get_actor_action(channel)

@@ -6,7 +6,7 @@ module Writefully
     belongs_to :owner, class_name: "Writefully::Authorship"
 
     def setup_repository
-      # publish a message
+      Writefully.redis.publish('mailbox:site_builder:build', self.id)
     end
   end
 end

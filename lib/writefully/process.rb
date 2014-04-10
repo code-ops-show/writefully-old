@@ -5,6 +5,7 @@ require 'celluloid'
 require 'celluloid/io'
 require 'celluloid/redis'
 
+
 require 'active_record'
 require 'writefully'
 require 'redis'
@@ -13,6 +14,8 @@ require 'redis-namespace'
 %w(tag post site tagging authorship).each do |model|
   require File.dirname(__FILE__) + "/../../app/models/writefully/#{model}"
 end
+
+require 'github_api'
 
 require 'writefully/tools'
 require 'writefully/roles'
@@ -35,6 +38,8 @@ module Writefully
     end
 
     def start_mail_man!
+      # the mail man needs to be supervised so he doesn't sleep around
+      # when he delivers the 'packages'
       Roles::MailMan.supervise_as :mailman
     end
 

@@ -15,14 +15,16 @@ module Writefully
 
     def create
       @site = current_wf_owner.owned_sites.build(site_params)
-      set_flash :success, object: @site
-      redirect_to sites_path
+      if @site.save
+        set_flash :success, object: @site
+        redirect_to sites_path
+      end
     end
 
   protected
 
     def site_params
-      params.require(:site).permit(:name)
+      params.require(:site).permit(:name, :domain)
     end
   end
 end
