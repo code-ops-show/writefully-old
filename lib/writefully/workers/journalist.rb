@@ -17,9 +17,10 @@ module Writefully
 
         @pencil = Tools::Pencil.new_link(index, Writefully::Source.site_id)
 
-        
+        # actually we should upload assets first before updating the content in the db
+        # it just makes more sense because the content depends on the assets
 
-        written_to_db  = @pencil.future.write_content
+        written_to_db  = @pencil.future.write
         upload_assets(index) if written_to_db.value
       ensure
         @pencil.terminate

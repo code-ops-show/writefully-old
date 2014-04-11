@@ -24,19 +24,12 @@ module Writefully
         })
       end
 
-      def write_content 
+      def write
         compute_type.by_site(site_id).where(slug: content.slug)
                       .first_or_initialize
                         .update_attributes(computed_attributes)
       ensure 
         ::ActiveRecord::Base.clear_active_connections! if defined?(::ActiveRecord)
-      end
-
-
-      def write_assets
-        results = asset.names.map do |name|
-          Celluoid::Actor[:pigeons].future.upload(asset.endpoint, asset.path, name)
-        end
       end
 
     private
