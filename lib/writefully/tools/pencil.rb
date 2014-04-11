@@ -10,7 +10,7 @@ module Writefully
 
       class ContentModelNotFound < StandardError; end
 
-      def pick_up(index, site_id)
+      def initialize(index, site_id)
         @site_id  = site_id
         @index    = index
         @content  = Content.new(index)
@@ -28,11 +28,14 @@ module Writefully
         compute_type.by_site(site_id).where(slug: content.slug)
                       .first_or_initialize
                         .update_attributes(computed_attributes)
+      ensure 
+        ::ActiveRecord::Base.clear_active_connections! if defined?(::ActiveRecord)
       end
 
+
       def write_assets
-        asset.names.map do |asset_name| 
-          Celluloid::Actor[:pigeons].async.upload(asset.endpoint, asset.path, asset_name)
+        results = asset.names.map do |name|
+          Celluoid::Actor[:pigeons].future.upload(asset.endpoint, asset.path, name)
         end
       end
 

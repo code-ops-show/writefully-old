@@ -1,5 +1,5 @@
 module Writefully
-  module Roles
+  module Workers
     class SiteBuilder
       include Celluloid
 
@@ -12,7 +12,7 @@ module Writefully
         user_name  = site.owner.data["user_name"]
         auth_token = site.owner.data["auth_token"]
 
-        @site_name = site.name.parameterize
+        @site_name = site.slug
         @hammer    = Tools::Hammer.new_link(auth_token, user_name, site_name, site.domain)
 
         complete_site_setup(*build_repository)
@@ -30,13 +30,13 @@ module Writefully
 
       def complete_site_setup repo, hook
         site_repository = { name: repo.name, id: repo.id, hook_id: hook.id }
-        site.update_attributes(repository: site_repository, processing: false)
+        site.update_attributes(repository: site_repository, processing: false, healthy: true)
       end
 
       def actor_died actor, reason
         Writefully.logger.info "#{reason.message}"
+        Writefully.redis.sadd "site:#{site.id}:errors", reason.message
         site.update_attributes(processing: false, healty: false)
-        Writefully.redis.lpush "site:#{site.id}:errors", reason.message
       end
 
       def clear_db_connection!

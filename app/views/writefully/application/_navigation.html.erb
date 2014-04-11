@@ -10,6 +10,10 @@
       <%= link_to "Writefully", root_path, class: 'navbar-brand' %>
     </div>
     <div class="collapse navbar-collapse">
+      <ul class='nav navbar-nav'>
+        <%= activeable_link_to :li, "Dashboard",    root_path, icon: 'home' %>
+        <%= activeable_link_to :li, "New Site", new_site_path, icon: 'plus' %>
+      </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><p class='navbar-text'><%= current_wf_owner %></p></li>
         <li><%= link_to "Sign Out", signout_path %></li>

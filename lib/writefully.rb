@@ -10,7 +10,6 @@ require 'writefully/engine'
 require 'writefully/storage'
 
 module Writefully
-  STORAGE = Storage.new
   SCOPES  = %w(repo public_repo user write:repo_hook)
 
   class << self

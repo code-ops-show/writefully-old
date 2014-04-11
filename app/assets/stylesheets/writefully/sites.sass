@@ -1,6 +1,16 @@
-body.writefully.sites
+body.writefully.sites, body.writefully.posts.index
   h1, h2, h3, h4, h5, h6
     font-weight: 100
+
+  div.post.media
+    border-top: 1px solid #eee
+    padding-top: 15px
+
+    &:first-child
+      border-top: 0px
+      padding-top: 0px
+
+  ul.nav-tabs
     margin-bottom: 20px
 
   form#new_site
@@ -8,16 +18,15 @@ body.writefully.sites
     p.form-info
       padding: 10px
 
-  div.heading
-    border-top: 1px solid #eee
-    padding-top: 10px
-    margin-bottom: 10px
 
-  div.site
+  div.site.media
     border-top: 1px solid #eee
+    padding-top: 15px
+    &:first-child
+      border-top: 0px
+      padding-top: 0px
     div.status
       margin-top: 5px
-      line-height: 69px
       vertical-align: middle
       font-size: 16px
     h2

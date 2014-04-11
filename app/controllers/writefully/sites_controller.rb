@@ -9,8 +9,17 @@ module Writefully
       redirect_to new_site_path if @sites.empty?
     end
 
+    def show
+      @site = get_site
+      redirect_to site_posts_path(@site) if params[:tab].nil?
+    end
+
     def new
       @site = current_wf_owner.owned_sites.build
+    end
+
+    def edit
+      @site = get_site
     end
 
     def create
@@ -22,6 +31,10 @@ module Writefully
     end
 
   protected
+
+    def get_site
+      current_wf_owner.owned_sites.friendly.find(params[:id])
+    end
 
     def site_params
       params.require(:site).permit(:name, :domain)

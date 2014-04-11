@@ -1,7 +1,14 @@
 <h1>Sites</h1>
-<div class='row heading'>
-  <div class='col-md-4'>Site Name</div>
-  <div class='col-md-4 text-center'>Processing</div>
-  <div class='col-md-4 text-center'>Healthy</div>
+<div class='panel panel-default'>
+  <div class='panel-heading'>
+    <div class='row'>
+      <div class='col-md-4'><h3>Site Name</h3></div>
+      <div class='col-md-4 text-center'><h3>Processing</h3></div>
+      <div class='col-md-4 text-center'><h3>Healthy</h3></div>
+    </div>
+  </div>
+  <div class='panel-body'>
+    <%= render @sites %>
+  </div>
 </div>
-<%= render @sites %>
+

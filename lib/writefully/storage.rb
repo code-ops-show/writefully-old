@@ -1,6 +1,6 @@
 module Writefully
-  class Storage
-  
+  module Storage
+
     def directory
       @directory ||= connection.directories.get(Writefully.options[:storage_folder])
     end

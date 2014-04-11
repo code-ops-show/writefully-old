@@ -1,5 +1,5 @@
 module Writefully
-  module Roles
+  module Workers
     class Censor
       include Celluloid
 

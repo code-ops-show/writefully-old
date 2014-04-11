@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'thor'
   s.add_dependency 'pg'
   s.add_dependency 'hashie'
+  s.add_dependency 'friendly_id'
   s.add_dependency 'github_api'
   s.add_dependency 'redis'
   s.add_dependency 'redis-namespace'

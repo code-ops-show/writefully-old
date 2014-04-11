@@ -1,0 +1,5 @@
+<%= content_tag type, class: path_active?(path) do %>
+  <%= link_to path, options do %>
+    <%= link_icon(options[:icon]) %> <%= name %> 
+  <% end %>
+<% end %>

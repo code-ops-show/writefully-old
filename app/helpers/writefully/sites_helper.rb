@@ -13,5 +13,9 @@ module Writefully
     def healthy_partial site
       'writefully/sites/healthy/' + STATE_PARTIAL[site.healthy]
     end
+
+    def site_tab(tab)
+      tab.present? ? tab : 'posts'
+    end
   end
 end
