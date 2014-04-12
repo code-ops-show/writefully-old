@@ -20,7 +20,7 @@ module Writefully
 
       def actor_died actor, reason
         Writefully.logger.error "An error occured #{reason.message}"
-        Writefully.retry_job :journalists, index.merge({ tries: (index[:tries] || 1) + 1 })
+        Writefully.add_job :journalists, index.merge({ tries: (index[:tries] || 1) + 1 })
       end
     end
   end
