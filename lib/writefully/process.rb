@@ -2,9 +2,7 @@ require 'listen'
 require 'logger'
 
 require 'celluloid'
-require 'celluloid/io'
 require 'celluloid/redis'
-
 
 require 'active_record'
 require 'writefully'
@@ -22,7 +20,7 @@ end
 require 'github_api'
 
 require 'writefully/tools'
-require 'writefully/roles'
+require 'writefully/workers'
 require 'writefully/news_agency'
 
 module Writefully
@@ -32,7 +30,7 @@ module Writefully
       log_start
       connect_to_database!
       start_news_agency!
-      start_mail_man!
+      start_dispatcher!
       boot_listener!
     end
 
@@ -42,8 +40,8 @@ module Writefully
     end
 
     # Mail Man uses celluloid/io its basically listening for redis subscription
-    def start_mail_man!
-      Roles::MailMan.supervise_as :mailman
+    def start_dispatcher!
+      Tools::Dispatcher.supervise_as :dispatch
     end
 
     # Supervises the actors that manage all the work with converting content
@@ -75,8 +73,8 @@ module Writefully
     end
 
     JOBS = { 
-      write:  -> (index) { Celluloid::Actor[:journalist].publish(index) },
-      remove: -> (index) { Celluloid::Actor[:censor].pull(index)  }
+      write:  -> (index) { Writefully.add_job :journalists, index },
+      remove: -> (index) { Wrotefully.add_job :censors, index  }
     }
 
     def queue_jobs indices, action

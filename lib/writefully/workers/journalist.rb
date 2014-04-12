@@ -2,35 +2,38 @@ module Writefully
   module Workers
     class Journalist
       include Celluloid
+
       trap_exit :actor_died
 
-      attr_reader :asset
+      attr_reader :asset, :index
 
-      def initialize
-        # get job from redis queue
-        # processes 2 types of jobs write_content and write_assets
-        # or both
+      def perform(message)
+        publish_content(message)
       end
 
       def publish_content(index)
-        Writefully.logger.info "Processing #{index[:resource]} #{index[:slug]}"
+        Writefully.logger.info "Publishing #{index[:resource]} #{index[:slug]}"
 
-        @pencil = Tools::Pencil.new_link(index, Writefully::Source.site_id)
+        @index = index
+        @asset = Asset.new(index)
 
-        # actually we should upload assets first before updating the content in the db
-        # it just makes more sense because the content depends on the assets
-
-        written_to_db  = @pencil.future.write
-        upload_assets(index) if written_to_db.value
-      ensure
-        @pencil.terminate
+        assets_uploaded = upload_assets.map(&:value).compact
+        write_content if can_update_db?(asset.names, assets_uploaded)
       end
 
-      def upload_assets(index)
-        asset = Asset.new(index)
-        assets_results = written_assets.map(&:value)
-        results = asset.names.map do |name|
-          Celluoid::Actor[:pigeons].future.upload(asset.endpoint, asset.path, name)
+      def write_content
+        pencil = Tools::Pencil.new_link(index, Writefully::Source.site_id, asset)
+        written_to_db   = pencil.future.write 
+        pencil.terminate if written_to_db.value
+      end
+
+      def can_update_db?  available, uploaded
+        available.count == uploaded.count
+      end
+
+      def upload_assets
+        asset.names.map do |name|
+          Celluloid::Actor[:pigeons].future.upload(asset.endpoint, asset.path, name)
         end
       end
 

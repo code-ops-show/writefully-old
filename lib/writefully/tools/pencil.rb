@@ -4,17 +4,15 @@ module Writefully
       include Celluloid
       include Celluloid::Logger
 
-      finalizer :clean_up
-
-      attr_reader :resource, :content, :asset, :index, :site_id
+      attr_reader :resource, :content, :asset, :index, :site_id, :asset
 
       class ContentModelNotFound < StandardError; end
 
-      def initialize(index, site_id)
+      def initialize(index, site_id, asset)
         @site_id  = site_id
         @index    = index
         @content  = Content.new(index)
-        @asset    = Asset.new(index)
+        @asset    = asset
       end
 
       def computed_attributes

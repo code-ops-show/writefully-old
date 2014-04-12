@@ -3,6 +3,7 @@ require 'hashie'
 require 'github_api'
 require 'activerecord-import'
 
+require 'connection_pool'
 require 'redis'
 require 'redis-namespace'
 
@@ -20,7 +21,17 @@ module Writefully
 
     def redis
       r = Redis.new(host: 'localhost', port: 6379)
-      @_redis ||= Redis::Namespace.new(:"#{env}:writefully", redis: r)
+      @_redis ||= ConnectionPool.new(size: 5, timeout: 5) do 
+        Redis::Namespace.new(:"#{env}:writefully", redis: r)
+      end
+    end
+
+    def add_job worker, message
+      Writefully.redis.with { |c| c.sadd "jobs", convert_job(worker, message) }
+    end
+
+    def convert_job worker, message
+       Marshal.dump({worker: worker, message: message})
     end
 
     def env

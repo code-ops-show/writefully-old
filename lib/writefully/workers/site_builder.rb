@@ -7,6 +7,10 @@ module Writefully
 
       attr_reader :site, :site_name
 
+      def perform(message)
+        build(message)
+      end
+
       def build(site_id)
         @site      = Site.where(id: site_id.to_i).first
         user_name  = site.owner.data["user_name"]

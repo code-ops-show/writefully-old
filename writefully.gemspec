@@ -23,7 +23,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'sprockets',  '= 2.11.0'
   
   s.add_dependency 'celluloid'
-  s.add_dependency 'celluloid-io'
   s.add_dependency 'celluloid-redis'
 
   s.add_dependency 'listen', '~> 2.0'
@@ -32,6 +31,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'hashie'
   s.add_dependency 'friendly_id'
   s.add_dependency 'github_api'
+  s.add_dependency 'connection_pool'
   s.add_dependency 'redis'
   s.add_dependency 'redis-namespace'
   s.add_dependency 'activerecord-import'
