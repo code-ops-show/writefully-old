@@ -5,12 +5,20 @@ module Writefully
 
       def initialize
         every 1.second do 
-          async.heartbeat
+          async.process
         end
       end
 
-      def heartbeat
+      def process
         job_data = Writefully.redis.with { |c| c.spop 'jobs' }
+        compute(job_data)
+      end
+
+      def retry
+        
+      end
+
+      def compute job_data
         job      = Marshal.load(job_data)
         dispatch(job) if job_valid?(job)
       end

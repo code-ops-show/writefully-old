@@ -30,6 +30,10 @@ module Writefully
       Writefully.redis.with { |c| c.sadd "jobs", convert_job(worker, message) }
     end
 
+    def retry_job, worker, message
+      Writefully.redis.with { |c| c.zadd "retries", message[:tries], convert_job(worker, message) }
+    end
+
     def convert_job worker, message
        Marshal.dump({worker: worker, message: message})
     end
