@@ -5,7 +5,6 @@ PATH
       activerecord-import
       bootstrap-sass
       celluloid
-      celluloid-io
       celluloid-redis
       coffee-rails (~> 4.0)
       connection_pool

@@ -2,6 +2,7 @@ require 'jquery-rails'
 require 'turbolinks'
 require 'transponder'
 require 'bootstrap-sass'
+require 'friendly_id'
 
 module Writefully
   class Engine < ::Rails::Engine
