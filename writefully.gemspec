@@ -23,7 +23,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'sprockets',  '= 2.11.0'
   
   s.add_dependency 'celluloid'
-  s.add_dependency 'celluloid-redis'
 
   s.add_dependency 'listen', '~> 2.0'
   s.add_dependency 'thor'

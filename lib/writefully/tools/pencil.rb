@@ -2,7 +2,6 @@ module Writefully
   module Tools
     class Pencil
       include Celluloid
-      include Celluloid::Logger
 
       attr_reader :resource, :content, :asset, :index, :site_id, :asset
 

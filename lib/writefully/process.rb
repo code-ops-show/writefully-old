@@ -2,7 +2,6 @@ require 'listen'
 require 'logger'
 
 require 'celluloid'
-require 'celluloid/redis'
 
 require 'active_record'
 require 'writefully'
