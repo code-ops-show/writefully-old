@@ -61,8 +61,8 @@ module Writefully
       end
     end
 
-    # this listener listens to the specified content folder and updates the content
-    # in the database
+    # this listener listens to the specified content folder 
+    # queues the changes detected into the job queue
     def boot_listener!
       listener = Listen.to config[:content], wait_for_delay: 2, &process_message
       listener.start
