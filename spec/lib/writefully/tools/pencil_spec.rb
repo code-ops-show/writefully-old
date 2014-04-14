@@ -31,6 +31,14 @@ module Writefully
         pencil.terminate
       end
 
+      it "#write" do 
+        pencil = Pencil.new(index, site_id)
+        expect { 
+          pencil.write
+        }.to change(Post, :count).by(1)
+        pencil.terminate
+      end
+
       describe "#can_update_db" do
         it "can update" do 
           pencil = Pencil.new(index, site_id) 
