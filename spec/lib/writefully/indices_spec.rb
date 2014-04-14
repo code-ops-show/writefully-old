@@ -6,6 +6,10 @@ module Writefully
     let(:index)     { [{resource: 'posts', slug: '1-hash-selector-pattern' }] }
     subject { Indices }
 
+    before do 
+      Writefully.stub(:options).and_return({content: '/Users/zacksiri/Repositories/writefully/spec/dummy/content/' })
+    end
+
     it "#build_from" do  
       Indices.build_from(full_path).should eq index 
     end
