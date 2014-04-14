@@ -44,6 +44,35 @@
         null,
         null
       ],
+      "/Users/zacksiri/Repositories/writefully/spec/lib/writefully/postable_spec.rb": [
+        1,
+        null,
+        1,
+        1,
+        5,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null
+      ],
       "/Users/zacksiri/Repositories/writefully/spec/lib/writefully/source_spec.rb": [
         1,
         null,
@@ -716,6 +745,6 @@
         null
       ]
     },
-    "timestamp": 1397502654
+    "timestamp": 1397503796
   }
 }
