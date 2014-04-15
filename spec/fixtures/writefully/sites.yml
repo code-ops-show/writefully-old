@@ -3,3 +3,8 @@ codemy_net:
   slug: 'codemy-net'
   domain: 'http://www.codemy.net'
   owner: wf_owner_1
+
+some_site:
+  name: "Some Site"
+  slug: 'some-site'
+  domain: 'http://www.somesite.com'
