@@ -11,7 +11,7 @@ module Writefully
     end
 
     def self.index_name_from(array)
-      [:resource, :slug].zip(array).flatten
+      [:site, :resource, :slug].zip(array).flatten
     end
 
     def self.index_hash_from(array)

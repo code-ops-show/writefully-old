@@ -1,0 +1,11 @@
+wf_owner_1: 
+  data:
+    email: "sakchai@artellectual.com"
+    name: "Zack Siri"
+    user_name: "zacksiri"
+
+wf_owner_2: 
+  data: 
+    email: "somedude@gmail.com"
+    name: "Some Dude"
+    user_name: 'somedude'

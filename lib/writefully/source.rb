@@ -2,39 +2,21 @@ module Writefully
   module Source
 
     class << self
-
       def content_path
         Writefully.options[:content]
       end
 
-      def contentable
-        (available & valid)
-        .collect { |resource| resource.pluralize }
+      def models_path
+        File.join(Writefully.options[:app_directory], 'app', 'models')
       end
 
-      def available
-        Dir.chdir(content_path) do 
-          Dir.glob("*").collect { |resource| resource.singularize }
+      def to_load
+        Dir.chdir(models_path) do 
+          Dir.glob('*').select do |file|
+            open(File.join(models_path, file)).read.strip.match(/Writefully/) if File.file?(file)
+          end.collect { |file| file.split('.')[0] }
         end
-      end
-
-      def valid
-        Dir.chdir(Rails.root.join('app', 'models')) do
-          Dir.glob('*').select { |model| model.include?('.rb') }
-                       .collect { |model| model.split('.')[0] }
-        end
-      end
-
-      def indices
-        contentable.collect do |resource|
-          Dir.chdir(File.join(content_path, resource)) do
-            Dir.glob('*').collect do |content|
-              { resource: resource, slug: content }
-            end
-          end
-        end.flatten(1)
       end
     end
-
   end
 end

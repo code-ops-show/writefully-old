@@ -1,0 +1,5 @@
+<ul class="nav nav-tabs">
+  <%= activeable_link_to :li, 'Posts', site_posts_path(@site) %>
+  <%= activeable_link_to :li, 'Processing', tab_site_path(@site, 'processing') %>
+  <%= activeable_link_to :li, "Errors #{@site.processing_errors.count}", tab_site_path(@site, 'errors') %>
+</ul>

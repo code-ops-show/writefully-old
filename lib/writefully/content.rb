@@ -5,11 +5,11 @@ module Writefully
 
     def initialize(index)
       @index = index
-      @path = File.join(Writefully.options[:content], index[:resource], index[:slug])
+      @path = File.join(Writefully.options[:content], index[:site], index[:resource], index[:slug])
     end
 
     def body
-      @body ||= File.open(File.join(path, 'README.md')).read
+      @body ||= File.open(File.join(path, 'README')).read
     end
 
     def meta

@@ -5,3 +5,10 @@ hash_selector_pattern:
   slug: "ruby-hash-selector-pattern"  
   content: "Blah"
   type: "Post"
+  site: codemy_net
+
+blah_post:
+  title: "Blah Post"
+  slug: "blah-post"  
+  content: "Blah"
+  type: "Post"

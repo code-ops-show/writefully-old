@@ -3,7 +3,7 @@ module Writefully
     attr_reader :path, :endpoint
 
     def initialize(index)
-      base_path = [Writefully.options[:content], index[:resource], index[:slug]]
+      base_path = [Writefully.options[:content], index[:site], index[:resource], index[:slug]]
       @path = File.join(base_path, 'assets')
       @endpoint = File.join(index[:resource], index[:slug], 'assets')
     end
@@ -18,6 +18,16 @@ module Writefully
 
     def url storage_endpoint
       File.join(storage_endpoint, endpoint, '/')
+    end
+
+    def convert_for content
+      if content.is_a?(String)
+        content.gsub(regex, url(Writefully::Storage.endpoint))
+      elsif content.is_a?(Hash)
+        content.inject({}) do |h, (k, v)| 
+          h[k] = v.gsub(regex, url(Writefully::Storage.endpoint)); h 
+        end 
+      end
     end
   end
 end
