@@ -22,7 +22,7 @@ module Writefully
     helper_method :current_wf_owner
 
     def current_wf_owner
-      @current_owner ||= Authorship.where(id: session[:owner_id]).first if session[:owner_id]
+      @current_owner ||= Authorship.where(id: session[:wf_owner_id]).first if session[:wf_owner_id]
     end
   end
 end

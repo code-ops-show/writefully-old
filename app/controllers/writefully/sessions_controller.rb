@@ -13,12 +13,12 @@ module Writefully
       @owner  = find_or_create_owner 
 
       refresh_token
-      session[:owner_id] = @owner.id
+      session[:wf_owner_id] = @owner.id
       redirect_to root_path, notice: 'signed_in'
     end
 
     def destroy
-      session[:owner_id] = nil
+      session[:wf_owner_id] = nil
       redirect_to root_path, notice: 'signed_out'
     end
 
