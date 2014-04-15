@@ -4,6 +4,8 @@ module Writefully
   class SitesController < ApplicationController
     before_filter :authenticate_wf_owner!
 
+    VALID_TABS = %w(processing errors)
+
     def index
       @sites = current_wf_owner.owned_sites
       redirect_to new_site_path if @sites.empty?
@@ -11,7 +13,9 @@ module Writefully
 
     def show
       @site = get_site
-      redirect_to site_posts_path(@site) if params[:tab].nil?
+      if params[:tab].nil? or not tab_valid?
+        redirect_to site_posts_path(@site) 
+      end
     end
 
     def new
@@ -31,6 +35,10 @@ module Writefully
     end
 
   protected
+
+    def tab_valid?
+      VALID_TABS.include?(params[:tab])
+    end
 
     def get_site
       current_wf_owner.owned_sites.friendly.find(params[:id])
