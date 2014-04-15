@@ -8,7 +8,7 @@ Allows developers who love to write to publish easily
 
 + Writefully Core
   + Separate lightweight process that manages all the work
-  + Main rails process should be able to communicate with Writefully via ZMQ
+  + Main rails process should be able to communicate with Writefully via Redis queue
     + When a site is created it sets up a repository / hooks with sample content
   + Manages content taxonomy via Tags / Taggings
   + Easily Extendable from main rails app

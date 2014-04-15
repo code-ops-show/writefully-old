@@ -33,6 +33,13 @@ module Writefully
       rescue Exception => e
         raise e
       end
+
+      def add_sample_content repo_name
+        Writefully.logger.info "Adding Sample content #{site_name}"
+        
+      rescue Exception => e
+        raise e
+      end
     end
   end
 end

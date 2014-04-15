@@ -1,4 +1,5 @@
 require 'jquery-rails'
+require 'coffee_script'
 require 'turbolinks'
 require 'transponder'
 require 'bootstrap-sass'
