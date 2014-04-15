@@ -1,0 +1,7 @@
+<div id='new-session' class='row'>
+  <div class='col-md-4 col-md-offset-4'>
+    <h1 class='text-center'>Welcome to Writefully</h1>
+    <p class='lead text-center'>Lets get started!</p>
+    <%= link_to "Authenticate with Github", @github_app.authorize_url(scope: Writefully::SCOPES), class: 'btn btn-primary text-center btn-block' %>
+  </div>
+</div>
