@@ -1,5 +1,8 @@
-test:
+development: &default
   :content: <%= Rails.root.join('content') %>
   :storage_folder: 'codemycasts'
   :storage_provider: 'AWS'
   :app_directory: <%= Rails.root %>
+
+test:
+  <<: *default

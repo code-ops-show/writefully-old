@@ -5,8 +5,9 @@ require 'writefully/tools'
 module Writefully
   module Tools
     describe Pencil do 
-      let(:index)   { {resource: 'posts', slug: '1-hash-selector-pattern' } }
-      let(:site_id) { 1 }
+      fixtures :"writefully/sites"
+
+      let(:index)   { {site: 'codemy-net', resource: 'posts', slug: '1-hash-selector-pattern' } }
       let(:computed_attributes) { 
         { 
           "title" => "Ruby Hash Selector Pattern",
@@ -26,13 +27,13 @@ module Writefully
       end
 
       it "#computed_attributes" do 
-        pencil = Pencil.new(index, site_id)
+        pencil = Pencil.new(index)
         pencil.computed_attributes.should eq computed_attributes 
         pencil.terminate
       end
 
       it "#write" do 
-        pencil = Pencil.new(index, site_id)
+        pencil = Pencil.new(index)
         expect { 
           pencil.write
         }.to change(Post, :count).by(1)
@@ -41,13 +42,13 @@ module Writefully
 
       describe "#can_update_db" do
         it "can update" do 
-          pencil = Pencil.new(index, site_id) 
+          pencil = Pencil.new(index) 
           pencil.can_update_db?([true, true]).should be_true
           pencil.terminate
         end
 
         it "can't update" do 
-          pencil = Pencil.new(index, site_id) 
+          pencil = Pencil.new(index) 
           expect { 
             pencil.can_update_db?([true])
           }.to raise_error Writefully::Tools::Pencil::SomeAssetsNotUploaded

@@ -14,7 +14,7 @@ module Writefully
       def publish_content(index)
         Writefully.logger.info "Publishing #{index[:resource]} #{index[:slug]}"
         @index = index
-        pencil = Tools::Pencil.new_link(index, Writefully::Source.site_id)
+        pencil = Tools::Pencil.new_link(index)
         pencil.perform
       end
 

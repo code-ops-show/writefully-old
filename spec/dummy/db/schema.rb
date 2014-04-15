@@ -49,11 +49,12 @@ ActiveRecord::Schema.define(version: 20140403181629) do
 
   create_table "writefully_sites", force: true do |t|
     t.string   "name"
-    t.string   "access_token"
-    t.string   "branch",       default: "master"
+    t.string   "branch",     default: "master"
+    t.string   "slug"
     t.hstore   "repository"
     t.string   "domain"
-    t.boolean  "processing"
+    t.boolean  "processing", default: true
+    t.boolean  "healthy",    default: false
     t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -61,6 +62,7 @@ ActiveRecord::Schema.define(version: 20140403181629) do
 
   add_index "writefully_sites", ["owner_id"], name: "index_writefully_sites_on_owner_id", using: :btree
   add_index "writefully_sites", ["repository"], name: "index_writefully_sites_on_repository", using: :gin
+  add_index "writefully_sites", ["slug"], name: "index_writefully_sites_on_slug", unique: true, using: :btree
 
   create_table "writefully_taggings", force: true do |t|
     t.integer  "tag_id"

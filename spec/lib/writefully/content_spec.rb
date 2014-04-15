@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Writefully
   describe Content do 
-    let(:index) { {resource: 'posts', slug: '1-hash-selector-pattern' } }
+    let(:index) { {site: 'codemy-net', resource: 'posts', slug: '1-hash-selector-pattern' } }
     let(:meta)  { { 
       "title"        => "Ruby Hash Selector Pattern",
       "slug"        => "ruby-hash-selector-pattern",

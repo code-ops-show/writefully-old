@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Writefully
   describe Asset do 
-    let(:index) { {resource: 'posts', slug: '1-hash-selector-pattern' } }
+    let(:index) { {site: 'codemy-net', resource: 'posts', slug: '1-hash-selector-pattern' } }
     subject(:asset) { Asset.new(index) }
     let(:url)   { "https://codemycasts.s3.amazonaws.com/posts/1-hash-selector-pattern/assets/" }
 
