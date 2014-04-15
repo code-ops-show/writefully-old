@@ -6,8 +6,10 @@ module Writefully
   module Tools
     describe Pencil do 
       fixtures :"writefully/sites"
+      fixtures :"writefully/posts"
 
       let(:index)   { {site: 'codemy-net', resource: 'posts', slug: '1-hash-selector-pattern' } }
+      let(:index_2)   { {site: 'codemy-net', resource: 'posts', slug: '2-rails-flash-partials' } }
       let(:computed_attributes) { 
         { 
           "title" => "Ruby Hash Selector Pattern",
@@ -32,12 +34,22 @@ module Writefully
         pencil.terminate
       end
 
-      it "#write" do 
-        pencil = Pencil.new(index)
-        expect { 
-          pencil.write
-        }.to change(Post, :count).by(1)
-        pencil.terminate
+      describe "#write" do 
+        it "should create new post" do 
+          pencil = Pencil.new(index)
+          expect { 
+            pencil.write
+          }.to change(Post, :count).by(0)
+          pencil.terminate
+        end
+
+        it "should update existing post" do 
+          pencil = Pencil.new(index_2)
+          expect { 
+            pencil.write
+          }.to change(Post, :count).by(1)
+          pencil.terminate
+        end
       end
 
       describe "#can_update_db" do
