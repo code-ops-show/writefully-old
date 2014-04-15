@@ -1,5 +1,5 @@
 require 'thor'
-require 'writefully/monitor'
+require 'writefully/process'
 
 module Writefully
   class CLI < Thor
@@ -16,7 +16,7 @@ module Writefully
         pid = waitpid(spawn(listen(config)))
         write pid, config[:pidfile]
       else
-        Writefully::Monitor.new(config).listen
+        Writefully::Process.new(config).listen
       end
     end
 
@@ -41,7 +41,7 @@ module Writefully
 
     no_tasks do 
       def listen(config)
-        Writefully::Monitor.new(config).listen
+        Writefully::Process.new(config).listen
       end
 
       def write pid, pidfile

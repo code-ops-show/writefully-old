@@ -1,17 +1,9 @@
-namespace :writefully do 
-  desc "Writes content to database"
-  task :write => :environment do 
-    Writefully::Source.indices.each do |index|
-      writer = Writefully::Writer.new(index)
-      writer.async.write_content 
-      writer.async.write_assets
-    end
-  end
+require 'writefully/process'
 
+namespace :writefully do 
   desc "Starts the writefully monitor"
-  task :start => :environment do
-    require 'writefully/monitor'
+  task :start do
     Signal.trap("INT") { $stdout.puts "Writefully exiting..."; exit }
-    Writefully::Monitor.new(Writefully.options).listen
+    Writefully::Process.new(Writefully.options).listen
   end
 end

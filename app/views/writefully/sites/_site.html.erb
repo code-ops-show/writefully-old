@@ -1,0 +1,16 @@
+<%= div_for site, class: 'row media' do %>
+  <div class='col-md-4'>
+    <h2>
+      <%= link_to site do %> 
+        <%= site.name %> 
+        <small><span class='glyphicon glyphicon-zoom-in'></span></small>
+      <% end %>
+    </h2>
+  </div>
+  <div class='col-md-4 text-center'>
+    <%= render processing_partial site %>
+  </div>
+  <div class='col-md-4'>
+    <%= render healthy_partial site %>
+  </div>
+<% end %>

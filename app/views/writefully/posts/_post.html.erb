@@ -1,0 +1,14 @@
+<%= div_for post, class: 'media' do %>
+  <%= link_to site_post_path(@site, post), class: 'pull-left' do %>
+    <%= image_tag post.details.cover, size: '64x64', alt: post.title %>
+  <% end %>
+  <div class='media-body'>
+    <h4 class='media-heading'><%= link_to post.title, site_post_path(@site, post) %></h4>
+    <div class='media-blurb'>
+      <%= post.details.blurb %>
+    </div>
+    <div class='media-status'>
+      <%= render publish_tag(post) %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,15 @@
+<%= form_for @site, html: { class: 'form-horizontal', role: 'form' } do |f| %>
+  <div class='form-group'>
+    <div class='col-sm-12'>
+      <%= f.text_field :name, class: 'form-control input-lg', placeholder: 'Site Name' %>
+    </div>
+  </div>
+  <div class='form-group'>
+    <div class='col-sm-12'>
+      <%= f.text_field :domain, class: 'form-control input-lg', placeholder: 'Site Domain' %>
+      <span class='help-block'>http://www.example.com for github web hook</span>
+    </div>
+  </div>
+  <p class='bg-primary form-info'>Lets give your site a name. This name will be used as your github repository name.</p>
+  <%= f.submit "Next", class: 'btn btn-success btn-block' %>
+<% end %>
