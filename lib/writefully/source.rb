@@ -10,8 +10,8 @@ module Writefully
         File.join(Writefully.options[:app_directory], 'app', 'models')
       end
 
-      def valid_models
-        skim_for ::Regexp.new('Writefully::Post')
+      def valid_resources
+        skim_for(::Regexp.new('Writefully::Post')).map { |r| r.pluralize }
       end
 
       def to_load

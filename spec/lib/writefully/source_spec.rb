@@ -6,6 +6,7 @@ module Writefully
     let(:indices)    { [{site: 'codemy-net', resource: 'posts', slug: '1-hash-selector-pattern'}, 
                         {site: 'codemy-net', resource: 'posts', slug: '2-rails-flash-partials'} ]}
 
-    its(:to_load)     { should =~ ['post', 'playlist'] }
+    its(:to_load)         { should =~ ['post', 'playlist'] }
+    its(:valid_resources) { should =! ['posts'] }
   end
 end
