@@ -38,7 +38,7 @@ module Writefully
       ActiveRecord::Base.establish_connection(Writefully.db_config)
     end
 
-    # Mail Man uses celluloid/io its basically listening for redis subscription
+    # Dispatcher monitors job queue and throws job at workers
     def start_dispatcher!
       Tools::Dispatcher.supervise_as :dispatch
     end
