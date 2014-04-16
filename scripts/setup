@@ -1,0 +1,25 @@
+#!/bin/bash
+
+set -o nounset
+set -o errexit
+
+ContentFolder="$1"
+SiteName="$2"
+ModelName="$3"
+
+SampleContent="1-sample-content"
+
+SitePath="$1/$2"
+ContentPath="$1/$2/$3"
+SampleContentPath="$ContentPath/$SampleContent"
+AssetsPath="$SampleContent/assets"
+
+# setup site / content / sample / assets
+[ -d $AssetsPath ] || mkdir -p $AssetsPath
+
+# setup git repo for site path
+git init $SitePath
+
+
+
+

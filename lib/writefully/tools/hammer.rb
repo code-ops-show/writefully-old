@@ -22,7 +22,7 @@ module Writefully
 
       def forge
         Writefully.logger.info "Forging #{site_name}"
-        api.repos.create name: site_name 
+        api.repos.create name: site_name, auto_init: true
       rescue Exception => e
         raise e
       end
@@ -36,7 +36,7 @@ module Writefully
 
       def add_sample_content repo_name
         Writefully.logger.info "Adding Sample content #{site_name}"
-        
+
       rescue Exception => e
         raise e
       end
