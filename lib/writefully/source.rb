@@ -10,10 +10,18 @@ module Writefully
         File.join(Writefully.options[:app_directory], 'app', 'models')
       end
 
+      def valid_models
+        skim_for ::Regexp.new('Writefully::Post')
+      end
+
       def to_load
+        skim_for ::Regexp.new('Writefully')
+      end
+
+      def skim_for matcher
         Dir.chdir(models_path) do 
           Dir.glob('*').select do |file|
-            open(File.join(models_path, file)).read.strip.match(/Writefully/) if File.file?(file)
+            open(File.join(models_path, file)).read.strip.match(matcher) if File.file?(file)
           end.collect { |file| file.split('.')[0] }
         end
       end

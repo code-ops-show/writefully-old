@@ -108,8 +108,8 @@
         1,
         1,
         1,
-        2,
-        2,
+        1,
+        1,
         null,
         null,
         null
@@ -187,7 +187,7 @@
         3,
         null,
         1,
-        6,
+        4,
         null,
         null,
         null
@@ -761,7 +761,7 @@
         null,
         1,
         0,
-        null,
+        0,
         null,
         0,
         null,
@@ -1004,6 +1004,7 @@
         null,
         1,
         1,
+        1,
         1
       ],
       "/Users/zacksiri/Repositories/writefully/lib/writefully/workers/censor.rb": [
@@ -1066,7 +1067,7 @@
         null,
         null
       ],
-      "/Users/zacksiri/Repositories/writefully/lib/writefully/workers/site_builder.rb": [
+      "/Users/zacksiri/Repositories/writefully/lib/writefully/workers/builder.rb": [
         1,
         1,
         1,
@@ -1114,6 +1115,23 @@
         null,
         1,
         0,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/zacksiri/Repositories/writefully/lib/writefully/workers/initializer.rb": [
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
         null,
         null,
         null,
@@ -1156,6 +1174,6 @@
         null
       ]
     },
-    "timestamp": 1397578205
+    "timestamp": 1397664227
   }
 }

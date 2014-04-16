@@ -15,8 +15,10 @@ SitePath="$1/$2"
 # setup git repo for site path
 git init $SitePath
 
+# go into the site directory
 cd $SitePath
 
+# add remote origin
 git remote add origin $OriginRemote
 
 

@@ -36,7 +36,7 @@ module Writefully
 
       def add_sample_content repo_name
         Writefully.logger.info "Adding Sample content #{site_name}"
-
+        apis.repos.contents.create user_name, repo_name
       rescue Exception => e
         raise e
       end
