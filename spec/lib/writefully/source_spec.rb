@@ -7,6 +7,6 @@ module Writefully
                         {site: 'codemy-net', resource: 'posts', slug: '2-rails-flash-partials'} ]}
 
     its(:to_load)         { should =~ ['post', 'playlist'] }
-    its(:valid_resources) { should =! ['posts'] }
+    its(:valid_resources) { should =~ ['posts'] }
   end
 end
