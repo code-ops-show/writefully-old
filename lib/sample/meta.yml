@@ -1,0 +1,6 @@
+title: "Sample Post"
+slug: "sample-post"
+tags: ["Writefully"]
+details:
+  blurb: "This is a sample post for Writefully"
+  cover: "assets/writefully.png"
