@@ -14,7 +14,7 @@ module Writefully
     has_many :posts, -> { order(:position) }
 
     def setup_repository
-      Writefully.add_job :site_builder, self.id
+      Writefully.add_job :builder, self.id
     end
 
     def processing_errors

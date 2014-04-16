@@ -1,6 +1,6 @@
 module Writefully
   module Workers
-    class SiteBuilder
+    class Builder
       include Celluloid
 
       trap_exit :actor_died
