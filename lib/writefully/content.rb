@@ -9,7 +9,7 @@ module Writefully
     end
 
     def body
-      @body ||= File.open(File.join(path, 'README')).read
+      Dir.chdir(path) { File.open(Dir['README.*'].first).read }
     end
 
     def meta
