@@ -1,3 +1,5 @@
+require 'base64'
+
 module Writefully
   module Source
 
@@ -12,6 +14,22 @@ module Writefully
 
       def sample_content file
         open(File.dirname(__FILE__) + "/../sample/#{file}")
+      end
+
+      def sample_content_paths 
+        valid_resources.map do |resource|
+          ["#{resource}/1-change-me/README", 
+           "#{resource}/1-change-me/meta.yml", 
+           "#{resource}/1-change-me/assets/writefully.png"]
+        end.flatten
+      end
+
+      def sample_content_properties file
+        { 
+          path: file,
+          content: Base64.encode64(sample_content(file)),
+          message: "added sample #{file}"
+        }
       end
 
       def valid_resources

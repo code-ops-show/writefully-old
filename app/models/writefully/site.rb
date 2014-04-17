@@ -14,15 +14,17 @@ module Writefully
     has_many :posts, -> { order(:position) }
 
     def setup_repository
-      Writefully.add_job :builder, self.id
+      Writefully.add_job :builder, { auth_token: owner.data["auth_token"], 
+                                     user_name: owner.data["user_name"],
+                                     site_id: id, site_slug: slug   }
     end
 
     def processing_errors
-      Writefully.redis.smembers "site:#{self.id}:errors"
+      Writefully.redis.with { |c| c.smembers "site:#{self.id}:errors" }
     end
 
     def clear_errors
-      Writefully.redis.del("site:#{self.id}:errors")
+      Writefully.redis.with { |c| c.del("site:#{self.id}:errors") }
     end
   end
 end
