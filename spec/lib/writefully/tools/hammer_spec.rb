@@ -7,8 +7,10 @@ module Writefully
     describe Hammer do 
       let(:user_name) { 'zacksiri' }
       let(:domain)    { 'http://www.codemy.net' }
-      let(:site_name) { 'codemy-net' }
+      let(:site_slug) { 'codemy-net' }
       let(:token)     { 'sampletoken' }
+
+      let(:message) { {auth_token: token, user_name: user_name, domain: domain, site_slug: site_slug }}
 
       before do 
         $stdout.stub(:write)
@@ -18,14 +20,14 @@ module Writefully
       describe "#forge" do 
         it "can forge" do 
           Github::Repos.any_instance.stub(:create).and_return(true)
-          hammer = Hammer.new token, user_name, site_name, domain
+          hammer = Hammer.new message
           hammer.forge.should be_true
           hammer.terminate
         end
 
         it "should raise error" do 
           Github::Repos.any_instance.stub(:create).and_raise(StandardError)
-          hammer = Hammer.new token, user_name, site_name, domain
+          hammer = Hammer.new message
           expect { 
             hammer.forge
           }.to raise_error
@@ -35,16 +37,16 @@ module Writefully
       describe "#add_hook_for" do 
         it "should create hook" do
           Github::Repos::Hooks.any_instance.stub(:create).and_return(true)
-          hammer = Hammer.new token, user_name, site_name, domain
-          hammer.add_hook_for(site_name).should be_true
+          hammer = Hammer.new message
+          hammer.add_hook_for(site_slug).should be_true
           hammer.terminate
         end
 
         it "should raise error" do 
           Github::Repos::Hooks.any_instance.stub(:create).and_raise(StandardError)
-          hammer = Hammer.new token, user_name, site_name, domain
+          hammer = Hammer.new message
           expect { 
-            hammer.add_hook_for(site_name)
+            hammer.add_hook_for(site_slug)
           }.to raise_error
         end
       end 

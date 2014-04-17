@@ -7,7 +7,7 @@ module Writefully
                         {site: 'codemy-net', resource: 'posts', slug: '2-rails-flash-partials'} ]}
 
 
-    let(:sample_paths) { ['posts/1-change-me/README', 
+    let(:sample_paths) { ['posts/1-change-me/README.md', 
                           'posts/1-change-me/meta.yml', 
                           'posts/1-change-me/assets/writefully.png' ] }
 
@@ -15,7 +15,7 @@ module Writefully
     its(:valid_resources) { should =~ ['posts'] }
 
     it "should open README" do 
-      subject.sample_content("README").read.should include "# Welcome to Writefully!"
+      subject.sample_content("README.md").should include "# Welcome to Writefully!"
     end
 
     its(:sample_content_paths) { should eq sample_paths }
