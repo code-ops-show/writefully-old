@@ -10,6 +10,10 @@ module Writefully
         File.join(Writefully.options[:app_directory], 'app', 'models')
       end
 
+      def sample_content file
+        open(File.dirname(__FILE__) + "/../sample/#{file}")
+      end
+
       def valid_resources
         skim_for(::Regexp.new('Writefully::Post')).map { |r| r.pluralize }
       end

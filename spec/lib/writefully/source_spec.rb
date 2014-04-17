@@ -8,5 +8,9 @@ module Writefully
 
     its(:to_load)         { should =~ ['post', 'playlist'] }
     its(:valid_resources) { should =~ ['posts'] }
+
+    it "should open README" do 
+      subject.sample_content("README").read.should include "# Welcome to Writefully!"
+    end
   end
 end
