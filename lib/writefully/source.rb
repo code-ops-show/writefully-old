@@ -13,12 +13,12 @@ module Writefully
       end
 
       def sample_content file
-        open(File.dirname(__FILE__) + "/../sample/#{file}")
+        open(File.dirname(__FILE__) + "/../sample/#{file}").read
       end
 
       def sample_content_paths 
         valid_resources.map do |resource|
-          ["#{resource}/1-change-me/README", 
+          ["#{resource}/1-change-me/README.md", 
            "#{resource}/1-change-me/meta.yml", 
            "#{resource}/1-change-me/assets/writefully.png"]
         end.flatten
@@ -27,7 +27,7 @@ module Writefully
       def sample_content_properties file
         { 
           path: file,
-          content: Base64.encode64(sample_content(file)),
+          content: sample_content(file),
           message: "added sample #{file}"
         }
       end

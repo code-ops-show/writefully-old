@@ -16,7 +16,7 @@ module Writefully
         @api = Github.new oauth_token: message[:auth_token]
 
         async.add_sample_content
-        async.build_content_directory
+        async.build_content_folder
       end
 
       def add_sample_content
@@ -30,7 +30,7 @@ module Writefully
 
       def build_content_folder
         Writefully.logger.info "Creating content folder #{message[:site_slug]}"
-        system("bash #{INITIALIZE_SCRIPT} #{Writefully.config[:content]} #{message[:site_slug]} #{message[:ssh_url]}")
+        system("bash #{INITIALIZE_SCRIPT} #{Writefully.options[:content]} #{message[:site_slug]} #{message[:ssh_url]}")
       end
 
       def sample_content_for file_name

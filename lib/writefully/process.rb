@@ -77,7 +77,7 @@ module Writefully
     }
 
     def queue_jobs indices, action
-      indices.uniq.each { |index| JOBS[action].call(index) }
+      indices.uniq.each { |index| JOBS[action].call(index) if Source.valid_resources.include?(index[:resource]) }
     end
 
   end
