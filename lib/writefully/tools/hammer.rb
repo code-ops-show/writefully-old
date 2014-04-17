@@ -3,36 +3,34 @@ module Writefully
     class Hammer
       include Celluloid
 
-      attr_reader :api, :user_name, :site_name, :domain
+      attr_reader :api, :message
 
-
-      def initialize auth_token, user_name, site_name, domain
-        @api = Github.new oauth_token: auth_token
-        @user_name = user_name
-        @site_name = site_name
-        @domain = domain
+      def initialize message
+        @message = message
+        @api = Github.new oauth_token: message[:auth_token]
       end
 
       def hook_config
         { name: 'web',
           events: ["push", "member"],
           active: true,
-          config: { url: "#{domain}/writefully/hook" } }
+          config: { url: "#{message[:domain]}/writefully/hook" } }
       end
 
       def forge
-        Writefully.logger.info "Forging #{site_name}"
-        api.repos.create name: site_name 
+        Writefully.logger.info "Forging #{message[:site_slug]}"
+        api.repos.create name: message[:site_slug], auto_init: true
       rescue Exception => e
         raise e
       end
 
       def add_hook_for repo_name
-        Writefully.logger.info "Adding hook for #{site_name}"
-        api.repos.hooks.create user_name, repo_name, hook_config
+        Writefully.logger.info "Adding hook for #{message[:site_slug]}"
+        api.repos.hooks.create message[:user_name], repo_name, hook_config
       rescue Exception => e
         raise e
       end
+
     end
   end
 end
