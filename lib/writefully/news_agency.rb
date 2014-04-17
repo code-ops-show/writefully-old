@@ -4,6 +4,5 @@ module Writefully
     pool      Workers::Journalist,    as: :journalists, size: (Writefully.options[:concurrency] rescue 2)
     
     supervise Workers::Builder,       as: :builder
-    supervise Workers::Initializer,   as: :initializer
   end
 end

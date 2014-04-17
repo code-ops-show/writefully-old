@@ -19,10 +19,13 @@ module Writefully
 
         repo, hook = build_repository
         complete_site_setup(repo, hook)
+
+        @initializer = Tools::Initializer.new_link(message.merge({ ssh_url: repo.ssh_url }))
+        initialize_sample_content
       ensure
         @hammer.terminate
+        @initializer.terminate
         clear_db_connection!
-        Writefully.add_job :initializer, message.merge({ ssh_url: repo.ssh_url })
       end
 
       def build_repository
@@ -37,14 +40,17 @@ module Writefully
         site.update_attributes(repository: site_repository, processing: false, healthy: true)
       end
 
+      def initialize_sample_content
+        added_sample_content = @initializer.future.add_sample_content
+        created_directory    = @initializer.future.build_content_folder
+
+        [added_sample_content.value, created_directory.value]
+      end
+
       def actor_died actor, reason
         Writefully.logger.info "#{reason.message}"
         Writefully.redis.with { |c| s.sadd "site:#{site.id}:errors", reason.message }
         site.update_attributes(processing: false, healty: false)
-      end
-
-      def clear_db_connection!
-        ::ActiveRecord::Base.clear_active_connections! if defined?(::ActiveRecord)
       end
 
     end
