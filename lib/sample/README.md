@@ -19,4 +19,8 @@ details:
   price: "10" # this is the extra detail 
 ```
 
+Now try cloning this repository into your local machine, edit it to you heart's content and try doing a push into github!
+
+To create another post simply create a new directory 2-another-post and follow the structure provided in the first post.
+
 Check out the documentation at [Writefully](https://github.com/codemy/writefully) for more details.
