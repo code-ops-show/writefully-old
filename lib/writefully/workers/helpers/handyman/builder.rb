@@ -1,13 +1,6 @@
-module Writefully::Workers::Helpers
-  module Handyman
+module Writefully::Workers::Helpers::Handyman
+  module Builder
     extend ActiveSupport::Concern
-
-    def build_repository
-      created_repo = @hammer.future.forge
-      added_hook   = @hammer.future.add_hook_for(created_repo.value.name)
-
-      [created_repo.value, added_hook.value]
-    end
 
     def complete_site_setup repo, hook
       site_repository = { name: repo.name, id: repo.id, hook_id: hook.id }

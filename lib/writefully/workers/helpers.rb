@@ -5,4 +5,4 @@ module Writefully::Workers
   end
 end
 
-require 'writefully/workers/helpers/handyman'
+require 'writefully/workers/helpers/handyman/builder'
