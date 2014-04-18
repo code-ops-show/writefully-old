@@ -72,8 +72,8 @@ module Writefully
     end
 
     JOBS = { 
-      write:  -> (index) { Writefully.add_job :journalists, index },
-      remove: -> (index) { Wrotefully.add_job :censors, index  }
+      write:  -> (index) { Writefully.add_job :journalists, index.merge({task: :publish}) },
+      remove: -> (index) { Wrotefully.add_job :journalists, index.merge({task: :remove})  }
     }
 
     def queue_jobs indices, action

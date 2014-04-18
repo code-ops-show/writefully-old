@@ -3,7 +3,6 @@ module Writefully
 
   end
 end
-
-require 'writefully/workers/censor'
+require 'writefully/workers/helpers'
 require 'writefully/workers/journalist'
-require 'writefully/workers/builder'
+require 'writefully/workers/handyman'

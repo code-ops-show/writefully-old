@@ -7,15 +7,24 @@ module Writefully
 
       attr_reader :index
 
+      TASKS = { 
+        publish: -> (message) { publish_content(message) },
+        remove:  -> (message) { remove_content(message) }
+      }
+
       def perform(message)
-        publish_content(message)
+        @index = message
+        TASKS[message[:task]].call(message)
       end
 
       def publish_content(index)
         Writefully.logger.info "Publishing #{index[:resource]} #{index[:slug]}"
-        @index = index
         pencil = Tools::Pencil.new_link(index)
         pencil.perform
+      end
+
+      def remove_content(index)
+        Writefully.logger.info "Removing #{index[:resource]} #{index[:slug]}"
       end
 
       def index_with_tries

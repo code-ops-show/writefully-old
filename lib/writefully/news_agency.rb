@@ -3,6 +3,6 @@ module Writefully
     pool      Tools::Pigeon,          as: :pigeons,     size: ((Writefully.options[:concurrency] * 4) rescue 2)
     pool      Workers::Journalist,    as: :journalists, size: (Writefully.options[:concurrency] rescue 2)
     
-    supervise Workers::Builder,       as: :builder
+    supervise Workers::Handyman,      as: :handyman
   end
 end
