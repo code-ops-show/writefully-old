@@ -13,7 +13,7 @@ module Writefully
     let(:some_site) { writefully_sites(:some_site) }
 
     before do 
-      session[:wf_owner_id] = owner.id
+      session[:wf_authorship_id] = owner.id
     end
 
     describe "#index" do 

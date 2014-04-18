@@ -17,7 +17,7 @@ module Writefully
           config: { 
             url: "#{message[:domain]}/writefully/hook", 
             content_type: 'json',
-            secret: Writefully.config[:hook_secret]
+            secret: Writefully.options[:hook_secret]
           } 
         }
       end
