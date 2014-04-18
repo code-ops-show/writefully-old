@@ -14,7 +14,12 @@ module Writefully
         { name: 'web',
           events: ["push", "member"],
           active: true,
-          config: { url: "#{message[:domain]}/writefully/hook" } }
+          config: { 
+            url: "#{message[:domain]}/writefully/hook", 
+            content_type: 'json',
+            secret: Writefully.config[:hook_secret]
+          } 
+        }
       end
 
       def forge
