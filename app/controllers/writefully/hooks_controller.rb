@@ -29,7 +29,7 @@ module Writefully
   protected
 
     def body
-      @_body ||= Hashie::Mash.new(request.body.read)
+      @_body ||= Hashie::Mash.new(JSON.parse(request.body.read))
     end
 
     def check_signature
