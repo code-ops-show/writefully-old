@@ -14,9 +14,9 @@ module Writefully
     has_many :posts, -> { order(:position) }
 
     def setup_repository
-      Writefully.add_job :builder, { auth_token: owner.data["auth_token"], 
-                                     user_name: owner.data["user_name"],
-                                     site_id: id, site_slug: slug   }
+      Writefully.add_job :handyman, { task: :build, auth_token: owner.data["auth_token"], 
+                                                    user_name: owner.data["user_name"],
+                                                    site_id: id, site_slug: slug   }
     end
 
     def processing_errors

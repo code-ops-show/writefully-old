@@ -15,7 +15,7 @@ module Writefully
     let(:some_post) { writefully_posts(:blah_post) }
 
     before do 
-      session[:wf_owner_id] = owner.id
+      session[:wf_authorship_id] = owner.id
     end
 
     describe "#index" do 
