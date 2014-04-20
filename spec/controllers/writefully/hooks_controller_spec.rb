@@ -8,7 +8,7 @@ module Writefully
     let(:github_member_add_hook) { open(File.dirname(__FILE__) + "/../../fixtures/writefully/github_member_add_hook.json").read }
   
     before do 
-      HooksController.any_instance.stub(:check_signature).and_return(true)
+      controller.stub(:check_signature).and_return(true)
     end
 
     it "should call 'push'" do 
