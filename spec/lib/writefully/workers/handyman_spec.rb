@@ -9,17 +9,25 @@ module Writefully
       fixtures :"writefully/sites"
 
       let(:message) { { task: :build,  user_name: 'zacksiri', auth_token: 'sampletoken', 
-                                       site_slug: 'codemy-net', ssh_url: 'blah@blah.com:zacksiri/blah.git', site_id: site.id } }
+                                       site_slug: 'codemy-net', site_id: site.id } }
 
-      let(:repo) { double("repo", :name => 'codemy-net', :ssh_url => 'blah@blah.com:zacksiri/blah.git', :id => "1234") }
-      let(:hook) { double("hook", :id => '123') }
+      let(:repo_value) { double("repo_value", :name => 'codemy-net', :ssh_url => 'blah@blah.com:zacksiri/blah.git', :id => "1234") }                                 
+      let(:hook_value) { double("hook_value", :id => "123") }   
+      let(:repo) { double("repo", :value => repo_value) }
+      let(:hook) { double("hook", :value => hook_value) }
+      let(:hammer_future) { double("hammer_future", :forge => repo, :add_hook_for => hook) }
+      let(:hammer) { double("Hammer", :future => hammer_future, :terminate => true) } 
+
+
+      let(:initializer) { double("Initializer", :terminate => true) }                                
+
       let(:site) { writefully_sites(:codemy_net) }
 
       before do 
         $stdout.stub(:write)
         $stderr.stub(:write)
-        Tools::Hammer.any_instance.stub(:forge).and_return(repo)
-        Tools::Hammer.any_instance.stub(:add_hook_for).with('codemy-net').and_return(hook)
+        Tools::Hammer.stub(:new_link).and_return(hammer)
+        Tools::Initializer.stub(:new_link).and_return(initializer)
         Handyman.any_instance.stub(:initialize_sample_content).and_return([true, true])
       end
 

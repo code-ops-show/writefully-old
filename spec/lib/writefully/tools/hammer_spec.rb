@@ -33,6 +33,7 @@ module Writefully
         it "should be correct" do 
           hammer = Hammer.new message
           hammer.hook_config.should eq hook_config
+          hammer.terminate
         end
       end
 
@@ -41,6 +42,7 @@ module Writefully
           Github::Repos.any_instance.stub(:create).and_return(true)
           hammer = Hammer.new message
           hammer.forge.should be_true
+          hammer.terminate
         end
 
         it "should raise error" do 
@@ -57,6 +59,7 @@ module Writefully
           Github::Repos::Hooks.any_instance.stub(:create).and_return(true)
           hammer = Hammer.new message
           hammer.add_hook_for(site_slug).should be_true
+          hammer.terminate
         end
 
         it "should raise error" do 

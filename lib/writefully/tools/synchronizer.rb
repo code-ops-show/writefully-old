@@ -1,6 +1,8 @@
 module Writefully
   module Tools
     class Synchronizer
+      include Celluloid
+
       SYNC_SCRIPT = File.dirname(__FILE__) + "/../../../scripts/sync.sh"
 
       attr_reader :message
