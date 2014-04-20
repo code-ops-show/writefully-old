@@ -8,7 +8,7 @@ module Writefully
     describe Handyman do 
       fixtures :"writefully/sites"
 
-      let(:message) { { task: :build,  user_name: 'zacksiri', auth_token: 'sampletoken', 
+      let(:build_message) { { task: :build,  user_name: 'zacksiri', auth_token: 'sampletoken', 
                                        site_slug: 'codemy-net', site_id: site.id } }
 
       let(:repo_value) { double("repo_value", :name => 'codemy-net', :ssh_url => 'blah@blah.com:zacksiri/blah.git', :id => "1234") }                                 
@@ -33,8 +33,16 @@ module Writefully
 
       it "should successfully setup site" do 
         handyman = Handyman.new
-        handyman.perform(message)
-        site.reload.repository.should_not be_nil
+        handyman.perform(build_message)
+
+
+        s = site.reload
+        s.repository["name"].should eq 'codemy-net'
+        s.repository["id"].should eq '1234'
+        s.repository["hook_id"].should eq '123'
+        s.healthy.should be_true
+        s.processing.should be_false
+
         handyman.terminate
       end 
     end
