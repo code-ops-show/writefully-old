@@ -1,8 +1,6 @@
 module Writefully
   module Tools
     class Hammer
-      include Celluloid
-
       attr_reader :api, :message
 
       def initialize message
@@ -35,7 +33,6 @@ module Writefully
       rescue Exception => e
         raise e
       end
-
     end
   end
 end

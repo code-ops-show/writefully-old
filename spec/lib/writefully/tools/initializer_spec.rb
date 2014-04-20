@@ -11,7 +11,6 @@ module Writefully
         initializer = Initializer.new(message)
         initializer.content_folder_setup_command.should include message[:site_slug]
         initializer.content_folder_setup_command.should include message[:ssh_url]
-        initializer.terminate
       end
     end
   end

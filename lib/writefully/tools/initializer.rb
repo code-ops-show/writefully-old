@@ -1,7 +1,6 @@
 module Writefully
   module Tools
     class Initializer
-      include Celluloid
 
       INITIALIZE_SCRIPT = File.dirname(__FILE__) + "/../../../scripts/initialize.sh"
 
