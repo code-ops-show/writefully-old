@@ -12,9 +12,29 @@ module Writefully
 
       let(:message) { {auth_token: token, user_name: user_name, domain: domain, site_slug: site_slug }}
 
+      let(:hook_config) { 
+        { name: 'web',
+          events: ["push", "member"],
+          active: true,
+          config: { 
+            url: "http://www.codemy.net/writefully/hook", 
+            content_type: 'json',
+            secret: '00e4de0cf7647cd447b6659bd0b3b5fe'
+          } 
+        }
+      }
+
       before do 
         $stdout.stub(:write)
         $stderr.stub(:write)
+      end
+
+      describe "#hook_config" do 
+        it "should be correct" do 
+          hammer = Hammer.new message
+          hammer.hook_config.should eq hook_config
+          hammer.terminate
+        end
       end
 
       describe "#forge" do 
