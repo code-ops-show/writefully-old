@@ -15,7 +15,7 @@ module Writefully
   protected
 
     def get_site
-      current_wf_owner.owned_sites.friendly.find(params[:site_id])
+      current_wf_authorship.owned_sites.friendly.find(params[:site_id])
     end
   end
 end

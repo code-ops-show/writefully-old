@@ -27,7 +27,7 @@ module Writefully
                             name: auth_user.name,
                             avatar: auth_user.avatar_url }.select { |k,v| v.present? }
                             
-        authorship.role = select_role
+        authorship.role = authorship.select_role
       end 
     end
   end
