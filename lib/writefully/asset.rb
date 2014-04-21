@@ -5,7 +5,7 @@ module Writefully
     def initialize(index)
       base_path = [Writefully.options[:content], index[:site], index[:resource], index[:slug]]
       @path = File.join(base_path, 'assets')
-      @endpoint = File.join(index[:resource], index[:slug], 'assets')
+      @endpoint = File.join(index[:site], index[:resource], index[:slug], 'assets')
     end
 
     def names
