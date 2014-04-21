@@ -2,12 +2,12 @@ require_dependency "writefully/application_controller"
 
 module Writefully
   class SitesController < ApplicationController
-    before_filter :authenticate_wf_owner!
+    before_filter :authenticate_wf_authorship!
 
     VALID_TABS = %w(processing errors)
 
     def index
-      @sites = current_wf_owner.owned_sites
+      @sites = current_wf_authorship.owned_sites
       redirect_to new_site_path if @sites.empty?
     end
 
@@ -19,7 +19,7 @@ module Writefully
     end
 
     def new
-      @site = current_wf_owner.owned_sites.build
+      @site = current_wf_authorship.owned_sites.build
     end
 
     def edit
@@ -27,7 +27,7 @@ module Writefully
     end
 
     def create
-      @site = current_wf_owner.owned_sites.build(site_params)
+      @site = current_wf_authorship.owned_sites.build(site_params)
       if @site.save
         set_flash :success, object: @site
         redirect_to sites_path
@@ -41,7 +41,7 @@ module Writefully
     end
 
     def get_site
-      current_wf_owner.owned_sites.friendly.find(params[:id])
+      current_wf_authorship.owned_sites.friendly.find(params[:id])
     end
 
     def site_params

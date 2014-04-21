@@ -10,7 +10,7 @@ feature "WritefullySitesFeature" do
   let(:post_1) { writefully_posts(:hash_selector_pattern) }
 
   before do 
-    Writefully::ApplicationController.any_instance.stub(:current_wf_owner).and_return(owner)
+    Writefully::ApplicationController.any_instance.stub(:current_wf_authorship).and_return(owner)
     Writefully::Site.any_instance.stub(:processing_errors).and_return([])
   end
 
