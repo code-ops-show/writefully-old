@@ -16,7 +16,7 @@ module Writefully
 
     its(:body)     { should include "# Hash Selector Pattern" }
     its(:meta)     { should eq meta }
-    its(:slug)     { should eq 'ruby-hash-selector-pattern' }
+    its(:slug)     { should eq 'hash-selector-pattern' }
     its(:position) { should eq 1 }
   end
 end

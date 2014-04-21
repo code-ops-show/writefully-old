@@ -21,7 +21,7 @@ module Writefully
     end
 
     def slug
-      meta["slug"] || index[:slug].split(/\d-/).last
+      index[:slug].split(/\d-/).last
     end
 
     def position
