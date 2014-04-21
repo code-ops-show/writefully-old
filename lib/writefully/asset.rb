@@ -17,7 +17,7 @@ module Writefully
     end
 
     def url storage_endpoint
-      File.join(storage_endpoint, endpoint, '/')
+      Writefully.options[:assets_host] || File.join(storage_endpoint, endpoint, '/')
     end
 
     def convert_for content

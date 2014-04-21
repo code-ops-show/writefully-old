@@ -2,7 +2,7 @@
 
 hash_selector_pattern:
   title: "Ruby Hash Selector Pattern"
-  slug: "ruby-hash-selector-pattern"  
+  slug: "hash-selector-pattern"  
   content: "Blah"
   type: "Post"
   site: codemy_net
