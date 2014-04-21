@@ -16,7 +16,7 @@ module Writefully
         pid = waitpid(spawn(listen(config)))
         write pid, config[:pidfile]
       else
-        Writefully::Process.new(config).listen
+        listen(config)
       end
     end
 
