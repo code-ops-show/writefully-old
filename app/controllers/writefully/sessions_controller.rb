@@ -13,12 +13,12 @@ module Writefully
       @owner  = find_or_create_owner 
 
       refresh_token
-      session[:wf_owner_id] = @owner.id
+      session[:wf_authorship_id] = @owner.id
       redirect_to root_path, notice: 'signed_in'
     end
 
     def destroy
-      session[:wf_owner_id] = nil
+      session[:wf_authorship_id] = nil
       redirect_to root_path, notice: 'signed_out'
     end
 
@@ -38,7 +38,7 @@ module Writefully
 
     def create_owner
       if Authorship.count == 0
-        Authorship.create_with_omniauth(@github_user)
+        Authorship.create_from_data(@github_user)
       else
         return redirect_to root_path, notice: 'owner_exists'
       end

@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20140403181629) do
   create_table "writefully_authorships", force: true do |t|
     t.integer  "user_id"
     t.hstore   "data"
+    t.string   "role"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

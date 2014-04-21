@@ -8,10 +8,10 @@ module Writefully::Workers::Helpers::Handyman
     end
 
     def initialize_sample_content
-      added_sample_content = @initializer.future.add_sample_content
-      created_directory    = @initializer.future.build_content_folder
+      added_sample_content = @initializer.add_sample_content
+      created_directory    = @initializer.build_content_folder
 
-      [added_sample_content.value, created_directory.value]
+      [added_sample_content, created_directory]
     end
   end
 end

@@ -7,7 +7,7 @@ module Writefully
 
       attr_reader :message
 
-      def initializer message
+      def initialize message
         @message = message
       end
 

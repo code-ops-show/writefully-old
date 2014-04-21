@@ -3,6 +3,7 @@ development: &default
   :storage_folder: 'codemycasts'
   :storage_provider: 'AWS'
   :app_directory: <%= Rails.root %>
+  :hook_secret: '00e4de0cf7647cd447b6659bd0b3b5fe'
 
 test:
   <<: *default

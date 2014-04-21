@@ -5,7 +5,7 @@ module Writefully
     has_many :posts
     has_many :owned_sites, class_name: "Writefully::Site", foreign_key: :owner_id
 
-    store_accessor :data, :name, :email, :bio, :uid, :user_name, :auth_token
+    store_accessor :data, :name, :email, :uid, :user_name, :auth_token
 
     def to_s
       data["name"] || data["login"] || data["email"] || data["uid"]
@@ -15,13 +15,19 @@ module Writefully
       where("data -> 'uid' = ?", uid.to_s).first
     end
 
-    def self.create_with_omniauth(auth_user)
+    def select_role
+      Authorship.count == 0 ? "super_admin" : "collaborator"
+    end
+
+    def self.create_from_data(auth_user)
       create! do |authorship|
         authorship.data = { email: auth_user.email,
                             uid: auth_user.id,
-                            bio: auth_user.bio,
                             user_name: auth_user.login,
-                            name: auth_user.name }
+                            name: auth_user.name,
+                            avatar: auth_user.avatar_url }.select { |k,v| v.present? }
+                            
+        authorship.role = authorship.select_role
       end 
     end
   end
