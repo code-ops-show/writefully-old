@@ -18,11 +18,7 @@ module Writefully
 
       def actor_died(actor, reason)
         Writefully.logger.error "An error occured #{reason.message}"
-        on_death
-      end
-
-      def on_death
-        # do something on death
+        on_death(actor, reason) if self.respond_to?(:on_death)
       end
     end
   end
