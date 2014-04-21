@@ -16,7 +16,7 @@ module Writefully
 
     def push
       Writefully.add_job :handyman, { task: :synchronize, 
-                                      site_slug: body.repository.name }
+                                      site_slug: body.repository.name } if branch_match?
     end
 
     def member
@@ -27,6 +27,10 @@ module Writefully
     end
 
   protected
+
+    def branch_match?
+      Site.where(slug: body.repository.name).first.branch == body.ref.split('/').last
+    end
 
     def body
       @_body ||= Hashie::Mash.new(JSON.parse(request.body.read))
