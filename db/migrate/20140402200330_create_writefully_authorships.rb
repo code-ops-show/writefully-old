@@ -4,6 +4,7 @@ class CreateWritefullyAuthorships < ActiveRecord::Migration
       t.references :user, index: true
       t.hstore     :data
       t.string     :role
+      t.boolean    :active, default: true
 
       t.timestamps
     end
