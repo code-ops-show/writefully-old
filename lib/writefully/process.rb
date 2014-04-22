@@ -1,36 +1,43 @@
 require 'listen'
 require 'logger'
-
 require 'celluloid'
-
+require 'github_api'
 require 'active_record'
-require 'writefully'
+require 'friendly_id'
+require 'activerecord-import'
+require 'connection_pool'
 require 'redis'
 require 'redis-namespace'
+require 'writefully/loader'
+require 'writefully/tools'
+require 'writefully/workers'
+require 'writefully/news_agency'
 
 %w(tag post site tagging authorship).each do |model|
   require File.dirname(__FILE__) + "/../../app/models/writefully/#{model}"
 end
 
-Writefully::Source.to_load.each do |model|
-  require File.join(Writefully.options[:app_directory], 'app', 'models', model)
-end
-
-require 'github_api'
-
-require 'writefully/tools'
-require 'writefully/workers'
-require 'writefully/news_agency'
-
 module Writefully
   Process = Struct.new(:config) do
 
     def listen
+      set_options
       log_start
+      load_models
       connect_to_database!
       start_news_agency!
       start_dispatcher!
       boot_listener!
+    end
+
+    def set_options
+      Writefully.options = config
+    end
+
+    def load_models
+      Writefully::Source.to_load.each do |model|
+        require File.join(config[:app_directory], 'app', 'models', model)
+      end
     end
 
     # connect to db

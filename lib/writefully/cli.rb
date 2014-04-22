@@ -1,28 +1,30 @@
 require 'thor'
 require 'writefully/process'
-
+require 'pry'
 module Writefully
   class CLI < Thor
     desc "start", "Start listening to the content directory"
 
     method_options %w( daemonize -d ) => :boolean
-    method_options %w( config -c )    => :string
 
-    def start
-      config = Writefully.config_from(options.config)
+    def start(file)
+      config = Writefully.config_from(file)
 
       if options.daemonize?
         Process.daemon(true, true)
         pid = waitpid(spawn(listen(config)))
         write pid, config[:pidfile]
       else
+        Signal.trap("INT") { $stdout.puts "Writefully exiting..."; exit }
         listen(config)
       end
     end
 
     desc "stop", "Stop listening for content directory changes"
-    def stop(pidfile = nil)
-      pid = open(pidfile).read.strip.to_i
+    def stop(file)
+      config = Writefully.config_from(file)
+
+      pid = open(config[:pidfile]).read.strip.to_i
       Process.kill("HUP", pid)
       true
     rescue Errno::ENOENT
