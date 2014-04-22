@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    writefully (0.3.4)
+    writefully (0.3.5)
       activerecord-import
       bootstrap-sass
       celluloid
