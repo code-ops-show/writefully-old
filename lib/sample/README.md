@@ -8,7 +8,7 @@ Thats how you include an image
 
 Checkout `meta.yml` you can add extra details to the 'details' area. Anything you like for example
 
-```yml
+```yaml
 title: "Sample Post"
 slug: "sample-post"
 tags: ["Writefully"]

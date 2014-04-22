@@ -6,7 +6,7 @@ module Writefully
       def upload endpoint, path, name
         file = File.open(File.join(path, name))
         Writefully::Storage.store_file(File.join(endpoint, name), file)
-      rescue Exception => e
+      rescue StandardError => e
         nil
       end
 
