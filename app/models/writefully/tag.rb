@@ -1,5 +1,7 @@
 module Writefully
   class Tag < ActiveRecord::Base
+    self.table_name = "writefully_tags"
+
     has_many :taggings
     has_many :posts, through: :taggings
 

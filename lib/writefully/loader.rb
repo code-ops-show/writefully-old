@@ -4,16 +4,14 @@ require 'erb'
 module Writefully
   SCOPES  = %w(repo public_repo user write:repo_hook)
 
-  class NoConfigError < StandardError; end
-
   class << self
 
-    def options=(options)
-      @_options = options
+    def options=(config)
+      @_options = config
     end
 
     def options
-      @_options
+      @_options ||= config_from(config_yml)
     end
 
     def redis
@@ -51,6 +49,18 @@ module Writefully
     def db_config
       YAML::load(ERB.new(IO.read(File.join(options[:app_directory], 'config', 'database.yml'))).result)[env]
     end
+
+    def config_from(path = nil)
+      YAML::load(ERB.new(IO.read(path)).result)[env]
+    rescue Errno::ENOENT
+      $stdout.puts "config/writefully.yml does not exist"
+    end
+
+
+    def config_yml
+      Rails.root.join('config', 'writefully.yml') if defined?(Rails)
+    end
+
   end
 end
 

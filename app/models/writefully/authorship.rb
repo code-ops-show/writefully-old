@@ -1,5 +1,7 @@
 module Writefully
   class Authorship < ActiveRecord::Base
+    self.table_name = "writefully_authorships"
+
     belongs_to :user
 
     has_many :posts

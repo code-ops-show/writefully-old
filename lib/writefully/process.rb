@@ -1,3 +1,4 @@
+require 'fog'
 require 'listen'
 require 'logger'
 require 'celluloid'
@@ -48,6 +49,7 @@ module Writefully
     # Dispatcher monitors job queue and throws job at workers
     def start_dispatcher!
       Tools::Dispatcher.supervise_as :dispatch
+      Tools::Retryer.supervise_as    :retryer
     end
 
     # Supervises the actors that manage all the work with converting content

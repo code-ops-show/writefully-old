@@ -1,5 +1,7 @@
 module Writefully
   class Site < ActiveRecord::Base
+    self.table_name = "writefully_sites"
+
     extend FriendlyId
 
     HOOK_EVENTS = %w(push collaborator)

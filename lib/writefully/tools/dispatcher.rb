@@ -21,9 +21,9 @@ module Writefully
       end
 
       def run_job
-        if is_retry? and retry_valid? then retry_job
-        elsif is_job? and job_valid?  then dispatch
-        else mark_as_failed end
+        if    retry_valid?   then retry_job
+        elsif job_valid?     then dispatch
+        end
       end
 
       def dispatch
@@ -31,11 +31,7 @@ module Writefully
       end
 
       def retry_job
-        after((job[:tries] * job[:tries]).seconds) { dispatch(job) }
-      end
-
-      def mark_as_failed
-        Writefully.redis.with { |c| c.sadd 'failed', Marshal.dump(job) }
+        Celluloid::Actor[:retryer].retry(job)
       end
 
       def is_job?
@@ -43,15 +39,15 @@ module Writefully
       end
 
       def is_retry?
-        is_job? and job.has_key?(:tries)
+        is_job? and job[:message].has_key?(:tries) and job[:message].has_key?(:run)
       end
 
       def job_valid?
-        job.keys.count == 2
+        is_job? and job.keys.count == 2
       end
 
       def retry_valid?
-        job[:tries] <= 5
+        is_retry? and (job[:message][:run] == false)
       end
 
     end
