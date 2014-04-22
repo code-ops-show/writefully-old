@@ -7,7 +7,11 @@ module Writefully
 
       def retry(job)
         @job   = job
-        after(delay) { job[:message][:tries] <= 5 ? queue_retry : mark_as_failed } 
+        if job[:message][:tries] <= 5
+          after(delay) { queue_retry }
+        else
+          mark_as_failed
+        end 
       end
 
       def queue_retry
