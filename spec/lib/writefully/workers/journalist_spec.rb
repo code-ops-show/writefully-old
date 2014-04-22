@@ -7,7 +7,7 @@ module Writefully
   module Workers
     describe Journalist do 
       let(:message) { { resource: 'posts', slug: '1-hash-selector-pattern' } }
-      let(:message_with_tries) { message.merge({tries: 2}) }
+      let(:message_with_tries) { message.merge({tries: 2, run: false}) }
       let(:pencil) { double("Pencil", perform: true) }
       subject(:journalist) { Journalist.new }
 

@@ -11,16 +11,15 @@ module Writefully
 
     def create
       self.__send__ request.headers["X-Github-Event"].to_sym
+      head :ok
     end
 
     def ping
-      head :ok
     end
 
     def push
       Writefully.add_job :handyman, { task: :synchronize, 
                                       site_slug: body.repository.name } if branch_match?
-      head :ok
     end
 
     def member
@@ -28,7 +27,6 @@ module Writefully
       unless authorship
         Authorship.create_from_data(body.member)
       end
-      head :ok
     end
 
   protected
