@@ -1,5 +1,7 @@
 module Writefully
   class Post < ActiveRecord::Base
+    self.table_name = "writefully_posts"
+
     extend FriendlyId
     include Writefully::Postable
 

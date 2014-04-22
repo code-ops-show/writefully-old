@@ -12,7 +12,7 @@ module Writefully
       end
 
       def message_with_tries
-        message.merge({ tries: (message[:tries] || 1) + 1 })
+        message.merge({ tries: (message[:tries] || 1) + 1, run: false })
       end
 
       def on_death actor, reason

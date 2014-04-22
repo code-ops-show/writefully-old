@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'writefully'
+require 'writefully/loader'
 require 'writefully/cli'
 
 
