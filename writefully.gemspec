@@ -14,9 +14,9 @@ Gem::Specification.new do |s|
   s.description = %q{Allows developer to quickly publish to their site using git hooks}
   s.license     = "MIT"
 
-  s.files = Dir["{app,config,db,lib,scripts}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
-  s.executables = Dir["writefully"]
-  s.test_files = Dir["spec/**/*"]
+  s.files       = Dir["{app,config,db,lib,scripts,bin}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  s.executables = ["writefully"]
+  s.test_files  = Dir["spec/**/*"]
 
   s.add_dependency 'rails', '~> 4.0'
   s.add_dependency 'coffee-rails', '~> 4.0'
