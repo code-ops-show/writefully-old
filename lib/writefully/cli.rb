@@ -9,13 +9,13 @@ module Writefully
 
     def start(file)
       config = Writefully.config_from(file)
-
+      
       if options.daemonize?
-        Process.daemon(true, true)
-        pid = waitpid(spawn(listen(config)))
-        write pid, config[:pidfile]
+        ::Process.daemon(true, true)
+        write(::Process.pid, config[:pidfile])
+        spawn(listen(config))
       else
-        Signal.trap("INT") { $stdout.puts "Writefully exiting..."; exit }
+        ::Signal.trap("INT") { $stdout.puts "Writefully exiting..."; exit }
         listen(config)
       end
     end
@@ -25,7 +25,7 @@ module Writefully
       config = Writefully.config_from(file)
 
       pid = open(config[:pidfile]).read.strip.to_i
-      Process.kill("HUP", pid)
+      ::Process.kill("HUP", pid)
       true
     rescue Errno::ENOENT
       $stdout.puts "#{pidfile} does not exist: Errno::ENOENT"
@@ -52,7 +52,7 @@ module Writefully
         end
       rescue ::Exception => e
         $stderr.puts "While writing the PID to file, unexpected #{e.class}: #{e}"
-        Process.kill "HUP", pid
+        ::Process.kill "HUP", pid
       end
     end
   end
