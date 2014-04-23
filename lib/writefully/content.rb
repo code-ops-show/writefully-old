@@ -25,7 +25,7 @@ module Writefully
     end
 
     def position
-      index[:slug].match(/\d/).to_s.to_i
+      index[:slug].match(/\d*/).to_s.to_i
     end
   end
 end 
