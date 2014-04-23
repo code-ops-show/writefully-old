@@ -1,5 +1,6 @@
 require 'thor'
 require 'writefully/process'
+require 'pry' if Writefully.env == 'development'
 
 module Writefully
   class CLI < Thor
