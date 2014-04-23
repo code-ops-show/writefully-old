@@ -13,6 +13,7 @@ module Writefully
       
       if options.daemonize?
         ::Process.daemon(true, true)
+        setup_logger(config[:logfile])
         write(::Process.pid, config[:pidfile])
         spawn(listen(config))
       else
@@ -45,6 +46,16 @@ module Writefully
     no_tasks do 
       def listen(config)
         Writefully::Process.new(config).listen
+      end
+
+      def setup_logger(logfile)
+        [$stdout, $stderr].each do |io|
+          File.open(logfile, 'ab') do |f|
+            io.reopen(f)
+          end
+          io.sync = true
+        end
+        $stdin.reopen('/dev/null')
       end
 
       def write pid, pidfile
