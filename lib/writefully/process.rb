@@ -9,6 +9,7 @@ require 'activerecord-import'
 require 'connection_pool'
 require 'redis'
 require 'redis-namespace'
+require 'writefully/version'
 require 'writefully/loader'
 require 'writefully/tools'
 require 'writefully/workers'
@@ -22,6 +23,7 @@ module Writefully
   Process = Struct.new(:config) do
 
     def listen
+      set_title
       set_options
       log_start
       load_models
@@ -29,6 +31,10 @@ module Writefully
       start_news_agency!
       start_dispatcher!
       boot_listener!
+    end
+
+    def set_title
+      $0 = "Writefully #{Writefully::VERSION}"
     end
 
     def set_options
