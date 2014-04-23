@@ -17,7 +17,7 @@ module Writefully
 
       def heartbeat
         @job      = Marshal.load(get_job_data)
-        run_job if is_job?
+        run_job if job_valid?
       end
 
       def run_job
@@ -34,16 +34,12 @@ module Writefully
         Celluloid::Actor[:retryer].retry(job)
       end
 
-      def is_job?
-        job.has_key?(:worker) and job.has_key?(:message)
-      end
-
       def is_retry?
-        is_job? and job[:message].has_key?(:tries) and job[:message].has_key?(:run)
+        job_valid? and job[:message].has_key?(:tries) and job[:message].has_key?(:run)
       end
 
       def job_valid?
-        is_job? and job.keys.count == 2
+        job.has_key?(:worker) and job.has_key?(:message)
       end
 
       def retry_valid?
