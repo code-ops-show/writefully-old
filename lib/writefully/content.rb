@@ -21,11 +21,11 @@ module Writefully
     end
 
     def slug
-      index[:slug].split(/\d-/).last
+      index[:slug].split(/\A\d*-/).last
     end
 
     def position
-      index[:slug].match(/\d/).to_s.to_i
+      index[:slug].match(/\A\d*/).to_s.to_i
     end
   end
 end 
