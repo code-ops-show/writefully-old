@@ -1,6 +1,6 @@
 require 'thor'
 require 'writefully/process'
-require 'pry'
+
 module Writefully
   class CLI < Thor
     desc "start", "Start listening to the content directory"
