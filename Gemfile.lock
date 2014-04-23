@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    writefully (0.4.2)
+    writefully (0.4.3)
       activerecord-import
       bootstrap-sass
       celluloid
@@ -14,7 +14,7 @@ PATH
       jquery-rails
       listen (~> 2.0)
       pg
-      rails (~> 4.0)
+      rails (>= 4)
       redis
       redis-namespace
       sass-rails (~> 4.0)
