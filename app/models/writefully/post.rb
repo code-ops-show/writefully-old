@@ -7,7 +7,7 @@ module Writefully
 
     friendly_id :title, use: :slugged
 
-    has_many :taggings
+    has_many :taggings, dependent: :destroy
     wf_taxonomize :tags, -> { where(type: nil) }, through: :taggings
 
     belongs_to :authorship

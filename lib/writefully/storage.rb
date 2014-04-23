@@ -14,7 +14,7 @@ module Writefully
       end
 
       def endpoint
-        provider_endpoints[Writefully.options[:storage_provider].downcase.to_sym]
+        Writefully.options[:assets_host] || provider_endpoints[Writefully.options[:storage_provider].downcase.to_sym]
       end
 
       def provider_endpoints
