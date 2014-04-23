@@ -32,13 +32,6 @@ module Writefully
         @synchronizer.terminate
       end
 
-      def on_death actor, reason
-        if site
-          Writefully.redis.with { |c| s.sadd "site:#{site.id}:errors", reason.message }
-          site.update_attributes(processing: false, healty: false)
-        end
-      end
-
     end
   end
 end
