@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Writefully
-  describe ProfileController do
+  describe ProfilesController do
 
   end
 end
