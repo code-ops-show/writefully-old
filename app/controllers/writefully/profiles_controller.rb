@@ -5,7 +5,7 @@ module Writefully
     before_filter :authenticate_wf_authorship!
 
 
-    def show
+    def edit
       @authorship = current_wf_authorship
     end
   end

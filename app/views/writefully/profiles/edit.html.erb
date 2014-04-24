@@ -1,0 +1,11 @@
+<%= content_for(:title, "Edit Author Profile") %>
+<div class='row'>
+  <div class='col-md-4 col-md-offset-4'>
+    <h1 class='text-center'><%= current_wf_authorship %></h1>
+    <%= render 'form' %>
+    <p class='text-center loader hide'>
+      <%= image_tag 'writefully/loading-bubbles.svg', alt: 'loading icon', width: '128', height: '128' %>
+    </p>
+  </div>
+</div>
+

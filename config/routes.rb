@@ -5,7 +5,7 @@ Writefully::Engine.routes.draw do
     resources :posts, only: [:index, :show]
   end
 
-  resource  :profile,    only: [:show]
+  resource  :profile,    only: [:edit]
   resource  :authorship, only: [:update]
   resource  :hook, only: [:create]
 

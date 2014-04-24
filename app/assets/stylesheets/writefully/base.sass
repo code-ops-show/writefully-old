@@ -21,3 +21,18 @@ div.container
 .panel
   h1, h2, h3, h4, h5, h6
     margin: 0px !important
+
+form.form-horizontal
+  margin-top: 40px
+  p.form-info
+    padding: 10px
+
+.form-control
+  border: none
+  @include box-shadow(none)
+  border-radius: 0px
+  background: #f8f8f8
+  border: 1px solid #e7e7e7
+
+  &:focus
+    @include box-shadow(0px 0px 5px #ddd)

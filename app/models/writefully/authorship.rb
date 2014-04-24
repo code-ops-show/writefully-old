@@ -7,7 +7,7 @@ module Writefully
     has_many :posts
     has_many :owned_sites, class_name: "Writefully::Site", foreign_key: :owner_id
 
-    store_accessor :data, :name, :email, :uid, :user_name, :auth_token
+    store_accessor :data, :name, :email, :uid, :user_name, :auth_token, :bio
 
     def to_s
       data["name"] || data["login"] || data["email"] || data["uid"]
