@@ -15,7 +15,7 @@
         <%= activeable_link_to :li, "New Site", new_site_path, icon: 'plus' %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><p class='navbar-text'><%= current_wf_authorship %></p></li>
+        <li><%= link_to current_wf_authorship, profile_path %></li>
         <li><%= link_to "Sign Out", signout_path %></li>
       </ul>
     </div>
