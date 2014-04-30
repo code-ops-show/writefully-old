@@ -41,6 +41,8 @@ module Writefully
         class_eval do 
           has_many :"#{type}", *args
 
+          scope :"with_#{type}", -> { find_by_sql(build_get_tags_query(type)) }
+
           define_method("#{type}=") do |tokens|
             self.taxonomize_with(tokens, type)
           end
@@ -51,6 +53,35 @@ module Writefully
         class_eval do 
           alias_attribute :content, :"#{field_name}" unless field_name == :content
         end
+      end
+
+    #private
+
+      def build_get_tags_query type
+        array_function = Arel::Nodes::NamedFunction.new('ARRAY', [build_tag_as_hstore_with(type)])
+        arel_table.project([Arel.sql('*'), array_function.as('all_tags')])
+      end
+
+      def build_tag_as_hstore_with type
+        tags = Tag.arel_table
+
+        tags.project(Arel.sql('hstore(tag)'))
+            .from(Tag.joins(:posts => :taggings).where(type: calculate_type(type)).arel.as('tag'))
+      end
+
+      def select_taxonomy_for type
+        "SELECT hstore(tag) FROM(#{select_post_taxonomy_by(type)}) AS tag" 
+      end
+
+      def select_post_taxonomy_by type
+        "SELECT writefully_tags.name, writefully_tags.slug FROM writefully_tags
+        INNER JOIN writefully_taggings ON writefully_tags.id = writefully_taggings.tag_id
+        WHERE writefully_tags.type #{calculate_type_sql_for(type)}
+        AND writefully_taggings.post_id = writefully_posts.id"
+      end
+
+      def calculate_type type
+        type == :tags ? nil : type.to_s.classify 
       end
     end
   end
