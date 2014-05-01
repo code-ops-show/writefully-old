@@ -41,7 +41,7 @@ module Writefully
         class_eval do 
           has_many :"#{type}", *args
 
-          scope :"with_#{type}", -> { find_by_sql(build_get_tags_query(type)) }
+          scope :"with_#{type}", -> { select(with_tags_query(type)) }
 
           define_method("#{type}=") do |tokens|
             self.taxonomize_with(tokens, type)
@@ -55,18 +55,23 @@ module Writefully
         end
       end
 
-    #private
+    private
 
-      def build_get_tags_query type
-        array_function = Arel::Nodes::NamedFunction.new('ARRAY', [build_tag_as_hstore_with(type)])
-        arel_table.project([Arel.sql('*'), array_function.as('all_tags')])
-      end
+      def with_tags_query type
+        posts    = arel_table
+        tags     = Tag.arel_table
+        taggings = Tagging.arel_table
 
-      def build_tag_as_hstore_with type
-        tags = Tag.arel_table
+        tags_for_posts = Tag.joins(:taggings).arel
+                            .where(tags[:type].eq(calculate_type(type)))
+                            .where(taggings[:post_id].eq(posts[:id])).as('tag')
 
-        tags.project(Arel.sql('hstore(tags)'))
-            .from(Tag.joins(:posts => :taggings).where(type: calculate_type(type)).arel.as('tags'))
+        tags_as_hstore = tags.project(Arel.sql('hstore(tag)')).from(tags_for_posts)
+
+        array_function = Arel::Nodes::NamedFunction.new('ARRAY', [tags_as_hstore])
+
+
+        [posts[Arel.star], array_function.as("all_#{type}")]
       end
 
       def calculate_type type
