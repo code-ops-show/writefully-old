@@ -22,7 +22,7 @@ module Writefully
     end
 
     def add_job worker, message
-      Writefully.redis.with { |c| c.sadd "jobs", convert_job(worker, message) }
+      Writefully.redis.with { |c| c.rpush "jobs", convert_job(worker, message) }
     end
 
     def convert_job worker, message

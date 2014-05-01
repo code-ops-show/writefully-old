@@ -45,7 +45,7 @@ module Writefully
 
     no_tasks do 
       def listen(config)
-        Writefully::Process.new(config).listen
+        Writefully::Process.instance.listen(config)
       end
 
       def setup_logger(logfile)

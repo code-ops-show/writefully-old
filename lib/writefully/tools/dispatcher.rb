@@ -12,7 +12,7 @@ module Writefully
       end
 
       def get_job_data
-        Writefully.redis.with { |c| c.spop 'jobs' }
+        Writefully.redis.with { |c| c.blpop 'jobs' }
       end
 
       def heartbeat

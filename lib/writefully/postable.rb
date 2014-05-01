@@ -65,19 +65,8 @@ module Writefully
       def build_tag_as_hstore_with type
         tags = Tag.arel_table
 
-        tags.project(Arel.sql('hstore(tag)'))
-            .from(Tag.joins(:posts => :taggings).where(type: calculate_type(type)).arel.as('tag'))
-      end
-
-      def select_taxonomy_for type
-        "SELECT hstore(tag) FROM(#{select_post_taxonomy_by(type)}) AS tag" 
-      end
-
-      def select_post_taxonomy_by type
-        "SELECT writefully_tags.name, writefully_tags.slug FROM writefully_tags
-        INNER JOIN writefully_taggings ON writefully_tags.id = writefully_taggings.tag_id
-        WHERE writefully_tags.type #{calculate_type_sql_for(type)}
-        AND writefully_taggings.post_id = writefully_posts.id"
+        tags.project(Arel.sql('hstore(tags)'))
+            .from(Tag.joins(:posts => :taggings).where(type: calculate_type(type)).arel.as('tags'))
       end
 
       def calculate_type type
