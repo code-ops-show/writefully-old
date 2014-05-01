@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140403181629) do
+ActiveRecord::Schema.define(version: 20140501094825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20140403181629) do
     t.integer  "authorship_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "trashed",               default: false
   end
 
   add_index "writefully_posts", ["authorship_id"], name: "index_writefully_posts_on_authorship_id", using: :btree

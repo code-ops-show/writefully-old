@@ -28,7 +28,7 @@ module Writefully
 
     def listen config
       @config = config
-      
+
       set_title
       set_options
       log_start
@@ -94,7 +94,7 @@ module Writefully
 
     JOBS = { 
       write:  -> (index) { Writefully.add_job :journalists, index.merge({task: :publish}) },
-      remove: -> (index) { Writefully.add_job :journalists, index.merge({task: :remove})  }
+      remove: -> (index) { Writefully.add_job :journalists, index.merge({task: :remove}), :top  }
     }
 
     def queue_jobs indices, action

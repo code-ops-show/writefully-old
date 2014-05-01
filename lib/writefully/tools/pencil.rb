@@ -1,21 +1,8 @@
 module Writefully
   module Tools
-    class Pencil
-      include Celluloid
+    class Pencil < Stationery
 
-      attr_reader :resource, :content, :asset, :index, :site_id, :asset
-
-      class ContentModelNotFound < StandardError; end
-      class SomeAssetsNotUploaded < StandardError; end
-
-      def initialize(index)
-        @site_id  = Site.where(slug: index[:site]).first.id
-        @index    = index
-        @content  = Content.new(index)
-        @asset    = Asset.new(index)
-      end
-
-      def perform
+      def use
         assets_uploaded = upload_assets.map(&:value).compact
         written_to_db   = future.write if can_update_db?(assets_uploaded)
         terminate if written_to_db.value
@@ -32,8 +19,6 @@ module Writefully
         compute_type.by_site(site_id).where(slug: content.slug)
                       .first_or_initialize
                         .update_attributes(computed_attributes)
-      ensure 
-        ::ActiveRecord::Base.clear_active_connections! if defined?(::ActiveRecord)
       end
       
       def upload_assets
@@ -47,22 +32,6 @@ module Writefully
           true
         else 
           raise SomeAssetsNotUploaded, "Some assets was not uploaded"
-        end
-      end
-
-    private
-
-      def compute_type
-        index[:resource].classify.constantize
-      rescue NameError
-        fallback_type
-      end
-
-      def fallback_type
-        if index[:resource] == "posts"
-          "Writefully::Post".constantize
-        else 
-          raise ContentModelNotFound, "Model #{index[:resource].classify} was not found"
         end
       end
       
