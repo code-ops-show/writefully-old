@@ -9,6 +9,8 @@ module Writefully
       after_initialize :check_content_field_existence
       attr_accessor :publish
 
+      scope :with_taxonomies, -> (*types) { select(Taxon::EagerLoader.new(self).build(*types)) }
+
       before_save :publish_resource, if: -> { respond_to?(:published_at) }
     end
 
@@ -41,8 +43,6 @@ module Writefully
         class_eval do 
           has_many :"#{type}", *args
 
-          scope :"with_#{type}", -> { select(with_tags_query(type)) }
-
           define_method("#{type}=") do |tokens|
             self.taxonomize_with(tokens, type)
           end
@@ -55,28 +55,6 @@ module Writefully
         end
       end
 
-    private
-
-      def with_tags_query type
-        posts    = arel_table
-        tags     = Tag.arel_table
-        taggings = Tagging.arel_table
-
-        tags_for_posts = Tag.joins(:taggings).arel
-                            .where(tags[:type].eq(calculate_type(type)))
-                            .where(taggings[:post_id].eq(posts[:id])).as('tag')
-
-        tags_as_hstore = tags.project(Arel.sql('hstore(tag)')).from(tags_for_posts)
-
-        array_function = Arel::Nodes::NamedFunction.new('ARRAY', [tags_as_hstore])
-
-
-        [posts[Arel.star], array_function.as("all_#{type}")]
-      end
-
-      def calculate_type type
-        type == :tags ? nil : type.to_s.classify 
-      end
     end
   end
 end
