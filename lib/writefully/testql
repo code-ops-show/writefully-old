@@ -1,6 +1,0 @@
-SELECT DISTINCT writefully_posts.*, ARRAY(SELECT hstore(tag) FROM(SELECT writefully_tags.name, writefully_tags.slug FROM writefully_tags
- INNER JOIN writefully_taggings ON writefully_tags.id = writefully_taggings.tag_id
- WHERE writefully_tags.type IS NULL
- AND writefully_taggings.post_id = writefully_posts.id) AS tag) AS all_tags FROM "writefully_posts" INNER JOIN "writefully_taggings" ON "writefully_taggings"."post_id" = "writefully_posts"."id" INNER JOIN "writefully_tags" ON "writefully_tags"."id" = "writefully_taggings"."tag_id" AND "writefully_tags"."type" IS NULL WHERE "writefully_posts"."type" IN ('Post')
-
- SELECT '*', 'ARRAY((SELECT hstore(tag) FROM (SELECT "writefully_tags".* FROM "writefully_tags" INNER JOIN "writefully_taggings" ON "writefully_taggings"."tag_id" = "writefully_tags"."id" INNER JOIN "writefully_posts" ON "writefully_posts"."id" = "writefully_taggings"."post_id" INNER JOIN "writefully_taggings" "taggings_writefully_posts" ON "taggings_writefully_posts"."post_id" = "writefully_posts"."id") WHERE "writefully_tags"."type" = ''Playlist'') tag)' FROM "writefully_posts"

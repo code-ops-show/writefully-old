@@ -11,7 +11,8 @@ module Writefully
       def computed_attributes
         content.meta.merge({ 
           "content" => asset.convert_for(content.body),
-          "details" => asset.convert_for(content.details)
+          "details" => asset.convert_for(content.details),
+          "trashed" => false
         })
       end
 
