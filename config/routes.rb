@@ -5,7 +5,8 @@ Writefully::Engine.routes.draw do
     resources :posts, only: [:index, :show]
   end
 
-  resources :authorships
+  resource  :profile,    only: [:edit]
+  resource  :authorship, only: [:update]
   resource  :hook, only: [:create]
 
   get '/signin',     to: 'sessions#new'

@@ -1,4 +1,4 @@
-Application.services_manifest = ->
+Writefully.services_manifest = ->
   # fill in your manifest here
   # example:
   # if you want to trigger a service on your entire app
@@ -21,8 +21,8 @@ Application.services_manifest = ->
   #    body.photos.index').trigger 'application:services:service_name'
   # 
 
-Application.run_ready = ->
-  Application.services_manifest()
+Writefully.run_ready = ->
+  Writefully.services_manifest()
 
-$(document).ready Application.run_ready
-$(document).on 'page:load', Application.run_ready
+$(document).ready Writefully.run_ready
+$(document).on 'page:load', Writefully.run_ready

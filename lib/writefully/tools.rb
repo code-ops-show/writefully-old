@@ -4,6 +4,7 @@ module Writefully
   end
 end
 
+require 'writefully/tools/stationery'
 require 'writefully/tools/eraser'
 require 'writefully/tools/pencil'
 require 'writefully/tools/pigeon'

@@ -9,6 +9,8 @@ module Writefully
       after_initialize :check_content_field_existence
       attr_accessor :publish
 
+      scope :with_taxonomies, -> (*types) { select(Taxon::EagerLoader.new(self).build(*types)) }
+
       before_save :publish_resource, if: -> { respond_to?(:published_at) }
     end
 
@@ -41,10 +43,29 @@ module Writefully
         class_eval do 
           has_many :"#{type}", *args
 
+          define_method("all_#{type}") do 
+            read_attribute(:"all_#{type}").map { |taxon| Hashie::Mash.new(taxon) }
+          end
+
           define_method("#{type}=") do |tokens|
             self.taxonomize_with(tokens, type)
           end
         end
+      end
+
+      def filter_with(filters)
+        if filters.present?
+          filters.keys.inject(self) do |klass, type| 
+            klass.where(id: by_taxonomies(filters[type].split(/,/), type))
+          end
+        else all end
+      end
+
+      def by_taxonomies(taxonomies, type)
+        joins(type.to_sym)
+        .where(writefully_tags: { slug: taxonomies, 
+                                  type: (type == "tags" ? nil : type.classify) })
+        .uniq
       end
 
       def wf_content(field_name)
@@ -52,6 +73,7 @@ module Writefully
           alias_attribute :content, :"#{field_name}" unless field_name == :content
         end
       end
+
     end
   end
 end

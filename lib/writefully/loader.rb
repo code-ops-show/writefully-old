@@ -5,6 +5,10 @@ module Writefully
   SCOPES  = %w(repo public_repo user write:repo_hook)
 
   class << self
+    QUEUE = { 
+      top:    -> (c, job) { c.lpush "jobs", job },
+      bottom: -> (c, job) { c.rpush "jobs", job }
+    }
 
     def options=(config)
       @_options = config
@@ -21,8 +25,9 @@ module Writefully
       end
     end
 
-    def add_job worker, message
-      Writefully.redis.with { |c| c.sadd "jobs", convert_job(worker, message) }
+    def add_job worker, message, position = nil
+      position_selector = position || :bottom
+      Writefully.redis.with { |c| QUEUE[position_selector].call(c, convert_job(worker, message)) }
     end
 
     def convert_job worker, message

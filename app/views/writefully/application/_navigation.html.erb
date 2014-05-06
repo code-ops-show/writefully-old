@@ -10,12 +10,9 @@
       <%= link_to "Writefully", root_path, class: 'navbar-brand' %>
     </div>
     <div class="collapse navbar-collapse">
-      <ul class='nav navbar-nav'>
-        <%= activeable_link_to :li, "Dashboard",    root_path, icon: 'home' %>
-        <%= activeable_link_to :li, "New Site", new_site_path, icon: 'plus' %>
-      </ul>
+      <%= render 'super_admin' if current_wf_authorship.role == 'super_admin' %>
       <ul class="nav navbar-nav navbar-right">
-        <li><p class='navbar-text'><%= current_wf_authorship %></p></li>
+        <li><%= link_to current_wf_authorship, edit_profile_path %></li>
         <li><%= link_to "Sign Out", signout_path %></li>
       </ul>
     </div>
