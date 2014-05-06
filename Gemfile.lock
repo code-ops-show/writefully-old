@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    writefully (0.5.0)
+    writefully (0.5.1)
       activerecord-import
       bootstrap-sass
       celluloid
@@ -131,7 +131,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jwt (0.1.11)
       multi_json (>= 1.5)
-    listen (2.7.1)
+    listen (2.7.4)
       celluloid (>= 0.15.2)
       celluloid-io (>= 0.15.0)
       rb-fsevent (>= 0.9.3)
@@ -146,9 +146,9 @@ GEM
     multi_json (1.9.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    net-scp (1.2.0)
+    net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (2.8.0)
+    net-ssh (2.9.0)
     nio4r (1.0.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
@@ -182,7 +182,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.2.2)
     rb-fsevent (0.9.4)
-    rb-inotify (0.9.3)
+    rb-inotify (0.9.4)
       ffi (>= 0.5.0)
     redis (3.0.7)
     redis-namespace (1.4.1)
