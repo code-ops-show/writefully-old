@@ -49,16 +49,16 @@ module Writefully
     private
 
       def array_of_taxonomy_hstores_for type
-        Arel::Nodes::NamedFunction.new('ARRAY', [hstore_for_taxonomy(type)]).as("all_#{type}")
+        Arel::Nodes::NamedFunction.new('ARRAY', [hstore_for_taxon(type)]).as("all_#{type}")
       end
 
-      def hstore_for_taxonomy type
-        tags.project(Arel.sql('hstore(taxonomy)')).from(taxonomy_for_resource(type))
+      def hstore_for_taxon type
+        tags.project(Arel.sql('hstore(taxon)')).from(taxons_for_resource(type))
       end
 
-      def taxonomy_for_resource type
+      def taxons_for_resource type
         Tag.joins(:taggings).arel.where(tags_by_type(type))
-                                 .where(taggings_by_resource).as('taxonomy')
+                                 .where(taggings_by_resource).as('taxon')
       end
 
       def tags_by_type type
