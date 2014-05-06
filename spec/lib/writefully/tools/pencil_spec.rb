@@ -13,12 +13,12 @@ module Writefully
       let(:computed_attributes) { 
         { 
           "title" => "Ruby Hash Selector Pattern",
-          "slug" => "ruby-hash-selector-pattern",
           "tags" => ["Ruby"],
           "playlists" => ["A Shot of Ruby"],
           "position" => 1,
           "content" => "converted stuff",
-          "details" => "converted stuff"
+          "details" => "converted stuff",
+          "trashed" => false
         }
       }
 

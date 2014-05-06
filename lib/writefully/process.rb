@@ -14,15 +14,21 @@ require 'writefully/loader'
 require 'writefully/tools'
 require 'writefully/workers'
 require 'writefully/news_agency'
+require 'singleton'
 
 %w(tag post site tagging authorship).each do |model|
   require File.dirname(__FILE__) + "/../../app/models/writefully/#{model}"
 end
 
 module Writefully
-  Process = Struct.new(:config) do
+  class Process
+    include Singleton
 
-    def listen
+    attr_reader :config
+
+    def listen config
+      @config = config
+
       set_title
       set_options
       log_start
@@ -88,7 +94,7 @@ module Writefully
 
     JOBS = { 
       write:  -> (index) { Writefully.add_job :journalists, index.merge({task: :publish}) },
-      remove: -> (index) { Wrotefully.add_job :journalists, index.merge({task: :remove})  }
+      remove: -> (index) { Writefully.add_job :journalists, index.merge({task: :remove}), :top  }
     }
 
     def queue_jobs indices, action
