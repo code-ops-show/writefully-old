@@ -1,4 +1,4 @@
-window.Application =
+window.Writefully =
   Helpers: {}
   Services: {}
   Presenters: {}

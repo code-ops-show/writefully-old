@@ -1,0 +1,17 @@
+<%= form_for @authorship, html: { class: 'form-horizontal', role: 'form' } do |f| %>
+  <div class='form-group'>
+    <div class='col-sm-12'>
+      <%= f.text_field :name, class: 'form-control input-lg', placeholder: 'Name' %>
+    </div>
+  </div>
+  <div class='form-group'>
+    <div class='col-sm-12'>
+      <%= f.text_field :email, class: 'form-control input-lg', placeholder: 'Email' %>
+    </div>
+  </div>
+  <div class='form-group'>
+    <div class='col-sm-12'>
+      <%= f.text_area :bio,  class: 'form-control input-lg', placeholder: 'A bit about yourself' %>
+    </div>
+  </div>
+<% end %>
