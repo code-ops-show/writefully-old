@@ -25,7 +25,7 @@ module Writefully
     end
 
     def publish_resource
-      if publish
+      if publish and published_at.nil?
         self.published_at = Time.now
       else
         self.published_at = nil
