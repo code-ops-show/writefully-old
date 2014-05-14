@@ -78,7 +78,7 @@ module Writefully
       Proc.new do |modified, added, removed|
         queue_jobs(Indices.build_from(modified), :write)
         queue_jobs(Indices.build_from(added),    :write)
-        # queue_jobs(Indices.build_from(removed),  :remove)
+        queue_jobs(Indices.build_from(removed),  :remove)
       end
     end
 
@@ -94,7 +94,7 @@ module Writefully
 
     JOBS = { 
       write:  -> (index) { Writefully.add_job :journalists, index.merge({task: :publish}) },
-      remove: -> (index) { Writefully.add_job :journalists, index.merge({task: :remove}), :top  }
+      remove: -> (index) { Writefully.add_job :journalists, index.merge({task: :remove})  }
     }
 
     def queue_jobs indices, action

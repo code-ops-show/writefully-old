@@ -10,8 +10,10 @@ module Writefully
         nil
       end
 
-      def remove endpoint, path, name
-        
+      def remove key
+        Writefully::Storage.remove_file(key)
+      rescue StandardError => e
+        nil
       end
     end
   end

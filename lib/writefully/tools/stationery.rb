@@ -7,6 +7,7 @@ module Writefully
 
       class ContentModelNotFound < StandardError; end
       class SomeAssetsNotUploaded < StandardError; end
+      class SomeAssetsNotRemoved < StandardError; end
 
       def initialize(index)
         @site_id  = Site.where(slug: index[:site]).first.id

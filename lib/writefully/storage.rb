@@ -13,6 +13,10 @@ module Writefully
         })
       end
 
+      def remove_file(key)
+        directory.files.get(key).destroy
+      end
+
       def endpoint
         Writefully.options[:assets_host] || provider_endpoints[Writefully.options[:storage_provider].downcase.to_sym]
       end
