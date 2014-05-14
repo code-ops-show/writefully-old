@@ -8,9 +8,13 @@ module Writefully
       end
 
       def remove
-        Writefully.logger.info "Removing #{message[:resource]} #{message[:slug]}"
         eraser = Tools::Eraser.new_link(message)
-        eraser.perform
+        unless eraser.directory_exists?
+          Writefully.logger.info "Removing #{message[:resource]} #{message[:slug]}"
+          eraser.perform
+        else
+          eraser.terminate
+        end
       end
 
       def message_with_tries

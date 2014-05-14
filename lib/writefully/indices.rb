@@ -2,7 +2,7 @@ module Writefully
   module Indices
     def self.build_from(modified)
       modified.map do |file_name|
-        index_hash_from(index_name_from(remove_content_path(file_name)))
+        index_hash_from(index_name_from(remove_content_path(file_name)))       
       end
     end
 
