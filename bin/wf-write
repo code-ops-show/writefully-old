@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require 'thor'
+
+module Writefully
+  class Write < Thor
+    desc "new", "creates a new article in the current directory"
+
+    def new type, slug
+      puts Dir.glob('*').sort_by { |item| item.match(/\A\d*/).to_s.to_i }
+    end
+  end
+end
+
+Writefully::Write.start(ARGV)
