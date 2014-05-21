@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'writefully/loader'
 require 'writefully/cli'
 
-
-Writefully::CLI.start
+Writefully::CLI.start(ARGV)

@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+
+require 'thor'
+require 'active_support/inflector'
+
+module Writefully
+  class Write < Thor
+    desc "new", "creates a new article in the current directory"
+
+    def new type, slug
+      create_content_with type, slug
+    end
+
+    no_tasks do 
+      def create_content_with type, slug
+        new_position = get_last_post(type).split(/\//).last.match(/\A\d*/).to_s.to_i + 1
+        dir_name = File.join(type.pluralize, [new_position, slug].join('-'))
+        Dir.mkdir dir_name
+        add_assets dir_name
+        add_readme_md dir_name
+        add_meta dir_name
+      end
+
+      def add_readme_md dir_name
+        file = File.new File.join(dir_name, 'README.md'), "w"
+        file.puts("Replace with your content")
+        file.close
+      end
+
+      def add_assets dir_name
+        assets_dir_name = File.join(dir_name, 'assets')
+        Dir.mkdir assets_dir_name
+      end
+
+      def add_meta dir_name
+        meta = File.open(File.dirname(__FILE__) + "/../lib/sample/meta.yml").read
+        file = File.new File.join(dir_name, 'meta.yml'), "w"
+        file.puts meta
+        file.close
+      end
+
+      def get_last_post type
+        Dir.glob("#{type.pluralize}/*").sort_by do |item| 
+          item.split(/\//).last.match(/\A\d*/).to_s.to_i
+        end.last
+      end
+    end
+  end
+end
+
+Writefully::Write.start(ARGV)
