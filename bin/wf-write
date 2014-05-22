@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 require 'thor'
-require 'active_support/inflector'
 
 module Writefully
   class Write < Thor
@@ -14,7 +13,7 @@ module Writefully
     no_tasks do 
       def create_content_with type, slug
         new_position = get_last_post(type).split(/\//).last.match(/\A\d*/).to_s.to_i + 1
-        dir_name = File.join(type.pluralize, [new_position, slug].join('-'))
+        dir_name = File.join(content_type(type), [new_position, slug].join('-'))
         Dir.mkdir dir_name
         add_assets dir_name
         add_readme_md dir_name
@@ -39,8 +38,12 @@ module Writefully
         file.close
       end
 
+      def content_type type
+        Dir.glob("*").select { |dir| dir.match(::Regexp.new(type)) }.first
+      end
+
       def get_last_post type
-        Dir.glob("#{type.pluralize}/*").sort_by do |item| 
+        Dir.glob("#{content_type(type)}/*").sort_by do |item| 
           item.split(/\//).last.match(/\A\d*/).to_s.to_i
         end.last
       end
