@@ -12,6 +12,7 @@ Allows developers who love to write to publish easily
 + [Tunneling](#tunneling)
 + [Admin Interface](#admin-interface)
 + [Who uses Writefully?](#who-uses-writefully)
++ [Why did you make Writefully?](#why-did-you-make-writefully)
 
 ## Getting Started
 
@@ -137,6 +138,22 @@ Once you create your first site simply head over to the repository in your githu
 ## Who uses Writefully?
 
 [Codemy.net](http://codemy.net) Is powered by Writefully
+
+## Why did you make writefully?
+
+I just want to write locally using my text editor in markdown, intead of logging into the admin interface and wrangling with the online editor and mucking about with image uploading.
+
+I just want to do a git push and the server takes care of the rest (updating content / assets uploading etc...). The same way I deploy my applications.
+
+### Why don't you just use static page generators like Jekyll or Middleman?
+
+Because I need real business objects. 
+
++ I want to have control over my content. I want to be able to control which user can see which content. (needed if you want to sell digital goods)
+
++ I want to use full text search technologies like Elasticsearch or in Database Full Text Search. 
+
++ I want to be able to taxonomize my content, put them into groups etc...
 
 
 ## Manifesto
