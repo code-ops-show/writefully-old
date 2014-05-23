@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.license     = "MIT"
 
   s.files       = Dir["{app,config,db,lib,scripts,bin}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
-  s.executables = ["writefully", "wf-write"]
+  s.executables = ["writefully", "wf-write", "wf-app"]
   s.test_files  = Dir["spec/**/*"]
 
   s.add_dependency 'rails', '>= 4'

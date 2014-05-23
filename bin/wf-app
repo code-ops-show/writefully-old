@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require 'thor'
+
+module Writefully
+  class Builder < Thor
+    desc "new", "creates a new writefully app"
+    TEMPLATE_PATH = File.dirname(__FILE__) + "/../lib/template.rb"
+
+    def new name
+      system "rails new #{name} -m #{TEMPLATE_PATH} -d postgresql"
+    end
+  end
+end
+
+Writefully::Builder.start(ARGV)
