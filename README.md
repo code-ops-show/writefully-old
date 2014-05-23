@@ -11,6 +11,7 @@ Allows developers who love to write to publish easily
 + [Running Writefully](#running-writefully)
 + [Tunneling](#tunneling)
 + [Admin Interface](#admin-interface)
++ [Who uses Writefully?](#who-uses-writefully)
 
 ## Getting Started
 
@@ -133,6 +134,10 @@ You will be asked to sign in with github. Once your logged in you'll have access
 
 Once you create your first site simply head over to the repository in your github account and follow the readme there.
 
+## Who uses Writefully?
+
+[Codemy.net](http://codemy.net) Is powered by Writefully
+
 
 ## Manifesto
 
@@ -155,7 +160,7 @@ Once you create your first site simply head over to the repository in your githu
 + Writefully Desktop App
   + Probably going to use [node-webkit](https://github.com/rogerwang/node-webkit)
   + Quill JS
-  + More details to com
+  + More details to come
 
 + Writefully mobile app
   + Probably going to use [Framework7](http://www.idangero.us/framework7/)
