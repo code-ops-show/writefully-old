@@ -4,6 +4,14 @@
 
 Allows developers who love to write to publish easily
 
++ [Getting Started](#getting-started)
+    + [New App](#new-app)
+    + [Existing App](#existing-app)
++ [Configuration](#configuration)
++ [Running Writefully](#running-writefully)
++ [Tunneling](#tunneling)
++ [Admin Interface](#admin-interface)
+
 ## Getting Started
 
 There are 2 ways to use Writefully, generate a brand new app or integrate it into an existing application.
@@ -146,6 +154,7 @@ Once you create your first site simply head over to the repository in your githu
 
 + Writefully Desktop App
   + Probably going to use [node-webkit](https://github.com/rogerwang/node-webkit)
+  + Quill JS
   + More details to com
 
 + Writefully mobile app
