@@ -4,6 +4,54 @@
 
 Allows developers who love to write to publish easily
 
+## Getting Started
+
+There are 2 ways to use Writefully, generate a brand new app or integrate it into an existing application.
+
+Writefully depends on PostgreSQL with hstore extension activated so make sure you set that up if your going with the existing application route.
+
+### New App
+
+```bash
+gem install writefully
+
+wf-app new [name]
+```
+
+This will generate the boilerplate rails app to get you started using writefully.
+
+### Existing App
+
+```bash
+gem 'writefully'
+```
+
+Once you've installed the gem run 
+
+```bash
+rake writefully:migrations:install
+```
+
+In `config/routes.rb` add the following
+
+```ruby
+mount Writefully::Engine, at: '/writefully'
+```
+
+Create any model for Writefully. This is the model writefully will use.
+
+```bash
+rails g model [ModelName (Post|Article|Whatever)] --skip-migration --parent=writefully/post
+```
+
+The last step is to run the migration to generate the database structure for writefully
+
+```bash
+rake db:migrate
+```
+
+
+
 ## Manifesto
 
 + Writefully Core
