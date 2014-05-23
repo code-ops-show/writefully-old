@@ -13,6 +13,7 @@ Allows developers who love to write to publish easily
 + [Admin Interface](#admin-interface)
 + [Who uses Writefully?](#who-uses-writefully)
 + [Why did you make Writefully?](#why-did-you-make-writefully)
+    + [Why don't you use Jekyll / Middleman](#why-dont-you-just-use-static-page-generators-like-jekyll-or-middleman)
 
 ## Getting Started
 
