@@ -50,6 +50,69 @@ The last step is to run the migration to generate the database structure for wri
 rake db:migrate
 ```
 
+## Configuration
+
+### Github Application
+
+Writefully integrates with github, which means you'll need to set up a github application.
+
+[Create new Application](https://github.com/settings/applications/new)
+
+Or just create an application in an organization.
+
+### Config file (app/config/writefully.yml)
+
+You'll need to fill out the configuration file for your development environment
+
+```yaml
+development: &default
+  :pidfile: <%= Rails.root.join('log', 'writefully.log') %>
+  :logfile: <%= Rails.root.join('tmp', 'pids', 'writefully.pid') %>
+  :content: <%= Rails.root.join('content') %> # create a content folder for development
+  :storage_key: 'aws-key'
+  :storage_secret: 'aws-secret'
+  :storage_folder: 'bucket-name'
+  :storage_provider: "AWS" # only supports AWS for now
+  :app_directory: <%= Rails.root %>
+  :github_client: 'github-app-client'
+  :github_secret: 'github-app-secret'
+  :hook_secret: 'generate-with-securerandom' 
+
+test:
+  <<: *default
+```
+
+These settings might seem obvious in development however you might want to change this in your production / staging environment. We assume you use capistrano style deployment where you have a separate config for those environments
+
+The `hook_secret` config is required to ensure that any web hooks you get from github is legitimate. You can generate it with anything you like. The most simplest thing to do is go into IRB and run
+
+```ruby
+require 'securerandom' ; SecureRandom.hex
+```
+
+I recommend you use a different one in production / staging than the one in development.
+
+## Running Writefully
+
+In development to run writefully all you have to do is 
+
+```bash
+# from your app root
+bin/writefully config/writefully.yml
+```
+
+This will start the writefully process and start listening for changes in the `:content` folder.
+
+## Admin Interface
+
+Once you've set everything up simply head over to
+
+```bash
+http://localhost:3000/writefully
+```
+
+You will be asked to sign in with github. Once your logged in you'll have access to the admin interface and will be promted to setup your first site.
+
 
 
 ## Manifesto
