@@ -103,6 +103,16 @@ bin/writefully config/writefully.yml
 
 This will start the writefully process and start listening for changes in the `:content` folder.
 
+## Tunneling
+
+If you want to test the github webhook process you'll need to use some  tunneling magic. Here are a few options to choose from.
+
++ [Ngrok](https://ngrok.com/)
++ [localtunnel npm](http://localtunnel.me/)
++ [localtunnel gem](http://progrium.com/localtunnel/)
+
+For development mode use the localtunnel url when you fill out the details for site creation. The url will be used with github webhooks
+
 ## Admin Interface
 
 Once you've set everything up simply head over to
@@ -113,6 +123,7 @@ http://localhost:3000/writefully
 
 You will be asked to sign in with github. Once your logged in you'll have access to the admin interface and will be promted to setup your first site.
 
+Once you create your first site simply head over to the repository in your github account and follow the readme there.
 
 
 ## Manifesto
