@@ -22,7 +22,7 @@ module Writefully
       end
 
       def on_death actor, reason
-        Writefully.add_job :journalists, message_with_tries
+        Writefully.add_job :journalists, message_with_tries if message
       end
     end
   end
