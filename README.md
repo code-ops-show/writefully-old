@@ -109,7 +109,7 @@ In development to run writefully all you have to do is
 
 ```bash
 # from your app root
-bin/writefully config/writefully.yml
+bin/writefully start config/writefully.yml
 ```
 
 This will start the writefully process and start listening for changes in the `:content` folder.

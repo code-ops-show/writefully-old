@@ -16,8 +16,11 @@ module Writefully
       end
 
       def heartbeat
-        @job      = Marshal.load(get_job_data)
-        run_job if job_valid?
+        data = get_job_data
+        if data
+          @job      = Marshal.load(data)
+          run_job if job_valid?
+        end
       end
 
       def run_job
