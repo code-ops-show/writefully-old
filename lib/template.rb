@@ -1,4 +1,4 @@
-gem "writefully"
+gem 'writefully'
 
 inside app_name do 
   run "bundle install"
