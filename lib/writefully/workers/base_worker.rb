@@ -5,7 +5,7 @@ module Writefully
 
       trap_exit :actor_died
 
-      attr_reader :message
+      attr_accessor :message
 
       def perform(message)
         @message = message
@@ -17,7 +17,7 @@ module Writefully
       end
 
       def actor_died(actor, reason)
-        Writefully.logger.error "#{reason.class} #{reason.message} #{reason.backtrace}"
+        Writefully.logger.error "#{reason.class} #{reason.message} #{reason.backtrace}" if reason
         on_death(actor, reason) if self.respond_to?(:on_death)
       end
     end
