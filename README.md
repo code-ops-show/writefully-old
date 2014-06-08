@@ -77,17 +77,17 @@ You'll need to fill out the configuration file for your development environment
 
 ```yaml
 development: &default
-  :pidfile: <%= Rails.root.join('log', 'writefully.log') %>
-  :logfile: <%= Rails.root.join('tmp', 'pids', 'writefully.pid') %>
-  :content: <%= Rails.root.join('content') %> # create a content folder for development
-  :storage_key: 'aws-key'
-  :storage_secret: 'aws-secret'
-  :storage_folder: 'bucket-name'
+  :pidfile: '/Users/zacksiri/Repositories/blogosphere/tmp/pids/writefully.pid'
+  :logfile: '/Users/zacksiri/Repositories/blogosphere/log/writefully.log'
+  :content: '/Users/zacksiri/Repositories/blogosphere/content' # create a content folder for development
+  :storage_key: 'AKIAIYSBJGEBTA35XDOA'
+  :storage_secret: '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'
+  :storage_folder: 'codemy-backup'
   :storage_provider: "AWS" # only supports AWS for now
-  :app_directory: <%= Rails.root %>
-  :github_client: 'github-app-client'
-  :github_secret: 'github-app-secret'
-  :hook_secret: 'generate-with-securerandom' 
+  :app_directory: '/Users/zacksiri/Repositories/blogosphere'
+  :github_client: '5c3285c9e7c7098c4b47'
+  :github_secret: 'd2a8546dec21f58bb3bc3f68906b15acbb295380'
+  :hook_secret: '607c1d7688d4a3024a680b5101f90544' 
 
 test:
   <<: *default
