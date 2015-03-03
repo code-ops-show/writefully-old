@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails', '>= 4'
   s.add_dependency 'coffee-rails', '~> 4.0'
-  s.add_dependency 'sass-rails', '~> 4.0'
+  s.add_dependency 'sass-rails', '~> 5.0'
   s.add_dependency 'sprockets',  '= 2.11.0'
   
   s.add_dependency 'celluloid'
