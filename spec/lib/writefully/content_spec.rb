@@ -13,7 +13,7 @@ module Writefully
     } }
     subject(:content) { Writefully::Content.new(index) }
 
-    its(:body)     { should include "# Hash Selector Pattern" }
+    its(:body)     { is_expected.to include "# Hash Selector Pattern" }
     its(:meta)     { should eq meta }
     its(:slug)     { should eq 'hash-selector-pattern' }
     its(:position) { should eq 1 }

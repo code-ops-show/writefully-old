@@ -34,7 +34,9 @@ RSpec.configure do |config|
 
   config.include Writefully::Engine.routes.url_helpers
   
-  config.mock_with :rspec
+  config.mock_with :rspec do |mocks|
+    mocks.syntax = :should
+  end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

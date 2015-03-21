@@ -95,8 +95,8 @@
         1,
         1,
         1,
-        2,
-        2,
+        3,
+        3,
         null,
         null,
         null
@@ -2047,7 +2047,7 @@
         1,
         1,
         null,
-        0,
+        1,
         null,
         null,
         null,
@@ -2173,6 +2173,25 @@
         null,
         null
       ],
+      "/Users/zacksiri/Repositories/writefully/app/models/writefully/tag.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        1,
+        1,
+        8,
+        null,
+        8,
+        16,
+        null,
+        null,
+        null,
+        null
+      ],
       "/Users/zacksiri/Repositories/writefully/app/models/writefully/site.rb": [
         1,
         1,
@@ -2229,7 +2248,7 @@
         5,
         null,
         1,
-        6,
+        10,
         null,
         null,
         null
@@ -2277,25 +2296,6 @@
         5,
         null
       ],
-      "/Users/zacksiri/Repositories/writefully/app/models/writefully/tag.rb": [
-        1,
-        1,
-        1,
-        null,
-        1,
-        1,
-        null,
-        1,
-        1,
-        8,
-        null,
-        8,
-        16,
-        null,
-        null,
-        null,
-        null
-      ],
       "/Users/zacksiri/Repositories/writefully/app/models/writefully/tagging.rb": [
         1,
         1,
@@ -2312,6 +2312,6 @@
         null
       ]
     },
-    "timestamp": 1426950967
+    "timestamp": 1426953338
   }
 }

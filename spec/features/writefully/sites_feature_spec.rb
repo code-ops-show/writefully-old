@@ -16,12 +16,12 @@ feature "WritefullySitesFeature" do
 
   scenario "should see site in index" do 
     visit sites_path
-    page.should have_content site.name
+    expect(page).to have_content site.name
   end
 
   scenario "should redirected and see posts" do 
     visit site_path(site)
-    page.should have_content post_1.title
-    current_path.should eq site_posts_path(site)
+    expect(page).to have_content post_1.title
+    expect(current_path).to eq site_posts_path(site)
   end
 end
