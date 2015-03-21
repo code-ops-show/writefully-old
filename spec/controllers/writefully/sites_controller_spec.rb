@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Writefully
-  describe SitesController do 
+  describe SitesController, type: :controller do 
     routes { Writefully::Engine.routes }
 
     fixtures :"writefully/sites"
@@ -20,13 +20,13 @@ module Writefully
       context "when user has sites" do 
         it "should be success" do 
           get :index
-          response.should be_success
+          expect(response).to be_success
         end
 
         it "should assign correct sites" do 
           get :index
-          assigns[:sites].should include site
-          assigns[:sites].should_not include some_site
+          expect(assigns[:sites]).to include site
+          expect(assigns[:sites]).to_not include some_site
         end
       end
 
@@ -35,7 +35,7 @@ module Writefully
 
         it "should be redirect" do 
           get :index
-          response.should redirect_to(new_site_path)
+          expect(response).to redirect_to(new_site_path)
         end
       end
     end
@@ -43,31 +43,31 @@ module Writefully
     describe "#show" do 
       it "should be redirect when no tab specified" do 
         get :show, id: site.slug
-        response.should redirect_to(site_posts_path(site))
+        expect(response).to redirect_to(site_posts_path(site))
       end
 
       it "should be success when correct tab is specified" do 
         get :show, id: site.slug, tab: 'processing'
-        response.should be_success
+        expect(response).to be_success
       end
 
       it "should be redirect when wrong tab is specified" do 
         get :show, id: site.slug, tab: 'weird'
-        response.should redirect_to(site_posts_path(site))
+        expect(response).to redirect_to(site_posts_path(site))
       end
     end
 
     describe "#new" do 
       it "should be success" do 
         get :new
-        response.should be_success
+        expect(response).to be_success
       end
     end
 
     describe "#edit" do 
       it "should be success" do 
         get :edit, id: site.slug
-        response.should be_success
+        expect(response).to be_success
       end
     end
 
@@ -84,7 +84,7 @@ module Writefully
 
       it "should be redirect" do 
         post :create, site: { name: "New Site", domain: "http://www.newsite.com" }
-        response.should be_redirect
+        expect(response).to be_redirect
       end
     end
   end

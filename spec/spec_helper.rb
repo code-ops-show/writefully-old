@@ -3,7 +3,7 @@ ENV["RAILS_ENV"] ||= 'test'
 
 require File.expand_path("../dummy/config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
+require 'rspec/its'
 require 'capybara/rspec'
 require 'pry'
 
@@ -42,7 +42,6 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
-  config.treat_symbols_as_metadata_keys_with_true_values = true
   config.filter_run :focus => true
   config.run_all_when_everything_filtered = true
   # If true, the base class of anonymous controllers will be inferred

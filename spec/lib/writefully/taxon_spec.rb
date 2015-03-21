@@ -20,7 +20,7 @@ module Writefully
 
       it "#build_attributes" do 
         built_attributes = subject.build_attributes("Beginning Ruby")
-        built_attributes.should eq attributes
+        expect(built_attributes).to eq attributes
       end
     end
   end

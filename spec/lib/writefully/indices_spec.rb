@@ -11,7 +11,7 @@ module Writefully
     end
 
     it "#build_from" do  
-      Indices.build_from(full_path).should eq index 
+      expect(Indices.build_from(full_path)).to eq index 
     end
   end 
 end

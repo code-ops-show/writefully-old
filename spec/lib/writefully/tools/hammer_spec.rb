@@ -32,21 +32,21 @@ module Writefully
       describe "#hook_config" do 
         it "should be correct" do 
           hammer = Hammer.new message
-          hammer.hook_config.should eq hook_config
+          expect(hammer.hook_config).to eq hook_config
           hammer.terminate
         end
       end
 
       describe "#forge" do 
         it "can forge" do 
-          Github::Repos.any_instance.stub(:create).and_return(true)
+          Github::Client::Repos.any_instance.stub(:create).and_return(true)
           hammer = Hammer.new message
-          hammer.forge.should be_true
+          expect(hammer.forge).to be true
           hammer.terminate
         end
 
         it "should raise error" do 
-          Github::Repos.any_instance.stub(:create).and_raise(StandardError)
+          Github::Client::Repos.any_instance.stub(:create).and_raise(StandardError)
           hammer = Hammer.new message
           expect { 
             hammer.forge
@@ -56,14 +56,14 @@ module Writefully
 
       describe "#add_hook_for" do 
         it "should create hook" do
-          Github::Repos::Hooks.any_instance.stub(:create).and_return(true)
+          Github::Client::Repos::Hooks.any_instance.stub(:create).and_return(true)
           hammer = Hammer.new message
-          hammer.add_hook_for(site_slug).should be_true
+          expect(hammer.add_hook_for(site_slug)).to be true
           hammer.terminate
         end
 
         it "should raise error" do 
-          Github::Repos::Hooks.any_instance.stub(:create).and_raise(StandardError)
+          Github::Client::Repos::Hooks.any_instance.stub(:create).and_raise(StandardError)
           hammer = Hammer.new message
           expect { 
             hammer.add_hook_for(site_slug)

@@ -9,8 +9,8 @@ module Writefully
 
       it "should have the correct command" do 
         initializer = Initializer.new(message)
-        initializer.content_folder_setup_command.should include message[:site_slug]
-        initializer.content_folder_setup_command.should include message[:ssh_url]
+        expect(initializer.content_folder_setup_command).to include message[:site_slug]
+        expect(initializer.content_folder_setup_command).to include message[:ssh_url]
         initializer.terminate
       end
     end

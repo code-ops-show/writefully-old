@@ -17,11 +17,11 @@ module Writefully
     it "should set published_at" do 
       subject.publish = true
       subject.publish_resource
-      subject.published_at.should_not be_nil
+      expect(subject.published_at).to_not be_nil
     end
 
     it "should taxonomize correctly" do 
-      subject.respond_to?(:playlists).should be_true
+      expect(subject.respond_to?(:playlists)).to be true
     end
   end
 end

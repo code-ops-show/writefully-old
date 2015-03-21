@@ -30,7 +30,7 @@ module Writefully
 
       it "#computed_attributes" do 
         pencil = Pencil.new(index)
-        pencil.computed_attributes.should eq computed_attributes 
+        expect(pencil.computed_attributes).to eq computed_attributes 
         pencil.terminate
       end
 
@@ -55,7 +55,7 @@ module Writefully
       describe "#can_update_db" do
         it "can update" do 
           pencil = Pencil.new(index) 
-          pencil.can_update_db?([true, true]).should be_true
+          expect(pencil.can_update_db?([true, true])).to be true
           pencil.terminate
         end
 
