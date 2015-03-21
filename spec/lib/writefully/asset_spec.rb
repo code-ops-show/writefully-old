@@ -12,11 +12,11 @@ module Writefully
     its(:endpoint) { should eq 'codemy-net/posts/1-hash-selector-pattern/assets'}
 
     it "#url" do 
-      subject.url(Writefully::Storage.endpoint).should eq url
+      expect(subject.url(Writefully::Storage.endpoint)).to eq url
     end
 
     it "#convert_for" do 
-      subject.convert_for(content_details)["cover"].should include url
+      expect(subject.convert_for(content_details)["cover"]).to include url
     end
   end
 end

@@ -11,13 +11,13 @@ module Writefully
                           'posts/1-change-me/meta.yml', 
                           'posts/1-change-me/assets/writefully.png' ] }
 
-    its(:to_load)         { should =~ ['post', 'playlist'] }
-    its(:valid_resources) { should =~ ['posts'] }
+    its(:to_load)         { are_expected.to contain_exactly('post', 'playlist') }
+    its(:valid_resources) { are_expected.to contain_exactly('posts') }
 
     it "should open README" do 
-      subject.sample_content("README.md").should include "# Welcome to Writefully!"
+      expect(subject.sample_content("README.md")).to include "# Welcome to Writefully!"
     end
 
-    its(:sample_content_paths) { should eq sample_paths }
+    its(:sample_content_paths) { are_expected.to eq sample_paths }
   end
 end

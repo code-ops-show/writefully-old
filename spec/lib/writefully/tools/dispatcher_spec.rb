@@ -21,7 +21,7 @@ module Writefully
           Dispatcher.any_instance.stub(:retry_job).and_return(false)
           Dispatcher.any_instance.stub(:dispatch).and_return(true)
           dispatch = Dispatcher.new
-          dispatch.run_job.should be_true
+          expect(dispatch.run_job).to be true
           dispatch.terminate
         end
 
@@ -30,7 +30,7 @@ module Writefully
           Dispatcher.any_instance.stub(:dispatch).and_return(false)
           Dispatcher.any_instance.stub(:retry_job).and_return(true)
           dispatch = Dispatcher.new
-          dispatch.run_job.should be_true
+          expect(dispatch.run_job).to be true
           dispatch.terminate
         end
       end
@@ -38,15 +38,15 @@ module Writefully
       it "should be job and valid" do 
         Dispatcher.any_instance.stub(:job).and_return(job)
         dispatch = Dispatcher.new
-        dispatch.job_valid?.should be_true
-        dispatch.retry_valid?.should be_false
+        expect(dispatch.job_valid?).to be true
+        expect(dispatch.retry_valid?).to be false
         dispatch.terminate
       end
 
       it "should be retry" do 
         Dispatcher.any_instance.stub(:job).and_return(retry_data)
         dispatch = Dispatcher.new
-        dispatch.retry_valid?.should be_true
+        expect(dispatch.retry_valid?).to be true
         dispatch.terminate
       end
     end

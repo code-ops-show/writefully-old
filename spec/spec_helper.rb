@@ -3,7 +3,7 @@ ENV["RAILS_ENV"] ||= 'test'
 
 require File.expand_path("../dummy/config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
+require 'rspec/its'
 require 'capybara/rspec'
 require 'pry'
 
@@ -34,7 +34,9 @@ RSpec.configure do |config|
 
   config.include Writefully::Engine.routes.url_helpers
   
-  config.mock_with :rspec
+  config.mock_with :rspec do |mocks|
+    mocks.syntax = :should
+  end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -42,7 +44,6 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
-  config.treat_symbols_as_metadata_keys_with_true_values = true
   config.filter_run :focus => true
   config.run_all_when_everything_filtered = true
   # If true, the base class of anonymous controllers will be inferred

@@ -2,7 +2,6 @@ require_dependency "writefully/application_controller"
 
 module Writefully
   class HooksController < ApplicationController
-    respond_to :json
     before_filter :check_signature
 
     HMAC_DIGEST = OpenSSL::Digest::Digest.new('sha1')

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Writefully
-  describe PostsController do 
+  describe PostsController, type: :controller do 
     routes { Writefully::Engine.routes }
 
     fixtures :"writefully/sites"
@@ -21,25 +21,25 @@ module Writefully
     describe "#index" do 
       it "should be success" do 
         get :index, site_id: site.slug
-        response.should be_success
+        expect(response).to be_success
       end
 
       it "should assign correct posts" do 
         get :index, site_id: site.slug
-        assigns[:posts].should include post_1
-        assigns[:posts].should_not include some_post
+        expect(assigns[:posts]).to include post_1
+        expect(assigns[:posts]).to_not include some_post
       end
     end
 
     describe "#show" do 
       it "should be success" do 
         get :show, site_id: site.slug, id: post_1.id
-        response.should be_success
+        expect(response).to be_success
       end
 
       it "should assign the correct post" do 
         get :show, site_id: site.slug, id: post_1.id
-        assigns[:post].should eq post_1
+        expect(assigns[:post]).to eq post_1
       end
     end
   end

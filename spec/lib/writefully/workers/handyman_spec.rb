@@ -37,11 +37,11 @@ module Writefully
 
 
         s = site.reload
-        s.repository["name"].should eq 'codemy-net'
-        s.repository["id"].should eq '1234'
-        s.repository["hook_id"].should eq '123'
-        s.healthy.should be_true
-        s.processing.should be_false
+        expect(s.repository["name"]).to eq 'codemy-net'
+        expect(s.repository["id"]).to eq '1234'
+        expect(s.repository["hook_id"]).to eq '123'
+        expect(s.healthy).to be true
+        expect(s.processing).to be false
 
         handyman.terminate
       end 

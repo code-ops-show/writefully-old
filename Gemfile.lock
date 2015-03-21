@@ -67,10 +67,10 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.7)
     arel (6.0.0)
-    autoprefixer-rails (5.1.7)
+    autoprefixer-rails (5.1.7.1)
       execjs
       json
-    bootstrap-sass (3.3.3)
+    bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
     builder (3.2.2)
@@ -102,8 +102,8 @@ GEM
     diff-lcs (1.2.5)
     docile (1.1.5)
     erubis (2.7.0)
-    excon (0.44.3)
-    execjs (2.3.0)
+    excon (0.44.4)
+    execjs (2.4.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.6)
@@ -288,6 +288,9 @@ GEM
     rspec-expectations (3.2.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.2.0)
+    rspec-its (1.2.0)
+      rspec-core (>= 3.0.0)
+      rspec-expectations (>= 3.0.0)
     rspec-mocks (3.2.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.2.0)
@@ -349,5 +352,6 @@ DEPENDENCIES
   capybara
   coveralls
   pry
+  rspec-its
   rspec-rails
   writefully!

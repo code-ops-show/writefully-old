@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Writefully
-  describe HooksController do 
+  describe HooksController, type: :controller do 
     routes { Writefully::Engine.routes }
 
     let(:github_push_hook)       { open(File.dirname(__FILE__) + "/../../fixtures/writefully/github_push_hook.json").read }
@@ -15,14 +15,14 @@ module Writefully
       request.headers["X-Github-Event"] = 'push'
       controller.should_receive(:push).once
       post :create, github_push_hook
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "should call 'member'" do 
       request.headers["X-Github-Event"] = 'member'
       controller.should_receive(:member).once
       post :create, github_member_add_hook
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "should add new authorship" do 
