@@ -36,6 +36,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'redis'
   s.add_dependency 'redis-namespace'
   s.add_dependency 'activerecord-import'
+  s.add_dependency 'responders', '~> 2.0'
 
   s.add_dependency 'jquery-rails'
   s.add_dependency 'turbolinks'
