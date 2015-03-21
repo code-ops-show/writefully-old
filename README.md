@@ -1,6 +1,6 @@
 # Writefully
 
-[![Build Status](https://travis-ci.org/codemy/writefully.svg?branch=master)](https://travis-ci.org/codemy/writefully) [![Coverage Status](https://coveralls.io/repos/codemy/writefully/badge.png?branch=master)](https://coveralls.io/r/codemy/writefully?branch=master) [![Code Climate](https://codeclimate.com/github/codemy/writefully.png)](https://codeclimate.com/github/codemy/writefully)
+[![Build Status](https://travis-ci.org/zacksiri/writefully.svg?branch=master)](https://travis-ci.org/zacksiri/writefully) [![Coverage Status](https://coveralls.io/repos/zacksiri/writefully/badge.png?branch=master)](https://coveralls.io/r/codemy/writefully?branch=master) [![Code Climate](https://codeclimate.com/github/zacksiri/writefully.png)](https://codeclimate.com/github/codemy/writefully)
 
 Allows developers who love to write to publish easily
 
