@@ -29,7 +29,8 @@ module Writefully
         @connection ||= Fog::Storage.new({
           provider:              Writefully.options[:storage_provider],
           aws_access_key_id:     Writefully.options[:storage_key],
-          aws_secret_access_key: Writefully.options[:storage_secret]
+          aws_secret_access_key: Writefully.options[:storage_secret],
+          region:                Writefully.options[:storage_region]
         })
       end
     end
